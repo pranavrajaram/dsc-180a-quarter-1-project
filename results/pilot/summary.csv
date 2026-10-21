@@ -1,0 +1,4 @@
+tone,n,mean_pass_rate,ci_low,ci_high,median_pass_rate,fully_correct_rate,runtime_error_rate,timeout_rate,compile_failure_rate,mean_response_tokens,difference_from_neutral,difference_ci_low,difference_ci_high
+neutral,10,0.2875,0.1375,0.4375,0.1875,0.1,0.4,0,0.1,189.4,0.0,0.0,0.0
+friendly,10,0.425,0.225,0.675,0.4375,0.1,0.4,0,0,215.1,0.1375,-0.0375,0.3125
+adversarial,10,0.325,0.225,0.425,0.1875,0.1,0.3,0,0.1,187.9,0.0375,-0.075,0.2125

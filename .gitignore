@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.env
+.env.*
+# Superseded presentation drafts remain local.
+results/pilot/pilot_slides.pptx
+results/pilot/pilot_slides_visual.pptx
