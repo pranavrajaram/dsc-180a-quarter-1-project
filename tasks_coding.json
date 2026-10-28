@@ -1,0 +1,2312 @@
+[
+  {
+    "task_id": "merge_intervals",
+    "difficulty": "easy",
+    "prompt": "Implement merge_intervals(intervals). Given a list of closed intervals [start, end] with start <= end, return their union as a list of disjoint intervals sorted by start. Merge intervals that overlap or share an endpoint. Accept unsorted input, duplicate intervals, negative endpoints, and an empty list. Do not mutate the input.",
+    "entry_point": "merge_intervals",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            6
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            15,
+            18
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              4,
+              5
+            ],
+            [
+              1,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            10
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              -5,
+              -2
+            ],
+            [
+              -3,
+              0
+            ],
+            [
+              2,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            -5,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              9,
+              10
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            9,
+            10
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              2
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              2,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            0,
+            6
+          ]
+        ]
+      }
+    ],
+    "domain": "coding"
+  },
+  {
+    "task_id": "version_compare",
+    "difficulty": "medium",
+    "prompt": "Implement compare_versions(a, b). Both inputs are nonempty strings of dot-separated nonnegative integer components, with optional leading zeroes in components. Compare components numerically from left to right, treating missing trailing components as zero. Return -1 if a < b, 0 if equal, and 1 if a > b. Do not convert the entire version to a floating-point number. Inputs are valid.",
+    "entry_point": "compare_versions",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          "1.2",
+          "1.10"
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          "1.0.0",
+          "1"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "001.02",
+          "1.2.0"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "0.0.1",
+          "0"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "10",
+          "2.99"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "1.2.3",
+          "1.2.3.4"
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          "99999999999999999999",
+          "99999999999999999998"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "0",
+          "000.00"
+        ],
+        "expected": 0
+      }
+    ],
+    "domain": "coding"
+  },
+  {
+    "task_id": "escaped_split",
+    "difficulty": "medium",
+    "prompt": "Implement split_escaped(text). Split text on unescaped commas. A backslash escapes exactly the next character, regardless of what it is; remove the escaping backslash and keep that character literally. A final backslash with no next character is kept literally. Preserve empty fields, including at the start or end; empty input returns ['']. Return a list of strings.",
+    "entry_point": "split_escaped",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": [
+          ""
+        ]
+      },
+      {
+        "args": [
+          ",a,,"
+        ],
+        "expected": [
+          "",
+          "a",
+          "",
+          ""
+        ]
+      },
+      {
+        "args": [
+          "a\\,b,c"
+        ],
+        "expected": [
+          "a,b",
+          "c"
+        ]
+      },
+      {
+        "args": [
+          "a\\\\,b"
+        ],
+        "expected": [
+          "a\\",
+          "b"
+        ]
+      },
+      {
+        "args": [
+          "a\\"
+        ],
+        "expected": [
+          "a\\"
+        ]
+      },
+      {
+        "args": [
+          "\\x,y"
+        ],
+        "expected": [
+          "x",
+          "y"
+        ]
+      },
+      {
+        "args": [
+          "\\,"
+        ],
+        "expected": [
+          ","
+        ]
+      },
+      {
+        "args": [
+          "a\\\\\\,b,,c\\"
+        ],
+        "expected": [
+          "a\\,b",
+          "",
+          "c\\"
+        ]
+      }
+    ],
+    "domain": "coding"
+  },
+  {
+    "task_id": "topological_order",
+    "difficulty": "hard",
+    "prompt": "Implement topological_order(n, edges). Nodes are integers 0 through n-1. Each directed edge [u, v] requires u to appear before v. Return the lexicographically smallest valid topological ordering as a list; return [] if there is any cycle. Include isolated nodes. Duplicate edges represent the same constraint and must be handled correctly. n is a nonnegative integer and all edge endpoints are valid. Do not mutate the inputs.",
+    "entry_point": "topological_order",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          0,
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          4,
+          []
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          4,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          4,
+          [
+            [
+              2,
+              0
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          0,
+          3
+        ]
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          5,
+          [
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          2,
+          3,
+          4,
+          0,
+          1
+        ]
+      }
+    ],
+    "domain": "coding"
+  },
+  {
+    "task_id": "lru_cache",
+    "difficulty": "hard",
+    "prompt": "Implement lru_results(capacity, operations). Simulate a least-recently-used cache initially empty. Each operation is ['put', key, value] or ['get', key], with integer keys and values. Return the results of get operations only, in order; a missing key returns -1. A successful get and any put make that key most recently used. Updating an existing key must not evict another key. A new put into a full cache evicts the least recently used key. Capacity is nonnegative; capacity zero never stores anything. Do not mutate operations.",
+    "entry_point": "lru_results",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          2,
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          0,
+          [
+            [
+              "put",
+              1,
+              4
+            ],
+            [
+              "get",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          -1
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              2,
+              2
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "put",
+              3,
+              3
+            ],
+            [
+              "get",
+              2
+            ],
+            [
+              "get",
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          -1,
+          3
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              2,
+              2
+            ],
+            [
+              "put",
+              1,
+              9
+            ],
+            [
+              "get",
+              2
+            ],
+            [
+              "get",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          2,
+          9
+        ]
+      },
+      {
+        "args": [
+          1,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              1,
+              2
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "put",
+              2,
+              3
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "get",
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          2,
+          -1,
+          3
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              2,
+              2
+            ],
+            [
+              "get",
+              9
+            ],
+            [
+              "put",
+              3,
+              3
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "get",
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          -1,
+          -1,
+          2
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              -1
+            ],
+            [
+              "put",
+              2,
+              0
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "put",
+              3,
+              3
+            ],
+            [
+              "get",
+              2
+            ],
+            [
+              "get",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              2,
+              2
+            ],
+            [
+              "put",
+              1,
+              10
+            ],
+            [
+              "put",
+              3,
+              3
+            ],
+            [
+              "get",
+              2
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "get",
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          -1,
+          10,
+          3
+        ]
+      }
+    ],
+    "domain": "coding"
+  },
+  {
+    "task_id": "evaluate_expression",
+    "domain": "coding",
+    "difficulty": "hard",
+    "prompt": "Implement evaluate_expression(s). s is a valid arithmetic expression containing nonnegative integer literals, the binary operators +, -, *, /, unary minus, parentheses, and spaces. Use standard precedence (* and / bind tighter than + and -; operators of equal precedence are left-associative; unary minus binds tighter than * and /). Division is integer division that truncates toward zero. No division by zero occurs. Return the integer result. Do not use eval or exec.",
+    "entry_point": "evaluate_expression",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          "1 + 2 * 3"
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          "(1 + 2) * 3"
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          "7 / 2"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "-7 / 2"
+        ],
+        "expected": -3
+      },
+      {
+        "args": [
+          "10 - 4 - 3"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "2 * (3 + 4) - -5"
+        ],
+        "expected": 19
+      },
+      {
+        "args": [
+          "  42  "
+        ],
+        "expected": 42
+      },
+      {
+        "args": [
+          "100 / (2 * -3) + 8 * (2 - 5)"
+        ],
+        "expected": -40
+      }
+    ]
+  },
+  {
+    "task_id": "edit_distance",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement edit_distance(a, b). Return the minimum number of single-character insertions, deletions, or substitutions needed to turn string a into string b. Either string may be empty. Comparison is case-sensitive.",
+    "entry_point": "edit_distance",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          "",
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "",
+          "abc"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "kitten",
+          "sitting"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "flaw",
+          "lawn"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "abc",
+          "abc"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "Abc",
+          "abc"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "intention",
+          "execution"
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          "ab",
+          "ba"
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "task_id": "count_decodings",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement count_decodings(s). The letters A to Z are encoded as the numbers 1 to 26. s is a string of digits. Return the number of ways s can be split into pieces where each piece is a number from 1 to 26 written without leading zeros. Return 0 for the empty string or if no valid split exists.",
+    "entry_point": "count_decodings",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "12"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "226"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "0"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "06"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "10"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "2101"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "11106"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "27"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "1111111111"
+        ],
+        "expected": 89
+      }
+    ]
+  },
+  {
+    "task_id": "min_coins",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement min_coins(amount, coins). coins is a list of distinct positive integers and amount is a nonnegative integer. Return the minimum number of coins (each denomination may be used any number of times) that sum exactly to amount, or -1 if it is impossible. min_coins(0, coins) is 0.",
+    "entry_point": "min_coins",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          0,
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          11,
+          [
+            1,
+            2,
+            5
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          3,
+          [
+            2
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          6,
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          7,
+          [
+            2,
+            4
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          27,
+          [
+            5,
+            9,
+            13
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          100,
+          [
+            1,
+            25,
+            50
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          12,
+          [
+            7,
+            5
+          ]
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "task_id": "count_coin_combinations",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement count_coin_combinations(amount, coins). coins is a list of distinct positive integers and amount is a nonnegative integer. Return the number of different multisets of coins (each denomination usable any number of times) that sum exactly to amount. Order does not matter, so 1+2 and 2+1 count once. count_coin_combinations(0, coins) is 1.",
+    "entry_point": "count_coin_combinations",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          0,
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          5,
+          [
+            1,
+            2,
+            5
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          3,
+          [
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          10,
+          [
+            10
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          12,
+          [
+            1,
+            5,
+            10
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          8,
+          [
+            3,
+            5,
+            2
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          7,
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          20,
+          [
+            2,
+            3,
+            7
+          ]
+        ],
+        "expected": 8
+      }
+    ]
+  },
+  {
+    "task_id": "longest_increasing_subsequence",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement longest_increasing_subsequence(nums). Return the length of the longest strictly increasing subsequence of the list of integers nums (elements need not be contiguous). Return 0 for an empty list.",
+    "entry_point": "longest_increasing_subsequence",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            10,
+            9,
+            2,
+            5,
+            3,
+            7,
+            101,
+            18
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            3,
+            2,
+            3
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            7,
+            7,
+            7,
+            7
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            -3,
+            -1,
+            -2,
+            0,
+            -5,
+            4
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "task_id": "wrap_text",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement wrap_text(text, width). Split text into words on any whitespace. Greedily build lines: place as many words on a line as fit, joined by single spaces, without the line length exceeding width. A word longer than width goes on its own line unchanged. Return the list of lines; return [] if there are no words. width is a positive integer.",
+    "entry_point": "wrap_text",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          "",
+          10
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          "   ",
+          5
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          "the quick brown fox",
+          10
+        ],
+        "expected": [
+          "the quick",
+          "brown fox"
+        ]
+      },
+      {
+        "args": [
+          "the quick brown fox",
+          9
+        ],
+        "expected": [
+          "the quick",
+          "brown fox"
+        ]
+      },
+      {
+        "args": [
+          "a b c d e",
+          3
+        ],
+        "expected": [
+          "a b",
+          "c d",
+          "e"
+        ]
+      },
+      {
+        "args": [
+          "supercalifragilistic is long",
+          6
+        ],
+        "expected": [
+          "supercalifragilistic",
+          "is",
+          "long"
+        ]
+      },
+      {
+        "args": [
+          "one\ttwo\nthree  four",
+          9
+        ],
+        "expected": [
+          "one two",
+          "three",
+          "four"
+        ]
+      },
+      {
+        "args": [
+          "exact fit",
+          9
+        ],
+        "expected": [
+          "exact fit"
+        ]
+      }
+    ]
+  },
+  {
+    "task_id": "count_islands",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement count_islands(grid). grid is a list of equal-length strings containing only '0' and '1'. An island is a maximal group of '1' cells connected horizontally or vertically (not diagonally). Return the number of islands. The grid may be empty.",
+    "entry_point": "count_islands",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            "0"
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            "1"
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            "11000",
+            "11000",
+            "00100",
+            "00011"
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            "101",
+            "010",
+            "101"
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            "111",
+            "101",
+            "111"
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            "1001",
+            "1001",
+            "1111"
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            "10101"
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "task_id": "shortest_path_length",
+    "domain": "coding",
+    "difficulty": "hard",
+    "prompt": "Implement shortest_path_length(n, edges, source, target). The graph is undirected with nodes 0 through n-1. Each edge is [u, v, w] with nonnegative integer weight w; there may be parallel edges and self-loops. Return the total weight of the minimum-weight path from source to target, 0 if source equals target, or -1 if target is unreachable. Do not mutate the inputs.",
+    "entry_point": "shortest_path_length",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          1,
+          [],
+          0,
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          2,
+          [],
+          0,
+          1
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              0,
+              2,
+              10
+            ]
+          ],
+          0,
+          2
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1,
+              5
+            ],
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1
+            ]
+          ],
+          0,
+          2
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          4,
+          [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              2,
+              3,
+              7
+            ]
+          ],
+          3,
+          0
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          5,
+          [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              3,
+              4,
+              1
+            ]
+          ],
+          0,
+          4
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          4,
+          [
+            [
+              0,
+              0,
+              3
+            ],
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              3,
+              9
+            ],
+            [
+              0,
+              2,
+              6
+            ],
+            [
+              2,
+              3,
+              1
+            ]
+          ],
+          0,
+          3
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          6,
+          [
+            [
+              0,
+              1,
+              7
+            ],
+            [
+              0,
+              2,
+              9
+            ],
+            [
+              0,
+              5,
+              14
+            ],
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              1,
+              3,
+              15
+            ],
+            [
+              2,
+              3,
+              11
+            ],
+            [
+              2,
+              5,
+              2
+            ],
+            [
+              3,
+              4,
+              6
+            ],
+            [
+              4,
+              5,
+              9
+            ]
+          ],
+          0,
+          4
+        ],
+        "expected": 20
+      }
+    ]
+  },
+  {
+    "task_id": "to_roman",
+    "domain": "coding",
+    "difficulty": "easy",
+    "prompt": "Implement to_roman(n). Given an integer n with 1 <= n <= 3999, return its standard Roman numeral using uppercase I, V, X, L, C, D, M and subtractive notation (IV, IX, XL, XC, CD, CM).",
+    "entry_point": "to_roman",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          1
+        ],
+        "expected": "I"
+      },
+      {
+        "args": [
+          4
+        ],
+        "expected": "IV"
+      },
+      {
+        "args": [
+          9
+        ],
+        "expected": "IX"
+      },
+      {
+        "args": [
+          14
+        ],
+        "expected": "XIV"
+      },
+      {
+        "args": [
+          40
+        ],
+        "expected": "XL"
+      },
+      {
+        "args": [
+          444
+        ],
+        "expected": "CDXLIV"
+      },
+      {
+        "args": [
+          1994
+        ],
+        "expected": "MCMXCIV"
+      },
+      {
+        "args": [
+          3999
+        ],
+        "expected": "MMMCMXCIX"
+      }
+    ]
+  },
+  {
+    "task_id": "spiral_order",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement spiral_order(matrix). matrix is a list of rows, all the same length. Return all elements in clockwise spiral order starting from the top-left corner and moving right first. Return [] for an empty matrix or a matrix with empty rows. Do not mutate the input.",
+    "entry_point": "spiral_order",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            []
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          6,
+          9,
+          8,
+          7,
+          4,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              5,
+              6,
+              7,
+              8
+            ],
+            [
+              9,
+              10,
+              11,
+              12
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          8,
+          12,
+          11,
+          10,
+          9,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          4,
+          6,
+          8,
+          7,
+          5,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "task_id": "longest_palindrome",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement longest_palindrome(s). Return the longest contiguous substring of s that reads the same forwards and backwards. If several have the maximum length, return the one that starts earliest. Return '' for an empty string. Comparison is case-sensitive.",
+    "entry_point": "longest_palindrome",
+    "check_no_mutation": false,
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "a"
+        ],
+        "expected": "a"
+      },
+      {
+        "args": [
+          "babad"
+        ],
+        "expected": "bab"
+      },
+      {
+        "args": [
+          "cbbd"
+        ],
+        "expected": "bb"
+      },
+      {
+        "args": [
+          "abacdfgdcaba"
+        ],
+        "expected": "aba"
+      },
+      {
+        "args": [
+          "forgeeksskeegfor"
+        ],
+        "expected": "geeksskeeg"
+      },
+      {
+        "args": [
+          "Aa"
+        ],
+        "expected": "A"
+      },
+      {
+        "args": [
+          "abcd"
+        ],
+        "expected": "a"
+      }
+    ]
+  },
+  {
+    "task_id": "sliding_window_max",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement sliding_window_max(nums, k). Return a list containing the maximum of every contiguous window of length k in nums, in order from left to right. 1 <= k <= len(nums). Do not mutate nums.",
+    "entry_point": "sliding_window_max",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          [
+            5
+          ],
+          1
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            -1,
+            -3,
+            5,
+            3,
+            6,
+            7
+          ],
+          3
+        ],
+        "expected": [
+          3,
+          3,
+          5,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            4,
+            2
+          ],
+          2
+        ],
+        "expected": [
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          1
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            9,
+            8,
+            7,
+            6,
+            5
+          ],
+          2
+        ],
+        "expected": [
+          9,
+          8,
+          7,
+          6
+        ]
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            2,
+            2
+          ],
+          3
+        ],
+        "expected": [
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            -1,
+            -5,
+            -2,
+            -8
+          ],
+          2
+        ],
+        "expected": [
+          -1,
+          -2,
+          -2
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            1,
+            2,
+            0,
+            5
+          ],
+          6
+        ],
+        "expected": [
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "task_id": "next_permutation",
+    "domain": "coding",
+    "difficulty": "medium",
+    "prompt": "Implement next_permutation(nums). Return a new list containing the next lexicographically greater rearrangement of the integers in nums. If nums is already the greatest rearrangement, return the smallest one (sorted ascending). nums may contain duplicates and has at least one element. Do not mutate nums.",
+    "entry_point": "next_permutation",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            5
+          ]
+        ],
+        "expected": [
+          1,
+          5,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            2
+          ]
+        ],
+        "expected": [
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            1,
+            1
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          5,
+          1,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            2,
+            5,
+            3,
+            3,
+            0
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          3,
+          0,
+          2,
+          3,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "task_id": "compress_ranges",
+    "domain": "coding",
+    "difficulty": "easy",
+    "prompt": "Implement compress_ranges(nums). nums is a list of integers in any order and may contain duplicates. Treat it as a set and process values in ascending order. Every maximal run of three or more consecutive integers becomes the string 'start->end'; values in runs of length one or two are listed individually as strings. Return the resulting list of strings in ascending order. Do not mutate nums.",
+    "entry_point": "compress_ranges",
+    "check_no_mutation": true,
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          "5"
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          "1->3"
+        ]
+      },
+      {
+        "args": [
+          [
+            3,
+            1,
+            2,
+            2,
+            7,
+            8,
+            10,
+            11,
+            12
+          ]
+        ],
+        "expected": [
+          "1->3",
+          "7",
+          "8",
+          "10->12"
+        ]
+      },
+      {
+        "args": [
+          [
+            -3,
+            -2,
+            -1,
+            1
+          ]
+        ],
+        "expected": [
+          "-3->-1",
+          "1"
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": [
+          "0",
+          "2",
+          "4",
+          "6"
+        ]
+      },
+      {
+        "args": [
+          [
+            9,
+            8,
+            7,
+            6,
+            4,
+            3,
+            1
+          ]
+        ],
+        "expected": [
+          "1",
+          "3",
+          "4",
+          "6->9"
+        ]
+      }
+    ]
+  }
+]

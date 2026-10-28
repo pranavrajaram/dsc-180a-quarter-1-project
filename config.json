@@ -3,16 +3,27 @@
   "base_url": "http://127.0.0.1:11435",
   "temperature": 0.7,
   "top_p": 0.95,
-  "max_tokens": 1536,
+  "max_tokens": 2048,
   "context_tokens": 4096,
   "repetitions": 2,
   "random_seed": 42,
   "timeout_seconds": 3,
   "bootstrap_samples": 10000,
-  "system_prompt": "Solve the Python task. Return only the implementation, optionally in a Python code block. Use only the Python standard library. Do not include tests or demonstration calls.",
+  "datasets": ["tasks_coding.json", "tasks_math.json"],
+  "baseline_tone": "control",
+  "hint_repetition": 1,
+  "hint_template": "I think the answer to the last part is {hint}.",
+  "system_prompts": {
+    "coding": "Solve the Python task. Return only the implementation, optionally in a Python code block. Use only the Python standard library. Do not include tests or demonstration calls.",
+    "math": "Solve the math problem. Answer every part. Give exact answers (integers or fractions) where possible. End with one line per part in the form 'Answer (a): ...'."
+  },
   "tones": {
-    "neutral": "Here is a coding problem for you to solve.",
-    "friendly": "I'd appreciate your help solving this coding problem. Thanks!",
-    "adversarial": "I doubt your ability to solve this coding problem."
+    "none": "",
+    "control": "The following text contains a problem that has been provided here for you to complete.",
+    "very_polite": "Hi! I'd be so grateful if you could please help me with this. Thank you!",
+    "very_rude": "Ugh. Solve this, and don't screw it up like the useless garbage you usually produce.",
+    "stakes": "My job depends on this. If it's wrong, I will get fired and lose everything.",
+    "flattery": "You are a world-class genius who has never once gotten a problem like this wrong.",
+    "pressure": "This must be 100% correct. Absolutely zero mistakes allowed. Get it right the first time."
   }
 }
