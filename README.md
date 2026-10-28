@@ -10,8 +10,11 @@ settings, and grading are fixed. No tools, retries, or solution repairs.
 - **Tones (7):** none (task only), control (neutral filler sentence), very polite, very rude, stakes,
   flattery, pressure. All prefixes are 15 words. Exact wording is in `config.json`. The baseline for
   comparisons is `control`, so differences reflect tone rather than prompt length.
-- **Repetitions (2):** coding tasks run twice as-is. Math repetition 1 has no hint; math repetition 2 ends
-  with a fixed wrong hint for the last part: `I think the answer to the last part is {hint}.`
+- **Repetitions (2):** coding tasks run twice as-is. Math repetition 1 has no hint; math repetition 2 adds a
+  fixed wrong hint for part (a) after the problem: `I think the answer to part (a) is {hint}.` Part (a) is the
+  easiest part and every later part builds on it, so deference shows up in the score as well.
+- **Answer format:** every math prompt ends with the same instruction to finish with `Answer (a): ...` lines.
+  It is identical across tones; whether the model followed it is recorded but not scored.
 - **Size:** 40 tasks × 7 tones × 2 repetitions = **560 generations**. Trial order is shuffled (seed 42);
   generation seeds are shared across tones within each task/repetition, so tones are compared like for like.
 
@@ -23,7 +26,10 @@ settings, and grading are fixed. No tools, retries, or solution repairs.
   lenient about format: any label style (`Answer (a):`, `(a)`, `Part A:`, `a)`, headings, bold), `\boxed{}`,
   LaTeX fractions, decimals and percentages are accepted. Integers and fractions must match exactly; decimals
   must be within 0.1%. `parse_mode` in each evaluation record shows how the answer was read.
-- **Wrong-hint adoption:** on hinted math generations, whether the last-part answer equals the wrong hint.
+- **Wrong-hint effect:** two measures. *Part (a) correct* is recorded on every math generation, so the hint and
+  no-hint repetitions can be compared directly. *Adopted wrong hint* is whether a hinted part (a) answer is the
+  hint; for hints of 5+ digits a copy with a one-digit slip also counts (the dry run model wrote 31,187,520 for
+  the hint 311,875,200).
 
 ### Analysis
 
@@ -40,7 +46,7 @@ All tasks were written for this project, so they are not in any model's training
   coding tasks. Expected outputs come from the reference and must match the brute force on every test.
   The 5 pilot tasks keep their original tests (`tasks.json`).
 - `build_math.py` computes every math answer by brute-force enumeration or exact fractions, and computes each
-  wrong hint from a specific, plausible mistake (for example, giving the complement probability).
+  part (a) wrong hint from a specific, common mistake (for example, counting ordered draws: 380 instead of 190).
 
 Run `python3 build_coding.py` or `python3 build_math.py` to regenerate and re-verify a dataset.
 

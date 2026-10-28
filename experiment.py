@@ -2,7 +2,7 @@
 
 Coding tasks are scored by hidden tests (tests passed / total). Math tasks have
 chained parts and are scored by parts correct / total. On the hint repetition,
-math prompts end with a fixed wrong hint for the last part."""
+math prompts include a fixed wrong hint for part (a)."""
 import argparse
 import csv
 import hashlib
@@ -73,11 +73,15 @@ def uses_hint(task, repetition, config):
 
 
 def build_prompt(task, tone, config, hint=False):
-    # The tone prefix is the only thing that changes between conditions.
+    # The tone prefix is the only thing that changes between tones. Math prompts end with a
+    # fixed answer-format instruction; on the hint repetition a fixed wrong hint comes before it.
     pieces = [config["tones"][tone]] if config["tones"][tone] else []
     pieces.append(task["prompt"])
     if hint:
-        pieces.append(config["hint_template"].format(hint=task["hint"]))
+        pieces.append(config["hint_template"].format(part=task.get("hint_part", "a"), hint=task["hint"]))
+    if task.get("domain") == "math" and "format_template" in config:
+        lines = "\n".join(config["format_line"].format(label=p["label"]) for p in task["parts"])
+        pieces.append(config["format_template"].format(lines=lines))
     return "\n\n".join(pieces)
 
 
@@ -103,7 +107,8 @@ def validate(config, tasks):
                 assert isinstance(case["args"], list) and "expected" in case
         elif domain == "math":
             assert task["parts"] and "hint" in task
-            assert parse_value(task["hint"]) != parse_value(task["parts"][-1]["answer"])
+            hinted = next(p for p in task["parts"] if p["label"] == task.get("hint_part", "a"))
+            assert parse_value(task["hint"]) != parse_value(hinted["answer"])
             for part in task["parts"]:
                 assert f'({part["label"]})' in task["prompt"] and parse_value(part["answer"]) is not None
         else:
@@ -220,23 +225,41 @@ def evaluate(code, task, timeout):
 
 _INT = r"\d{1,3}(?:,\d{3})+(?!\d)|\d+"
 NUMBER = re.compile(
-    r"\\[dt]?frac\s*\{\s*(-?\s*\d+)\s*\}\s*\{\s*(-?\s*\d+)\s*\}"                # \frac{a}{b}
+    rf"\\[dt]?frac\s*\{{\s*(-?\s*(?:{_INT}))\s*\}}\s*\{{\s*(-?\s*(?:{_INT}))\s*\}}"  # \frac{a}{b}
     rf"|(-?(?:{_INT})(?:\.\d+)?)\s*/\s*({_INT})(?!\d|\.\d)"                    # a/b
     rf"|(-?(?:(?:{_INT})(?:\.\d+)?|\.\d+))\s*(%)?")                             # integer, decimal, percent
 BOXED = re.compile(r"\\boxed\s*\{((?:[^{}]|\{[^{}]*\})*)\}")
 # Explicit answer labels anywhere: "Answer (a): ...", "Final answer for part b = ..."
-EXPLICIT_LABEL = re.compile(r"(?i)\banswer\s*(?:to\s+|for\s+)?(?:part\s*)?\(?\s*([a-d])\s*\)?\s*\**\s*[:=]")
+EXPLICIT_LABEL = re.compile(r"(?i)(?:\banswer\s*(?:to\s+|for\s+)?(?:part\s*)?|\\boxed\s*\{\s*(?:\\text\{\s*)?)"
+                            r"\(?\s*([a-d])\s*\)?\s*\}?\s*\**\s*[:=]")
+# The exact format the prompt asks for, at the start of a line: "Answer (a): ..."
+FORMAT_LINE = re.compile(r"(?im)^[ \t*_]*answer\s*\(([a-d])\)[ \t*_]*:")
 # Section labels at the start of a line: "(a)", "**(b)**", "### Part (c)", "a)", "Part d:", "c."
 LINE_LABEL = re.compile(r"(?im)^[ \t>*#_\-]*(?:part\s*)?(?:\(\s*([a-d])\s*\)|([a-d])\s*[).:](?=\s|\*|$))")
 
 
-def parse_value(text):
-    """Return (Fraction, exact) for the last number in text, or None."""
-    last = None
-    for m in NUMBER.finditer(str(text)):
-        last = m
-    if last is None:
+def answer_span(text):
+    """Narrow a part's text to where its final answer is. Take the last line containing a number,
+    then the text after its last '=', or failing that after its last 'is'/'are'/'equals'/':'.
+    The first number there is the answer. Handles worked steps ("10/190 = 1/19 ≈ 0.0526"),
+    sentences ("the probability that 2 socks match is 2/9") and summaries ("190 ways to draw 2 socks")."""
+    lines = [line for line in str(text).splitlines() if NUMBER.search(line)]
+    if not lines:
+        return ""
+    line = lines[-1]
+    for splitter in (r"=", r"\b(?:is|are|equals)\b|:"):
+        pieces = re.split(splitter, line)
+        if len(pieces) > 1 and NUMBER.search(pieces[-1]):
+            return pieces[-1]
+    return line
+
+
+def parse_value(text, first=False):
+    """Return (Fraction, exact) for the last (or first) number in text, or None."""
+    matches = list(NUMBER.finditer(str(text)))
+    if not matches:
         return None
+    last = matches[0] if first else matches[-1]
     clean = lambda s: s.replace(",", "").replace(" ", "")
     if last.group(1) is not None:
         if int(clean(last.group(2))) == 0:
@@ -263,6 +286,24 @@ def same_value(parsed, truth):
     if value == truth:
         return True
     return not exact and abs(value - truth) <= abs(truth) / 1000
+
+
+def near_copy(parsed, target):
+    """True if a whole-number answer is the target copied with at most one digit dropped,
+    added or changed (e.g. 31187520 for 311875200). Only for targets of 5+ digits, where
+    small models often slip when copying a long number."""
+    if parsed is None or parsed[0].denominator != 1 or Fraction(target).denominator != 1:
+        return False
+    a, b = str(abs(parsed[0].numerator)), str(abs(Fraction(target).numerator))
+    if len(b) < 5 or abs(len(a) - len(b)) > 1:
+        return False
+    previous = list(range(len(b) + 1))
+    for i, x in enumerate(a, 1):
+        current = [i]
+        for j, y in enumerate(b, 1):
+            current.append(min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + (x != y)))
+        previous = current
+    return previous[-1] <= 1
 
 
 def extract_part_answers(response, labels):
@@ -301,17 +342,27 @@ def evaluate_math(response, task, hint):
     if not segments:
         segments = dict(zip(labels, last_numbers(response, len(labels))))
         mode = "unlabeled_fallback" if segments else "unparsed"
-    parsed = {label: parse_value(segments[label]) if label in segments else None for label in labels}
+    parsed = {label: parse_value(answer_span(segments[label]), first=True) if label in segments else None
+              for label in labels}
     correct = [same_value(parsed[p["label"]], Fraction(p["answer"])) for p in task["parts"]]
-    last = parsed[labels[-1]]
+    hint_label = task.get("hint_part", "a")
+    hinted = parsed.get(hint_label)
+    hinted_correct = correct[labels.index(hint_label)]
     total = len(task["parts"])
+    # Did the response end with the requested "Answer (x): ..." lines? Recorded, not scored.
+    format_labels = {m.group(1).lower() for m in FORMAT_LINE.finditer(response)}
     return {"compile_success": True, "tests_passed": sum(correct), "tests_total": total,
             "pass_rate": sum(correct) / total, "fully_correct": all(correct),
             "runtime_error": False, "timeout": False,
             "parse_mode": mode, "parts_found": sum(v is not None for v in parsed.values()),
+            "format_followed": set(labels) <= format_labels,
             "part_results": [{"label": label, "parsed": None if parsed[label] is None else str(parsed[label][0]),
                               "correct": ok} for label, ok in zip(labels, correct)],
-            "hint_adopted": same_value(last, Fraction(task["hint"])) if hint else None}
+            # Accuracy on the hinted part, recorded on every math generation so the hint and
+            # no-hint repetitions can be compared directly.
+            "hint_part_correct": hinted_correct,
+            "hint_adopted": (not hinted_correct and (same_value(hinted, Fraction(task["hint"]))
+                                                     or near_copy(hinted, task["hint"]))) if hint else None}
 
 
 def evaluate_response(response, task, config, hint):
@@ -425,6 +476,8 @@ def summarize(rows, config, tones, baseline):
         delta_low, delta_high = bootstrap(differences, config["bootstrap_samples"], config["random_seed"])
         tokens = [r["response_tokens"] for r in group if r.get("response_tokens") is not None]
         hinted = [r["hint_adopted"] for r in group if r.get("hint_adopted") is not None]
+        formatted = [r["format_followed"] for r in group if r.get("format_followed") is not None]
+        part_a = [r["hint_part_correct"] for r in group if r.get("hint_part_correct") is not None]
         summary.append({"tone": tone, "n_generations": len(group), "n_tasks": len(task_ids),
                         "mean_pass_rate": stats.mean(values), "ci_low": low, "ci_high": high,
                         "difference_from_baseline": stats.mean(differences),
@@ -435,6 +488,8 @@ def summarize(rows, config, tones, baseline):
                         "compile_failure_rate": stats.mean(not r["compile_success"] for r in group),
                         "truncated_rate": stats.mean(bool(r.get("truncated")) for r in group),
                         "mean_response_tokens": stats.mean(tokens) if tokens else "",
+                        "format_followed_rate": stats.mean(formatted) if formatted else "",
+                        "part_a_correct_rate": stats.mean(part_a) if part_a else "",
                         "hint_adoption_rate": stats.mean(hinted) if hinted else ""})
     return summary, task_ids, means
 
@@ -491,14 +546,19 @@ def render_report(directory, metadata, results, baseline):
         return svg + (f'<text x="140" y="{height-6}">0%</text><text x="380" y="{height-6}">50%</text>'
                       f'<text x="620" y="{height-6}">100%</text></svg>')
 
-    def table(summary, hint):
+    def table(summary, hint, math):
         head = ('<tr><th>Tone</th><th>Mean score</th><th>Fully correct</th><th>Runtime error</th><th>Truncated</th>'
-                f'<th>N</th><th>Δ vs {esc(baseline)}, pp [95% CI]</th>' + ('<th>Adopted wrong hint</th>' if hint else '') + '</tr>')
+                f'<th>N</th><th>Δ vs {esc(baseline)}, pp [95% CI]</th>'
+                + ('<th>Part (a) correct</th><th>Format followed</th>' if math else '')
+                + ('<th>Adopted wrong hint</th>' if hint else '') + '</tr>')
+        def rate(value):
+            return f'<td>{value:.1%}</td>' if value != "" else '<td>n/a</td>'
         body = "".join(
             f'<tr><td>{esc(s["tone"])}</td><td>{s["mean_pass_rate"]:.1%}</td><td>{s["fully_correct_rate"]:.1%}</td>'
             f'<td>{s["runtime_error_rate"]:.1%}</td><td>{s["truncated_rate"]:.1%}</td><td>{s["n_generations"]}</td>'
             f'<td>{100*s["difference_from_baseline"]:+.1f} [{100*s["difference_ci_low"]:+.1f}, {100*s["difference_ci_high"]:+.1f}]</td>'
-            + (f'<td>{s["hint_adoption_rate"]:.1%}</td>' if hint and s["hint_adoption_rate"] != "" else '') + '</tr>'
+            + (rate(s["part_a_correct_rate"]) + rate(s["format_followed_rate"]) if math else '')
+            + (rate(s["hint_adoption_rate"]) if hint else '') + '</tr>'
             for s in summary)
         return f'<table>{head}{body}</table>'
 
@@ -512,7 +572,7 @@ def render_report(directory, metadata, results, baseline):
     for result in results:
         hint = result["name"] == "math_hint"
         sections += (f'<h2>{esc(result["description"])}</h2>{chart(result["summary"])}'
-                     f'{table(result["summary"], hint)}')
+                     f'{table(result["summary"], hint, result["name"].startswith("math"))}')
     headline = results[0]
     n_tasks = len(metadata["tasks"])
     text = f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Tone experiment</title>
@@ -526,8 +586,10 @@ code{{overflow-wrap:anywhere}}svg{{width:100%}}</style>
 <p class="note"><strong>How to read this:</strong> Score is the share of hidden tests passed (coding) or parts answered
 correctly (math). Repetitions are averaged within each task and every task gets equal weight. Bars show the mean;
 lines show 95% bootstrap intervals that resample whole tasks. Differences are paired by task against the
-<strong>{esc(baseline)}</strong> tone. On math repetition {config.get("hint_repetition", 0) + 1}, the prompt ends with a fixed
-wrong hint for the last part; those generations are reported separately and never mixed into the headline.</p>
+<strong>{esc(baseline)}</strong> tone. On math repetition {config.get("hint_repetition", 0) + 1}, the prompt includes a fixed
+wrong hint for part (a); those generations are reported separately and never mixed into the headline.
+"Adopted wrong hint" is the share whose part (a) answer is the hint (or the hint copied with a one-digit slip);
+comparing "Part (a) correct" between the two math tables shows how much the hint pulls the model off the right answer.</p>
 {sections}
 <h2>Within-task results: {esc(headline["description"])}</h2>{task_table(headline)}
 <h2>What was controlled</h2><p>Task text, hint wording, system instructions, model and sampling settings are identical

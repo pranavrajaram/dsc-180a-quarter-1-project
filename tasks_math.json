@@ -18,7 +18,8 @@
         "answer": "4165"
       }
     ],
-    "hint": "16660"
+    "hint_part": "a",
+    "hint": "311875200"
   },
   {
     "task_id": "matching_socks",
@@ -43,7 +44,8 @@
         "answer": "3/19"
       }
     ],
-    "hint": "16/19"
+    "hint_part": "a",
+    "hint": "380"
   },
   {
     "task_id": "full_house",
@@ -64,7 +66,8 @@
         "answer": "6/4165"
       }
     ],
-    "hint": "3/4165"
+    "hint_part": "a",
+    "hint": "312"
   },
   {
     "task_id": "digit_sum_nine",
@@ -85,7 +88,8 @@
         "answer": "495"
       }
     ],
-    "hint": "715"
+    "hint_part": "a",
+    "hint": "1001"
   },
   {
     "task_id": "lattice_paths_avoid",
@@ -106,7 +110,8 @@
         "answer": "110"
       }
     ],
-    "hint": "200"
+    "hint_part": "a",
+    "hint": "1024"
   },
   {
     "task_id": "no_consecutive_heads",
@@ -127,7 +132,8 @@
         "answer": "9/64"
       }
     ],
-    "hint": "89/1024"
+    "hint_part": "a",
+    "hint": "512"
   },
   {
     "task_id": "chinese_remainder",
@@ -148,7 +154,8 @@
         "answer": "578"
       }
     ],
-    "hint": "473"
+    "hint_part": "a",
+    "hint": "23"
   },
   {
     "task_id": "coupon_collector",
@@ -169,7 +176,8 @@
         "answer": "147/10"
       }
     ],
-    "hint": "49/20"
+    "hint_part": "a",
+    "hint": "1/6"
   },
   {
     "task_id": "bounded_solutions",
@@ -190,7 +198,8 @@
         "answer": "63"
       }
     ],
-    "hint": "135"
+    "hint_part": "a",
+    "hint": "231"
   },
   {
     "task_id": "derangement_probability",
@@ -211,7 +220,8 @@
         "answer": "53/144"
       }
     ],
-    "hint": "11/30"
+    "hint_part": "a",
+    "hint": "120"
   },
   {
     "task_id": "both_aces_given_one",
@@ -236,7 +246,8 @@
         "answer": "1/33"
       }
     ],
-    "hint": "1/221"
+    "hint_part": "a",
+    "hint": "2652"
   },
   {
     "task_id": "lcm_pairs",
@@ -257,7 +268,8 @@
         "answer": "35"
       }
     ],
-    "hint": "12"
+    "hint_part": "a",
+    "hint": "8"
   },
   {
     "task_id": "expected_flips_hh",
@@ -278,7 +290,8 @@
         "answer": "6"
       }
     ],
-    "hint": "4"
+    "hint_part": "a",
+    "hint": "1/2"
   },
   {
     "task_id": "grid_triangles",
@@ -299,7 +312,8 @@
         "answer": "516"
       }
     ],
-    "hint": "520"
+    "hint_part": "a",
+    "hint": "3360"
   },
   {
     "task_id": "committee_women",
@@ -324,7 +338,8 @@
         "answer": "596"
       }
     ],
-    "hint": "771"
+    "hint_part": "a",
+    "hint": "95040"
   },
   {
     "task_id": "double_headed_coin",
@@ -345,7 +360,8 @@
         "answer": "2/3"
       }
     ],
-    "hint": "1/3"
+    "hint_part": "a",
+    "hint": "1/2"
   },
   {
     "task_id": "max_of_two_dice",
@@ -366,7 +382,8 @@
         "answer": "161/36"
       }
     ],
-    "hint": "7/2"
+    "hint_part": "a",
+    "hint": "10"
   },
   {
     "task_id": "pipes_and_drain",
@@ -387,7 +404,8 @@
         "answer": "24/5"
       }
     ],
-    "hint": "24/7"
+    "hint_part": "a",
+    "hint": "1/14"
   },
   {
     "task_id": "elevator_floors",
@@ -408,7 +426,8 @@
         "answer": "5/18"
       }
     ],
-    "hint": "5/432"
+    "hint_part": "a",
+    "hint": "4096"
   },
   {
     "task_id": "price_changes",
@@ -429,6 +448,7 @@
         "answer": "396/5"
       }
     ],
-    "hint": "84"
+    "hint_part": "a",
+    "hint": "100"
   }
 ]
