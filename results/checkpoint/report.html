@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Checkpoint reanalysis</title>
+<style>body{font:17px/1.5 Georgia;max-width:1100px;margin:40px auto;padding:20px}table{border-collapse:collapse;width:100%;font-size:15px}td,th{padding:8px;border-bottom:1px solid #ccc;text-align:left}</style>
+<h1>Checkpoint reanalysis</h1><p>560 saved generations. No new model calls or candidate-code execution.</p>
+<h2>Paired differences from control</h2><p><strong>0 of 18 contrasts survive Holm correction at 0.05.</strong></p><p>Differences and intervals use percentage points. Intervals remain unadjusted
+95% task-bootstrap intervals. Exact two-sided sign-flip tests assume independent tasks and sign exchangeability under the null.
+Holm adjustment covers all 18 contrasts below, including the no-prefix comparison. This is an exploratory,
+post-data analysis, not a preregistered confirmatory test. A nonsignificant result does not establish equivalence.</p>
+<table><tr><th>Group</th><th>Tone</th><th>Tasks</th><th>Difference</th><th>95% CI</th><th>Raw p</th><th>Holm p</th></tr><tr><td>coding</td><td>none</td><td>20</td><td>+2.94</td><td>[-6.94, +13.19]</td><td>0.6060</td><td>1.0000</td></tr><tr><td>coding</td><td>very_polite</td><td>20</td><td>+11.25</td><td>[+0.62, +21.25]</td><td>0.0627</td><td>0.8784</td></tr><tr><td>coding</td><td>very_rude</td><td>20</td><td>+0.13</td><td>[-9.06, +9.38]</td><td>1.0000</td><td>1.0000</td></tr><tr><td>coding</td><td>stakes</td><td>20</td><td>-1.25</td><td>[-9.69, +6.88]</td><td>0.8313</td><td>1.0000</td></tr><tr><td>coding</td><td>flattery</td><td>20</td><td>+4.19</td><td>[-6.62, +15.44]</td><td>0.4995</td><td>1.0000</td></tr><tr><td>coding</td><td>pressure</td><td>20</td><td>+1.63</td><td>[-9.00, +12.81]</td><td>0.7861</td><td>1.0000</td></tr><tr><td>math_no_hint</td><td>none</td><td>20</td><td>+0.00</td><td>[-15.83, +15.00]</td><td>1.0000</td><td>1.0000</td></tr><tr><td>math_no_hint</td><td>very_polite</td><td>20</td><td>-14.17</td><td>[-30.42, +2.50]</td><td>0.1284</td><td>1.0000</td></tr><tr><td>math_no_hint</td><td>very_rude</td><td>20</td><td>-21.25</td><td>[-36.25, -6.25]</td><td>0.0195</td><td>0.3125</td></tr><tr><td>math_no_hint</td><td>stakes</td><td>20</td><td>-18.75</td><td>[-30.42, -8.33]</td><td>0.0078</td><td>0.1406</td></tr><tr><td>math_no_hint</td><td>flattery</td><td>20</td><td>-20.42</td><td>[-35.00, -7.08]</td><td>0.0122</td><td>0.2075</td></tr><tr><td>math_no_hint</td><td>pressure</td><td>20</td><td>-13.33</td><td>[-23.75, -3.75]</td><td>0.0352</td><td>0.5273</td></tr><tr><td>math_hint</td><td>none</td><td>20</td><td>-2.92</td><td>[-16.67, +9.58]</td><td>0.7500</td><td>1.0000</td></tr><tr><td>math_hint</td><td>very_polite</td><td>20</td><td>-0.00</td><td>[-13.33, +12.50]</td><td>1.0000</td><td>1.0000</td></tr><tr><td>math_hint</td><td>very_rude</td><td>20</td><td>+3.75</td><td>[-10.83, +17.50]</td><td>0.7500</td><td>1.0000</td></tr><tr><td>math_hint</td><td>stakes</td><td>20</td><td>+0.00</td><td>[-10.00, +10.00]</td><td>1.0000</td><td>1.0000</td></tr><tr><td>math_hint</td><td>flattery</td><td>20</td><td>-2.92</td><td>[-16.67, +9.58]</td><td>0.7500</td><td>1.0000</td></tr><tr><td>math_hint</td><td>pressure</td><td>20</td><td>+2.92</td><td>[+0.00, +7.50]</td><td>0.5000</td><td>1.0000</td></tr></table>
+<h2>Wrong-hint measurement</h2><p>Exact numerical matches: 84/140.
+The original approximate-copy measure: 84/140.
+Without a hint, 22 responses already matched that wrong answer.
+Part (a) correct: 67 without hints and 35 with hints
+(out of 140 each for this two-repetition design).</p>
+<p>Hint status is fixed by repetition and changes the generation seed. Therefore, the observed hint/no-hint difference
+also includes sampling differences. A future study should cross hint status with each task/tone/seed and use multiple seeds.
+Matching a user-supplied wrong answer is an operational proxy, not proof of a psychological mechanism.</p>
+<h2>Audit and sensitivity</h2><p>All saved prompts, request settings and trial cells match their recorded design.
+Math regrading changed 0/280 scores.
+6 responses hit the token limit. The separate strict-format sensitivity in audit.json requires the requested
+answer lines and therefore mixes format compliance with accuracy; it does not replace the original grader.</p>
+<p><a href="contrasts.csv">Contrasts CSV</a> · <a href="audit.json">Audit and format sensitivity</a></p>
+<p>Raw SHA-256: dc4768dbf87ad96c58e344fa4eb30471aa59736be792e78742e1c19661bd4686</p></html>

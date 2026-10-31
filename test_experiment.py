@@ -158,6 +158,10 @@ class DesignTests(unittest.TestCase):
     def test_analysis_groups_pairing_and_determinism(self):
         config = {**self.config, 'bootstrap_samples': 100}
         tasks = [t for t in self.tasks if t['domain'] == 'coding'][:2] + [t for t in self.tasks if t['domain'] == 'math'][:2]
+        tasks = copy.deepcopy(tasks)
+        for task in tasks:
+            if task['domain'] == 'math':
+                task['parts'] = [{'label': label, 'answer': '0'} for label in 'abcd']
         shift = {tone: 0 for tone in config['tones']}
         shift.update({'very_polite': 0.25, 'very_rude': -0.25})
         with tempfile.TemporaryDirectory() as directory:
@@ -174,6 +178,8 @@ class DesignTests(unittest.TestCase):
                     'task_id': tasks[i]['task_id'], 'domain': tasks[i]['domain'], 'tone': tone,
                     'repetition': rep, 'hint': hint, 'response_tokens': 100, 'truncated': False})
                 ex.append_record(path / 'raw.jsonl', {'kind': 'evaluation', 'trial_id': trial_id,
+                    'tests_total': len(tasks[i].get('parts', tasks[i].get('tests'))),
+                    'tests_passed': int(value * len(tasks[i].get('parts', tasks[i].get('tests')))),
                     'pass_rate': value, 'fully_correct': value == 1, 'runtime_error': False, 'timeout': False,
                     'compile_success': True, 'hint_adopted': (tone == 'very_rude') if hint else None})
             ex.analyze(path)
@@ -292,6 +298,62 @@ class EvaluatorTests(unittest.TestCase):
             code = f'def solve():\n try:\n  {action}\n except (PermissionError, BlockingIOError):\n  return 3\n return 0'
             with self.subTest(action=action):
                 self.assertTrue(ex.evaluate(code, self.task, 3)['fully_correct'])
+
+
+class ReanalysisTests(unittest.TestCase):
+    def test_exact_sign_flip_matches_exhaustive_enumeration(self):
+        from study_analysis import sign_flip_pvalue
+        for values in ([0, 0], [1, 1, 1, 1], [1, -1, 0], [Fraction(1, 3), Fraction(-1, 4), Fraction(1, 2)]):
+            observed = abs(sum(values))
+            sums = [abs(sum(x * sign for x, sign in zip(values, signs)))
+                    for signs in itertools.product((-1, 1), repeat=len(values))]
+            self.assertEqual(sign_flip_pvalue(values), sum(v >= observed for v in sums) / len(sums))
+        with self.assertRaises(ValueError):
+            sign_flip_pvalue([])
+
+    def test_holm_known_values_and_original_order(self):
+        from study_analysis import holm_adjust
+        self.assertEqual(holm_adjust([0.03, 0.001, 0.02]), [0.04, 0.003, 0.04])
+        self.assertEqual(holm_adjust([1, 1]), [1, 1])
+
+    def test_saved_run_audit_and_corruption_rejection(self):
+        from study_analysis import load_run, audit
+        original = [json.loads(line) for line in (ex.ROOT / 'results/full_run/raw.jsonl').read_text().splitlines()]
+        metadata, rows = load_run(ex.ROOT / 'results/full_run')
+        # Small bootstrap count suffices for checking the audit, not published inference.
+        metadata = copy.deepcopy(metadata)
+        metadata['config']['bootstrap_samples'] = 100
+        result = audit(metadata, rows, ex)
+        self.assertEqual(result['math_score_changes_on_regrade'], 0)
+        self.assertEqual(result['hint_adopted_exact'], 84)
+        self.assertEqual(result['hint_adopted_legacy'], 84)
+        self.assertEqual(result['no_hint_matches_wrong_hint'], 22)
+        mutations = []
+        mutations.append(original + [original[1]])
+        mutations.append(original[:-1])
+        duplicate_cell = copy.deepcopy(original)
+        generations = [r for r in duplicate_cell if r['kind'] == 'generation']
+        for key in ('task_id', 'tone', 'repetition'):
+            generations[1][key] = generations[0][key]
+        mutations.append(duplicate_cell)
+        wrong_score = copy.deepcopy(original)
+        next(r for r in wrong_score if r['kind'] == 'evaluation')['tests_total'] = 999
+        mutations.append(wrong_score)
+        wrong_hint = copy.deepcopy(original)
+        next(r for r in wrong_hint if r['kind'] == 'generation')['hint'] = True
+        mutations.append(wrong_hint)
+        with tempfile.TemporaryDirectory() as directory:
+            raw = Path(directory) / 'raw.jsonl'
+            for records in mutations:
+                raw.write_text(''.join(json.dumps(r) + '\n' for r in records))
+                with self.assertRaises(ValueError):
+                    load_run(directory)
+            raw.write_text(''.join(json.dumps(r) + '\n' for r in [original[0], *reversed(original[1:])]))
+            self.assertEqual(len(load_run(directory)[1]), 560)
+        altered = copy.deepcopy(rows)
+        altered[0]['request']['options']['temperature'] = 0
+        with self.assertRaisesRegex(ValueError, 'saved request'):
+            audit(metadata, altered, ex)
 
 
 if __name__ == '__main__':

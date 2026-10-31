@@ -59,6 +59,8 @@ def subset(tasks, per_domain):
     """First `per_domain` tasks of each domain, in file order (used for dry runs)."""
     if per_domain is None:
         return tasks
+    if per_domain < 1:
+        raise ValueError("tasks-per-domain must be positive.")
     counts, out = {}, []
     for task in tasks:
         domain = task.get("domain", "coding")
@@ -94,6 +96,8 @@ def system_prompt(task, config):
 def validate(config, tasks):
     assert config.get("baseline_tone", "neutral") in config["tones"] and len(config["tones"]) >= 2
     assert config["repetitions"] >= 1 and config["bootstrap_samples"] >= 100
+    if config.get("hint_repetition") is not None and not 0 <= config["hint_repetition"] < config["repetitions"]:
+        raise ValueError("hint_repetition must identify an existing repetition.")
     assert config["timeout_seconds"] > 0 and config["max_tokens"] > 0
     assert len({task["task_id"] for task in tasks}) == len(tasks) > 0
     for task in tasks:
@@ -496,19 +500,9 @@ def summarize(rows, config, tones, baseline):
 
 def analyze(directory):
     directory = Path(directory)
-    records = [json.loads(line) for line in (directory / "raw.jsonl").read_text().splitlines()]
-    metadata = records[0]
+    from study_analysis import load_run
+    metadata, rows = load_run(directory)
     config = metadata["config"]
-    generations = {r["trial_id"]: r for r in records if r["kind"] == "generation"}
-    evaluations = {r["trial_id"]: r for r in records if r["kind"] == "evaluation"}
-    if len(generations) != metadata["planned_generations"] or generations.keys() != evaluations.keys():
-        raise ValueError("Incomplete run: raw responses preserved; finish/re-evaluate before reporting.")
-    rows = []
-    for key, g in generations.items():
-        row = {**g, **evaluations[key]}
-        row.setdefault("domain", "coding")  # pilot records predate domains and hints
-        row.setdefault("hint", False)
-        rows.append(row)
     tones = list(config["tones"])
     baseline = config.get("baseline_tone", "neutral")
     results = []
