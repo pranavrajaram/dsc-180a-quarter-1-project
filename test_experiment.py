@@ -356,5 +356,61 @@ class ReanalysisTests(unittest.TestCase):
             audit(metadata, altered, ex)
 
 
+class FollowupTests(unittest.TestCase):
+    def test_fully_crossed_seed_pairing(self):
+        import followup
+        config = ex.read_json(ex.ROOT / 'followup.json')
+        tasks = ex.read_json(ex.ROOT / config['dataset'])
+        plan = followup.design(config, tasks)
+        self.assertEqual(len(plan), 480)
+        self.assertEqual(plan, followup.design(config, tasks))
+        for task, repetition in itertools.product(tasks, range(2)):
+            block = [r for r in plan if r['task_id'] == task['task_id'] and r['repetition'] == repetition]
+            self.assertEqual(len(block), 12)
+            self.assertEqual(len({r['seed'] for r in block}), 1)
+            self.assertEqual(len({(r['model'], r['tone'], r['hint']) for r in block}), 12)
+
+    def test_exact_hint_match_and_downstream_score(self):
+        import followup
+        task = {'hint_part': 'a', 'hint': '123456', 'parts': [
+            {'label': 'a', 'answer': '7'}, {'label': 'b', 'answer': '2'}, {'label': 'c', 'answer': '3'}]}
+        for answer, exact in [('123456', True), ('123455', False), ('-123456', False)]:
+            result = followup.score(f'Answer (a): {answer}\nAnswer (b): 2\nAnswer (c): 0', task, True)
+            self.assertEqual(result['exact_hint_match'], exact)
+            self.assertEqual(result['downstream_accuracy'], .5)
+
+    def test_paired_analysis_on_known_effect(self):
+        import followup
+        config = ex.read_json(ex.ROOT / 'followup.json')
+        config['bootstrap_samples'] = 100
+        tasks = [{'task_id': str(i), 'hint_part': 'a', 'hint': '9',
+                  'parts': [{'label': 'a', 'answer': '1'}, {'label': 'b', 'answer': '2'}]} for i in range(2)]
+        plan = followup.design(config, tasks)
+        with tempfile.TemporaryDirectory() as name:
+            directory = Path(name)
+            raw = directory / 'raw.jsonl'
+            ex.append_record(raw, dict(kind='metadata', config=config, tasks=tasks, plan=plan))
+            for trial in plan:
+                # The hint changes part (a) only: exactly -50 percentage points on overall score.
+                answer = 9 if trial['hint'] else 1
+                ex.append_record(raw, dict(kind='generation', **trial,
+                    api_response={'message': {'content': f'Answer (a): {answer}\nAnswer (b): 2'}, 'done_reason': 'stop'}))
+            followup.analyze(directory)
+            with (directory / 'effects.csv').open() as stream:
+                effects = list(csv.DictReader(stream))
+            for row in effects:
+                expected = -.5 if row['contrast'] == 'hint_minus_no_hint' and row['metric'] == 'pass_rate' else None
+                if expected is not None:
+                    self.assertEqual(float(row['estimate']), expected)
+                    self.assertEqual(float(row['ci_low']), expected)
+                    self.assertEqual(float(row['ci_high']), expected)
+                if row['contrast'] == 'tone_by_hint_interaction':
+                    self.assertEqual(float(row['estimate']), 0)
+            lines = raw.read_text().splitlines()
+            raw.write_text('\n'.join(lines[:-1])+'\n')
+            with self.assertRaisesRegex(ValueError, 'Incomplete run'):
+                followup.analyze(directory)
+
+
 if __name__ == '__main__':
     unittest.main()
