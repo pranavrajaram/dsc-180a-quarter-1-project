@@ -4,6 +4,10 @@ __pycache__/
 .venv/
 .env
 .env.*
-# Superseded presentation drafts remain local.
-results/pilot/pilot_slides.pptx
-results/pilot/pilot_slides_visual.pptx
+results/*_reproduction/
+report.aux
+report.log
+report.out
+report.fls
+report.fdb_latexmk
+report.synctex.gz

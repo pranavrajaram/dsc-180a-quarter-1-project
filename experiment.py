@@ -6,7 +6,6 @@ math prompts include a fixed wrong hint for part (a)."""
 import argparse
 import csv
 import hashlib
-import html
 import itertools
 import json
 import os
@@ -519,83 +518,7 @@ def analyze(directory):
         writer.writeheader()
         for result in results:
             writer.writerows({"group": result["name"], **row} for row in result["summary"])
-    render_report(directory, metadata, results, baseline)
-    print(f"Report: {directory / 'report.html'}", flush=True)
-
-
-def render_report(directory, metadata, results, baseline):
-    esc = html.escape
-    config = metadata["config"]
-
-    def chart(summary):
-        height = 40 + 46 * len(summary)
-        svg = f'<svg viewBox="0 0 780 {height}" role="img" aria-label="Mean score by tone with 95 percent intervals">'
-        for i, s in enumerate(summary):
-            y = 30 + i * 46
-            svg += (f'<text x="0" y="{y+5}">{esc(s["tone"])}</text>'
-                    f'<rect x="140" y="{y-13}" width="{500*s["mean_pass_rate"]:.2f}" height="26" fill="#bdd9eb"/>'
-                    f'<path d="M {140+500*s["ci_low"]:.2f} {y} H {140+500*s["ci_high"]:.2f}" stroke="#153f59" stroke-width="3"/>'
-                    f'<circle cx="{140+500*s["mean_pass_rate"]:.2f}" cy="{y}" r="5" fill="#153f59"/>'
-                    f'<text x="660" y="{y+5}">{s["mean_pass_rate"]:.1%}</text>')
-        return svg + (f'<text x="140" y="{height-6}">0%</text><text x="380" y="{height-6}">50%</text>'
-                      f'<text x="620" y="{height-6}">100%</text></svg>')
-
-    def table(summary, hint, math):
-        head = ('<tr><th>Tone</th><th>Mean score</th><th>Fully correct</th><th>Runtime error</th><th>Truncated</th>'
-                f'<th>N</th><th>Δ vs {esc(baseline)}, pp [95% CI]</th>'
-                + ('<th>Part (a) correct</th><th>Format followed</th>' if math else '')
-                + ('<th>Adopted wrong hint</th>' if hint else '') + '</tr>')
-        def rate(value):
-            return f'<td>{value:.1%}</td>' if value != "" else '<td>n/a</td>'
-        body = "".join(
-            f'<tr><td>{esc(s["tone"])}</td><td>{s["mean_pass_rate"]:.1%}</td><td>{s["fully_correct_rate"]:.1%}</td>'
-            f'<td>{s["runtime_error_rate"]:.1%}</td><td>{s["truncated_rate"]:.1%}</td><td>{s["n_generations"]}</td>'
-            f'<td>{100*s["difference_from_baseline"]:+.1f} [{100*s["difference_ci_low"]:+.1f}, {100*s["difference_ci_high"]:+.1f}]</td>'
-            + (rate(s["part_a_correct_rate"]) + rate(s["format_followed_rate"]) if math else '')
-            + (rate(s["hint_adoption_rate"]) if hint else '') + '</tr>'
-            for s in summary)
-        return f'<table>{head}{body}</table>'
-
-    def task_table(result):
-        tones = list(result["means"])
-        rows = "".join(f'<tr><td>{esc(task)}</td>' + "".join(f'<td>{result["means"][t][i]:.0%}</td>' for t in tones) + '</tr>'
-                       for i, task in enumerate(result["task_ids"]))
-        return f'<table><tr><th>Task</th>{"".join("<th>"+esc(t)+"</th>" for t in tones)}</tr>{rows}</table>'
-
-    sections = ""
-    for result in results:
-        hint = result["name"] == "math_hint"
-        sections += (f'<h2>{esc(result["description"])}</h2>{chart(result["summary"])}'
-                     f'{table(result["summary"], hint, result["name"].startswith("math"))}')
-    headline = results[0]
-    n_tasks = len(metadata["tasks"])
-    text = f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Tone experiment</title>
-<style>body{{font:17px/1.55 system-ui;max-width:980px;margin:48px auto;padding:0 24px;color:#183042}}
-h1{{line-height:1.2}}h2{{margin-top:36px}}table{{border-collapse:collapse;width:100%;font-size:14px;margin-top:12px}}
-th,td{{padding:8px;text-align:left;border-bottom:1px solid #dbe3e8}}.note{{background:#eff5f8;padding:18px}}
-code{{overflow-wrap:anywhere}}svg{{width:100%}}</style>
-<h1>Does user tone change LLM performance?</h1>
-<p>{n_tasks} tasks × {len(config["tones"])} tones × {config["repetitions"]} repetitions
-= {metadata["planned_generations"]} generations. Model: <strong>{esc(config["model"])}</strong>.</p>
-<p class="note"><strong>How to read this:</strong> Score is the share of hidden tests passed (coding) or parts answered
-correctly (math). Repetitions are averaged within each task and every task gets equal weight. Bars show the mean;
-lines show 95% bootstrap intervals that resample whole tasks. Differences are paired by task against the
-<strong>{esc(baseline)}</strong> tone. On math repetition {config.get("hint_repetition", 0) + 1}, the prompt includes a fixed
-wrong hint for part (a); those generations are reported separately and never mixed into the headline.
-"Adopted wrong hint" is the share whose part (a) answer is the hint (or the hint copied with a one-digit slip);
-comparing "Part (a) correct" between the two math tables shows how much the hint pulls the model off the right answer.</p>
-{sections}
-<h2>Within-task results: {esc(headline["description"])}</h2>{task_table(headline)}
-<h2>What was controlled</h2><p>Task text, hint wording, system instructions, model and sampling settings are identical
-across tones; only the prefix changes. Every generation is a fresh two-message conversation without tools. Trial order
-is shuffled with seed {config["random_seed"]}; generation seeds are shared across tones within each task/repetition.
-Temperature {config["temperature"]}, top-p {config["top_p"]}, output limit {config["max_tokens"]} tokens. No retries.</p>
-<ul>{"".join("<li><strong>"+esc(t)+":</strong> "+(esc(p) or "<em>(no prefix)</em>")+"</li>" for t, p in config["tones"].items())}</ul>
-<h2>Audit trail</h2><p><a href="summary.csv">Summary CSV</a> · <a href="raw.jsonl">Raw generations, evaluations and run metadata</a></p>
-<p>Model digest: <code>{esc(str(metadata["model"].get("digest")))}</code><br>
-Dataset SHA-256: <code>{esc(str(metadata["dataset_sha256"]))}</code><br>Runner SHA-256: <code>{esc(str(metadata["source_sha256"]))}</code><br>
-Ollama: {esc(str(metadata["ollama"]))}<br>Python: {esc(str(metadata["python"]))}<br>Platform: {esc(str(metadata["platform"]))}</p></html>'''
-    (directory / "report.html").write_text(text)
+    print(f"Summary: {directory / 'summary.csv'}", flush=True)
 
 
 def main():

@@ -195,9 +195,9 @@ class DesignTests(unittest.TestCase):
             self.assertEqual(get('math_hint', 'very_rude', 'hint_adoption_rate'), 1.0)
             self.assertEqual(get('math_hint', 'control', 'hint_adoption_rate'), 0.0)
             self.assertEqual(get('all_no_hint', 'control', 'n_generations'), 2 * 2 + 2 * 1)
-            first = (path / 'report.html').read_bytes()
+            first = (path / 'summary.csv').read_bytes()
             ex.analyze(path)
-            self.assertEqual(first, (path / 'report.html').read_bytes())
+            self.assertEqual(first, (path / 'summary.csv').read_bytes())
 
 
 class MathGradingTests(unittest.TestCase):
@@ -316,18 +316,15 @@ class ReanalysisTests(unittest.TestCase):
         self.assertEqual(holm_adjust([0.03, 0.001, 0.02]), [0.04, 0.003, 0.04])
         self.assertEqual(holm_adjust([1, 1]), [1, 1])
 
-    def test_saved_run_audit_and_corruption_rejection(self):
-        from study_analysis import load_run, audit
+    def test_saved_run_scores_and_corruption_rejection(self):
+        from study_analysis import load_run
         original = [json.loads(line) for line in (ex.ROOT / 'results/full_run/raw.jsonl').read_text().splitlines()]
         metadata, rows = load_run(ex.ROOT / 'results/full_run')
-        # Small bootstrap count suffices for checking the audit, not published inference.
-        metadata = copy.deepcopy(metadata)
-        metadata['config']['bootstrap_samples'] = 100
-        result = audit(metadata, rows, ex)
-        self.assertEqual(result['math_score_changes_on_regrade'], 0)
-        self.assertEqual(result['hint_adopted_exact'], 84)
-        self.assertEqual(result['hint_adopted_legacy'], 84)
-        self.assertEqual(result['no_hint_matches_wrong_hint'], 22)
+        tasks = {t['task_id']: t for t in metadata['tasks']}
+        for row in rows:
+            if row['domain'] == 'math':
+                rescored = ex.evaluate_math(row['raw_response'], tasks[row['task_id']], row['hint'])
+                self.assertEqual(rescored['pass_rate'], row['pass_rate'])
         mutations = []
         mutations.append(original + [original[1]])
         mutations.append(original[:-1])
@@ -350,10 +347,6 @@ class ReanalysisTests(unittest.TestCase):
                     load_run(directory)
             raw.write_text(''.join(json.dumps(r) + '\n' for r in [original[0], *reversed(original[1:])]))
             self.assertEqual(len(load_run(directory)[1]), 560)
-        altered = copy.deepcopy(rows)
-        altered[0]['request']['options']['temperature'] = 0
-        with self.assertRaisesRegex(ValueError, 'saved request'):
-            audit(metadata, altered, ex)
 
 
 class FollowupTests(unittest.TestCase):

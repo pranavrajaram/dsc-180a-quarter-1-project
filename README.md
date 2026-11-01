@@ -1,167 +1,161 @@
-# Does user tone affect LLM reasoning?
+# Prompt tone, misleading hints, and model size
 
-The latest extension is a completed **480-response experiment** comparing two model sizes
-under neutral, polite and rude wording, with and without misleading hints. The original
-560-response coding/math study and 30-response pilot are preserved.
+This project measures coding and mathematics accuracy under different prompt tones.
+It includes a 560-response experiment with Qwen2.5-Coder 1.5B and a 480-response
+mathematics experiment comparing the 1.5B and 3B checkpoints under neutral, polite,
+and rude wording, with and without wrong hints.
 
-**Main finding:** the larger model scores better, but misleading hints still substantially
-reduce accuracy. Polite wording moderates that penalty for the larger checkpoint in this
-exploratory sample; it does not establish a general protective effect of politeness.
+Read the updated [report.pdf](report.pdf), or edit its [LaTeX source](report.tex). The main finding is that the larger
+model performs better, but misleading hints still reduce accuracy substantially.
 
-Open **[the visual results](results/model_hint/report.html)**. To regenerate every new figure
-and table from saved responses, without a model or Python packages:
+## 1. Get the code and data
 
 ```sh
+git clone https://github.com/pranavrajaram/llm-tone-experiment.git
+cd llm-tone-experiment
+```
+
+All data needed to reproduce the reported results is included in the repository:
+
+| Path | Contents |
+|---|---|
+| `tasks.json` | Five original coding tasks used by the coding dataset builder |
+| `tasks_coding.json` | Twenty coding tasks and 162 hidden tests |
+| `tasks_math.json` | Twenty mathematics tasks, 63 answer-key parts, and wrong hints |
+| `results/full_run/raw.jsonl` | The 560 original prompts, responses, and evaluations |
+| `results/model_hint/raw.jsonl` | The 480 model-comparison prompts and responses |
+
+Keep these files in their existing locations. No external dataset, account, API key,
+or model download is required to reanalyze the saved responses. Each raw file begins
+with metadata containing the complete configuration, task set, model identifiers,
+and trial order. Subsequent lines contain individual trial records.
+
+## 2. Software dependencies
+
+- **Reanalysis:** Python 3.11 or newer; standard library only. Works on macOS, Linux,
+  and Windows. No `pip install`, environment manager, or GPU is needed.
+- **New model responses:** Ollama 0.6.8 and the specified Qwen model files. Both saved
+  experiments ran locally on Apple Silicon with 16 GB RAM. Full coding collection
+  also requires macOS `/usr/bin/sandbox-exec`, used to isolate generated code.
+- **Tests:** Python only. The full test suite requires macOS for the code-isolation
+  tests; a portable subset is listed below.
+- **Report PDF:** a LaTeX environment with `geometry`, `fontenc`, `mathptmx`, `amsmath`,
+  `booktabs`, `tabularx`, `pgfplots`, and `hyperref`, or Overleaf. All report figures
+  and references are embedded in `report.tex`; there are no external figure files.
+
+The analysis was tested with Python 3.14.5. The recorded inference runtime is Ollama
+0.6.8. No Python package requirements file is needed because the experiment and
+analysis code have no third-party Python dependencies.
+
+## 3. Reproduce results from the saved responses
+
+Run these commands from the repository root:
+
+```sh
+python3 experiment.py analyze --output results/full_run
+python3 study_analysis.py
 python3 followup.py analyze
 ```
 
-## Model × tone × misleading-hint follow-up
+They overwrite only the derived CSV files:
 
-The follow-up asks whether a larger checkpoint resists wrong hints better and whether tone
-changes that susceptibility. It runs **480 new responses**: the existing 20 math tasks ×
-Qwen2.5-Coder 1.5B/3B × control/polite/rude × 2 seeds × no hint/wrong hint. Both checkpoints
-use Q4_K_M quantization. Each task/repetition shares a seed across every condition; hint status
-is now crossed with seed, rather than being assigned to a particular repetition. This is an
-exploratory follow-up motivated by the first run, not a preregistered confirmation.
+| Output | Meaning |
+|---|---|
+| `results/full_run/summary.csv` | Original accuracy by domain, hint condition, and tone |
+| `results/full_run/contrasts.csv` | Paired tone effects, bootstrap intervals, and adjusted p-values |
+| `results/model_hint/summary.csv` | Accuracy, exact hint matching, later-part accuracy, and truncation rates |
+| `results/model_hint/effects.csv` | Paired model effects, hint effects, and tone-by-hint interactions |
 
-Only `followup.py` and `followup.json` are added to the implementation. Prompt construction
-and math scoring reuse `experiment.py`; no Python dependencies are required. The new runner
-resumes completed trials in the same directory. It refuses to resume if the configuration,
-tasks, source code or model digests changed. Do not run two collectors into the same directory.
-An API failure stops collection; rerun the same command to resume. A partial last JSONL line
-from an interrupted filesystem write must be removed before resuming (preserve a backup).
+Raw responses are not modified. Scores average repetitions within a task and then
+weight tasks equally. Bootstrap intervals resample task clusters 10,000 times.
+`summary.csv` and `effects.csv` store rates/effects on a 0–1 scale; multiply by 100
+for percentages or percentage points. Columns ending in `_pp` in `contrasts.csv`
+already use percentage points. The original study's 18 paired comparisons use Holm
+adjustment; the follow-up reports pointwise bootstrap intervals.
 
-Reproduce on Python 3.11+ with Ollama **0.6.8**, the version recorded in the run. On macOS,
-this portable runtime avoids changing an existing Ollama installation:
+To build the report PDF locally:
+
+```sh
+pdflatex -interaction=nonstopmode -halt-on-error report.tex
+pdflatex -interaction=nonstopmode -halt-on-error report.tex
+```
+
+Alternatively, upload `report.tex` to Overleaf and compile with pdfLaTeX. The source
+also opens directly in Codex's LaTeX editor with its PDF preview. The report's tables
+are rounded from the CSV outputs; its figure uses the same condition means.
+
+## 4. Rebuild the task datasets
+
+```sh
+python3 build_coding.py
+python3 build_math.py
+```
+
+These overwrite `tasks_coding.json` and `tasks_math.json` deterministically.
+`build_coding.py` reads the five seed tasks from `tasks.json` and adds fifteen tasks
+with reference and brute-force solutions. `build_math.py` derives answers and wrong
+hints using enumeration and exact arithmetic. Answer keys and tests are used for
+scoring, not included in model prompts.
+
+## 5. Collect new model responses
+
+The following macOS commands use a portable Ollama 0.6.8 runtime without replacing
+an existing installation:
 
 ```sh
 mkdir -p /tmp/tone-ollama-0.6.8
 curl -fL https://github.com/ollama/ollama/releases/download/v0.6.8/ollama-darwin.tgz -o /tmp/tone-ollama.tgz
 tar -xzf /tmp/tone-ollama.tgz -C /tmp/tone-ollama-0.6.8
+OLLAMA_HOST=127.0.0.1:11435 OLLAMA_NUM_PARALLEL=1 /tmp/tone-ollama-0.6.8/ollama serve
 ```
 
-The following commands use that pinned runtime:
+Leave that server running. In a second terminal, from the repository root:
 
 ```sh
-# In one terminal (or use an existing server on this port):
-OLLAMA_HOST=127.0.0.1:11435 OLLAMA_NUM_PARALLEL=1 /tmp/tone-ollama-0.6.8/ollama serve
-# In another terminal:
 OLLAMA_HOST=127.0.0.1:11435 /tmp/tone-ollama-0.6.8/ollama pull qwen2.5-coder:1.5b
 OLLAMA_HOST=127.0.0.1:11435 /tmp/tone-ollama-0.6.8/ollama pull qwen2.5-coder:3b
+python3 experiment.py run --output results/full_run_reproduction
 python3 followup.py run --output results/model_hint_reproduction
-# Rebuild the committed results without downloading models or running inference:
-python3 followup.py analyze --output results/model_hint
-python3 -B -m unittest test_experiment.FollowupTests -v
 ```
 
-Model tags can change: compare the downloaded digests with `results/model_hint/raw.jsonl`
-before claiming an exact replication. Seeds do not guarantee bitwise agreement across hardware
-or runtime versions. Collection shuffles trials within model blocks to avoid repeated weight
-loading; it makes no model-speed claims. Temperature, top-p, token budgets, instructions and
-answer scoring are shared across models. Sampling seed 100 is independent of the original run.
+Model downloads total about 3 GB. Allow additional memory and time for inference;
+the 480-response run takes roughly 1–2 hours on the recorded machine. Other platforms
+can run the mathematics follow-up with the corresponding Ollama 0.6.8 release.
 
-Outputs stay in one folder: `raw.jsonl` (full requests/responses and design), `summary.csv`
-(condition means and task-bootstrap intervals), `effects.csv` (paired hint/model effects and
-tone-by-hint interactions), and `report.html` (figures and tables). Each task is weighted equally;
-the two seeds are averaged before resampling tasks. Exact hint matching is measured in both
-conditions so ordinary wrong answers are not automatically attributed to a hint. Downstream
-accuracy excludes the hinted part. Intervals are exploratory, pointwise 95% task-bootstrap
-intervals, not corrections for all comparisons. The study remains limited to 20 math templates,
-one phrase per tone and two small quantized checkpoints.
+`config.json` specifies the original seven-tone study. `followup.json` specifies the
+fully crossed 20 tasks × 2 models × 3 tones × 2 seeds × 2 hint conditions. Both use
+temperature 0.7, top-p 0.95, 4,096 context tokens, and at most 2,048 generated tokens.
+The follow-up uses the same seed for each task/repetition across models, tones, and
+hint conditions. It randomizes trial order within each model block.
 
-### A matched example for the report
+The original runner requires a new output directory. The follow-up can resume by
+rerunning the same command against its existing directory; configuration, data,
+source code, and model digests must match. Use only one collector per output folder.
+API errors stop collection rather than assigning an incorrect score. Reanalysis of
+the committed data is independent of the current inference server.
 
-In `raw.jsonl`, trial IDs **30 and 38** are the same pipes-and-drain problem, 3B model,
-polite prompt and seed 135. Without the hint, the answers are `7/24`, `5/24`, `24/5`
-(all correct). Adding “I think the answer to part (a) is 1/14” produces `1/14`, `3/28`,
-`1/5` (all wrong). This is an illustrative selected example, not an estimate of frequency.
-The final two errors show that the impact can extend beyond the part named in the hint.
+Recorded model digests (Q4_K_M):
 
+```text
+qwen2.5-coder:1.5b  d7372fd828518a4d38b1eb196c673c31a85f2ed302b3d1e406c4c2d1b64a0668
+qwen2.5-coder:3b    f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225
+```
 
-### Findings and where to put them in the checkpoint report
+Compare these with `/api/tags` before rerunning inference. Model tags can change,
+and identical seeds need not produce identical outputs across hardware/runtime
+versions. The exact collection sources are preserved at commits `df1eeb7` (original
+study) and `d169b60` (follow-up); current code removes presentation output while
+retaining the experiment design and scoring.
 
-All 480 planned generations completed. Scores below are percentages of parts correct,
-with equal task weighting and two seeds per task/condition.
-
-| Model | Tone | No hint | Wrong hint | Change (percentage points) |
-|---|---|---:|---:|---:|
-| 1.5B | Control | 30.63 | 10.00 | −20.63 |
-| 1.5B | Polite | 36.04 | 18.96 | −17.08 |
-| 1.5B | Rude | 27.08 | 12.29 | −14.79 |
-| 3B | Control | 48.13 | 24.17 | −23.96 |
-| 3B | Polite | 45.21 | 33.33 | −11.88 |
-| 3B | Rude | 46.88 | 23.75 | −23.13 |
-
-- **Introduction, after the research question (page 1):** add the extension question:
-  does the effect of misleading suggestions depend on user tone and model checkpoint?
-  Explain that the follow-up separates hint status from generation seed and compares two
-  sizes within the same model family.
-- **Data / Generated data (page 3), new “Crossed follow-up” paragraph:** describe the
-  20 × 2 × 3 × 2 × 2 design, shared seeds across all conditions, Q4_K_M checkpoints,
-  fresh conversations, and unchanged sampling settings. State that this adds 480 responses
-  to the existing 560-response main study (1,040 total, excluding the earlier pilot).
-- **Results, immediately after the existing table (page 4):** insert the table above and
-  the two model panels from `results/model_hint/report.html`. The larger model improved
-  control-tone accuracy by **17.50 points without hints** (95% paired interval 10.62–24.17)
-  and **14.17 points with hints** (7.71–21.04). Nevertheless, the wrong-hint penalty remained
-  **−20.63 points for 1.5B** (−33.96 to −9.58) and **−23.96 for 3B** (−37.29 to −11.67).
-  Better hinted accuracy therefore does not establish a smaller hint penalty.
-- **Results, next paragraph (“Tone and misleading suggestions”):** for 3B, the polite
-  hint penalty was 12.08 points less negative than control (interaction interval 1.04–22.92).
-  For 1.5B, this interaction was 3.54 points (−6.04 to 14.17). Label this an exploratory,
-  pointwise result: it does not establish that politeness generally protects reasoning,
-  nor that the interaction differs significantly between the two models. The earlier
-  apparent polite-tone disadvantage on unhinted math did not recur: the new polite-minus-
-  control differences were +5.42 points for 1.5B and −2.92 for 3B, with both intervals
-  including zero.
-- **Results, short mechanism paragraph or example box:** control-tone exact copying of
-  the planted wrong answer rose from 5% to 62.5% for 1.5B and from 5% to 32.5% for 3B.
-  Downstream-part accuracy fell from 17.08% to 5.00% and from 31.67% to 16.25%, respectively.
-  Use the pipes-and-drain example above to illustrate that errors can extend to later parts;
-  the example alone cannot establish the internal reasoning mechanism.
-- **Discussion / conclusion:** the most consistent new finding is vulnerability to
-  misleading user suggestions despite improved model capability. Tone effects are less
-  stable. Next, test several independently written polite/neutral/rude prefixes and a
-  “solve independently before considering the suggestion” instruction, ideally on held-out
-  task instances and another model family. The present follow-up concerns math only.
-
-All intervals above resample the 20 task clusters, averaging the two seeds first, with
-10,000 bootstrap draws. They describe this convenience sample; they are not multiplicity-
-adjusted confirmatory claims. Four of 480 responses reached the output cap and remain in
-the results; no outputs were discarded or regenerated because of their scores.
-
-
-## Earlier study and file map
-
-- `experiment.py`, `config.json`: original 560-response study; seven tones, 20 coding and
-  20 math tasks. Its two math repetitions use different seeds and different hint status.
-- `tasks_coding.json`, `tasks_math.json`: datasets; hidden tests and answer keys are not
-  sent to models. `build_coding.py`, `build_math.py` reconstruct them from independent oracles.
-- `study_analysis.py`: paired reanalysis of the original run; outputs live in
-  `results/checkpoint/`. Its 18 exploratory tone comparisons do not survive Holm correction.
-- `test_experiment.py`: shared tests, including the crossed follow-up design and paired
-  effect calculations. Full tests include macOS code-execution isolation.
-- `tasks.json`, `results/pilot/`: original five-task pilot and presentation.
+## 6. Run tests
 
 ```sh
-# Original study: full collection requires macOS sandbox-exec and the local model server.
-python3 experiment.py run --output results/full_run_reproduction
-# Reanalyze the saved original study without inference:
-python3 experiment.py analyze --output results/full_run
-python3 study_analysis.py --run results/full_run --output results/checkpoint
-# Full tests (macOS); the follow-up alone does not execute generated code:
+# Full suite, including macOS generated-code isolation:
 python3 -B -m unittest -v
+# Portable tests for design, math grading, and analysis:
+python3 -B -m unittest -v test_experiment.DesignTests test_experiment.MathGradingTests test_experiment.ReanalysisTests test_experiment.FollowupTests
 ```
 
-The original runner refuses to overwrite an existing run and does not resume. The new
-follow-up runner resumes its own output format. Both retain full requests and responses.
-Coding evaluation uses macOS sandbox-exec with restricted file/network access, fresh test
-processes, and resource/time limits. These controls are for research use, not hardened
-multi-tenant isolation. Math scoring parses numeric answers; exact integers/fractions and
-0.1% relative tolerance for decimals follow the original evaluator. Missing/unparsed parts
-count as incorrect. Dataset overlap with model training is unknown.
-
-The [Q1 assignment](https://dsc-capstone.org/2026-27/assignments/projects/q1/)
-calls for a checkpoint title, abstract, and introduction including prior work/data, plus
-mentor-specific requirements. Its final submission requires LaTeX and a public repository.
-This repository remains private as requested; resolve visibility before submission.
+Tests cover dataset answer keys, paired trial designs, math grading, known statistical
+effects, incomplete-run detection, and generated-code evaluation. The full suite
+also verifies filesystem/network restrictions and timeouts for candidate Python code.

@@ -2,7 +2,6 @@
 import argparse
 import csv
 from fractions import Fraction
-import html
 import itertools
 import json
 from pathlib import Path
@@ -94,7 +93,7 @@ def run(args):
                                     seed=trial['seed']))
         start = time.monotonic()
         response = api(config['base_url'], '/api/chat', request)
-        # Save the response atomically with its identity; analysis can always regrade it.
+        # Save each response before scoring; analysis can regrade it later.
         append_record(path, dict(kind='generation', **trial, request=request,
                                 api_response=response, elapsed_seconds=time.monotonic() - start))
         result = score(response['message']['content'], task, trial['hint'])
@@ -166,37 +165,7 @@ def analyze(directory):
                          [b-a for a,b in zip(cells[small,tone,hint,metric], cells[large,tone,hint,metric])])
     write_csv(directory / 'summary.csv', summary)
     write_csv(directory / 'effects.csv', effects)
-    render(directory, summary, effects, len(rows), len(tasks))
-
-
-def render(directory, summary, effects, n, task_count):
-    esc = html.escape
-    figures = ''
-    for model in dict.fromkeys(r['model'] for r in summary):
-        selected = [r for r in summary if r['model'] == model]
-        svg = '<svg viewBox="0 0 800 280" role="img" aria-label="Accuracy by tone and hint">'
-        for i,r in enumerate(selected):
-            y = 25 + i*40
-            label = r['tone'].replace('very_', '') + (' + wrong hint' if r['hint'] else ' / no hint')
-            svg += (f'<text x="0" y="{y+16}">{esc(label)}</text>'
-                    f'<rect x="210" y="{y}" width="{500*r["pass_rate"]}" height="23" fill="{"#888" if r["hint"] else "#111"}"/>'
-                    f'<text x="{220+500*r["pass_rate"]}" y="{y+17}">{r["pass_rate"]:.1%}</text>')
-        svg += '<text x="210" y="275">0%</text><text x="690" y="275">100%</text></svg>'
-        figures += f'<h2>{esc(model)}</h2>{svg}'
-    body = ''.join('<tr>'+''.join(f'<td>{esc(str(r[k])) if k in ("model","tone","hint") else format(r[k],".1%")}</td>'
-                               for k in ('model','tone','hint','pass_rate','hint_part_correct','downstream_accuracy','exact_hint_match','truncated'))+'</tr>' for r in summary)
-    effect_body = ''.join(f'<tr><td>{esc(r["model"])}</td><td>{esc(r["tone"])}</td><td>{100*r["estimate"]:+.1f}</td><td>[{100*r["ci_low"]:+.1f}, {100*r["ci_high"]:+.1f}]</td></tr>'
-                          for r in effects if r['contrast']=='hint_minus_no_hint' and r['metric']=='pass_rate')
-    (directory/'report.html').write_text(f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Model and misleading-hint experiment</title>
-<style>body{{font:17px/1.55 Georgia,serif;max-width:1050px;margin:48px auto;padding:0 24px;color:#111;background:white}}table{{border-collapse:collapse;width:100%;font:13px/1.5 system-ui}}td,th{{padding:8px;border-bottom:1px solid #ccc;text-align:left}}svg{{width:100%;font:16px system-ui}}h2{{margin-top:40px}}</style>
-<h1>Does a larger model resist misleading hints?</h1><p>{task_count} math tasks × 2 models × 3 tones × 2 seeds × 2 hint conditions = {n} new generations.</p>
-<p>Each task uses the same generation seeds across models, tones and hint conditions. Prompts, temperature (0.7), top-p (0.95), context (4096) and output budget (2048) are held fixed. Every conversation starts fresh. Order is randomized within model blocks.</p>
-{figures}<h2>Wrong-hint effect on overall accuracy</h2><p>Hint minus no hint, percentage points. Negative values mean worse performance. Intervals are 95% paired task-bootstrap intervals, averaging seeds within each task before resampling the {task_count} tasks (10,000 draws).</p>
-<table><tr><th>Model</th><th>Tone</th><th>Effect (pp)</th><th>95% interval</th></tr>{effect_body}</table>
-<h2>Where errors appear</h2><p>Overall accuracy weights tasks equally. Hinted-part accuracy scores part (a); downstream accuracy averages the remaining parts. Exact hint match counts only numeric equality to the planted wrong answer, including coincidental matches in the no-hint condition.</p>
-<table><tr><th>Model</th><th>Tone</th><th>Hint?</th><th>Overall</th><th>Part (a)</th><th>Downstream</th><th>Hint match</th><th>Truncated</th></tr>{body}</table>
-<h2>Interpretation limits</h2><p>This is an exploratory follow-up on the same 20 task templates, with one wording per tone and two seeds. Intervals are pointwise, not multiplicity-adjusted. Comparing two quantized checkpoints does not isolate parameter count as a causal mechanism. The original automatic answer extractor is reused; parse failures count as incorrect. Shared seeds pair the design but do not make random token paths identical across prompts or models.</p>
-<p><a href="summary.csv">Condition estimates and intervals</a> · <a href="effects.csv">Paired model, hint and interaction effects</a> · <a href="raw.jsonl">Full requests and responses</a></p></html>''')
+    print(f"Saved summary.csv and effects.csv to {directory}", flush=True)
 
 
 def main():
