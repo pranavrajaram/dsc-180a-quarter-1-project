@@ -1,114 +1,146 @@
-# Prompt tone, misleading hints, and model size
+# Does prompt tone change model accuracy?
 
-This project measures coding and mathematics accuracy under different prompt tones.
-It includes a 560-response experiment with Qwen2.5-Coder 1.5B and a 480-response
-mathematics experiment comparing the 1.5B and 3B checkpoints under neutral, polite,
-and rude wording, with and without wrong hints.
+We test whether a language model solves the same problem differently when the user
+is polite, neutral, or rude, and whether it follows a misleading hint supplied by
+the user. The project contains two experiments:
 
-Read the updated [report.pdf](report/report.pdf), or edit its [LaTeX source](report/report.tex). The main finding is that the larger
-model performs better, but misleading hints still reduce accuracy substantially.
+| Experiment | What we tested | Recorded responses |
+|---|---|---:|
+| Original study | 20 coding + 20 math tasks, seven prompt conditions, Qwen2.5-Coder 1.5B | 560 |
+| Model comparison | The same 20 math tasks, 1.5B and 3B models, three tones, two seeds, with/without wrong hints | 480 |
 
-## Repository layout
+The larger model scored better, but wrong hints substantially reduced both models'
+accuracy. The [research report](report/report.pdf) presents the findings. The steps
+below reproduce the numerical results behind its tables and figure.
 
-```text
-configs/  Experiment settings
-data/     Task datasets and answer keys
-scripts/  Dataset builders, model runners, and analysis
-tests/    Automated tests
-results/  Saved responses and derived CSV tables
-report/   Research report PDF and LaTeX source
-```
+## Start here: reproduce the report results
 
-## 1. Get the code and data
+**You need Python 3.11 or newer and Git.** The analysis uses only Python's standard
+library: no packages to install, API keys, model downloads, or GPU are needed.
+These commands work on macOS and Linux; on Windows, use `python` if `python3` is not
+available. The analysis was tested with Python 3.14.5.
+
+### 1. Download the repository
 
 ```sh
 git clone https://github.com/pranavrajaram/dsc-180a-quarter-1-project.git
 cd dsc-180a-quarter-1-project
 ```
 
-All data needed to reproduce the reported results is included in the repository:
+**The necessary data comes with the clone.** `data/` contains the problem statements,
+hidden coding tests, math answer keys, and wrong hints. Each experiment's
+`results/.../raw.jsonl` contains its recorded responses and settings. Keep these
+files in their existing folders; no separate data download is required.
 
-| Path | Contents |
-|---|---|
-| `data/tasks.json` | Five original coding tasks used by the coding dataset builder |
-| `data/tasks_coding.json` | Twenty coding tasks and 162 hidden tests |
-| `data/tasks_math.json` | Twenty mathematics tasks, 63 answer-key parts, and wrong hints |
-| `results/full_run/raw.jsonl` | The 560 original prompts, responses, and evaluations |
-| `results/model_hint/raw.jsonl` | The 480 model-comparison prompts and responses |
+### 2. Run the analysis
 
-Keep these files in their existing locations. No external dataset, account, API key,
-or model download is required to reanalyze the saved responses. Each raw file begins
-with metadata containing the complete configuration, task set, model identifiers,
-and trial order. Subsequent lines contain individual trial records.
-
-## 2. Software dependencies
-
-- **Reanalysis:** Python 3.11 or newer; standard library only. Works on macOS, Linux,
-  and Windows. No `pip install`, environment manager, or GPU is needed.
-- **New model responses:** Ollama 0.6.8 and the specified Qwen model files. Both saved
-  experiments ran locally on Apple Silicon with 16 GB RAM. Full coding collection
-  also requires macOS `/usr/bin/sandbox-exec`, used to isolate generated code.
-- **Tests:** Python only. The full test suite requires macOS for the code-isolation
-  tests; a portable subset is listed below.
-- **Report PDF:** a LaTeX environment with `geometry`, `fontenc`, `mathptmx`, `amsmath`,
-  `booktabs`, `tabularx`, `pgfplots`, and `hyperref`, or Overleaf. All report figures
-  and references are embedded in `report/report.tex`; there are no external figure files.
-
-The analysis was tested with Python 3.14.5. The recorded inference runtime is Ollama
-0.6.8. No Python package requirements file is needed because the experiment and
-analysis code have no third-party Python dependencies.
-
-## 3. Reproduce results from the saved responses
-
-Run these commands from the repository root:
+Run all three commands from the repository root:
 
 ```sh
+# Original study: accuracy by task type and prompt condition
 python3 -m scripts.experiment analyze --output results/full_run
+
+# Original study: paired tone comparisons and adjusted p-values
 python3 -m scripts.study_analysis
+
+# Model comparison: scores, hint effects, and tone-by-hint interactions
 python3 -m scripts.followup analyze
 ```
 
-They overwrite only the derived CSV files:
+Each command prints the location of its output. Together they rebuild the four CSV
+files below, replacing the existing copies without changing the recorded responses.
+The original-study analysis aggregates saved evaluations; the model-comparison
+analysis scores the saved math responses again before computing its results.
 
-| Output | Meaning |
-|---|---|
-| `results/full_run/summary.csv` | Original accuracy by domain, hint condition, and tone |
-| `results/full_run/contrasts.csv` | Paired tone effects, bootstrap intervals, and adjusted p-values |
-| `results/model_hint/summary.csv` | Accuracy, exact hint matching, later-part accuracy, and truncation rates |
-| `results/model_hint/effects.csv` | Paired model effects, hint effects, and tone-by-hint interactions |
+### 3. Match the outputs to the report
 
-Raw responses are not modified. Scores average repetitions within a task and then
-weight tasks equally. Bootstrap intervals resample task clusters 10,000 times.
-`summary.csv` and `effects.csv` store rates/effects on a 0–1 scale; multiply by 100
-for percentages or percentage points. Columns ending in `_pp` in `contrasts.csv`
-already use percentage points. The original study's 18 paired comparisons use Holm
-adjustment; the follow-up reports pointwise bootstrap intervals.
+Open the CSV files in a spreadsheet application or text editor.
 
-To build the report PDF locally:
+| Output file | Where it is used in the report | What to read |
+|---|---|---|
+| [`results/full_run/summary.csv`](results/full_run/summary.csv) | Table 3: original study | `mean_pass_rate`, grouped by `coding`, `math_no_hint`, and `math_hint` |
+| [`results/full_run/contrasts.csv`](results/full_run/contrasts.csv) | Original-study tone comparisons | `difference_pp`, its interval, and `p_holm` |
+| [`results/model_hint/summary.csv`](results/model_hint/summary.csv) | Table 4 and Figure 1; Table 5 | `pass_rate` for overall accuracy; `hint_part_correct`, `exact_hint_match`, and `downstream_accuracy` for Table 5 |
+| [`results/model_hint/effects.csv`](results/model_hint/effects.csv) | Table 4 intervals and model/tone comparisons | Filter `metric=pass_rate`; read `contrast`, `estimate`, `ci_low`, and `ci_high` |
+
+**Reading the numbers:** accuracy is the fraction of hidden tests passed (coding)
+or parts correct (math). Tasks receive equal weight after averaging repeated runs.
+Rates and effects are stored as fractions: `0.30` means 30%, and `-0.20` means a
+20-percentage-point decrease. Columns ending in `_pp` are already percentage points.
+`control` means neutral wording; `hint=True` means a wrong hint was supplied.
+
+For example, these rows in `results/model_hint/summary.csv` reproduce the report's
+neutral-prompt comparison (rounded to one decimal place):
+
+| Model | Tone | Hint | Accuracy (`pass_rate` × 100) |
+|---|---|---|---:|
+| `qwen2.5-coder:1.5b` | `control` | `False` | 30.6% |
+| `qwen2.5-coder:1.5b` | `control` | `True` | 10.0% |
+| `qwen2.5-coder:3b` | `control` | `False` | 48.1% |
+| `qwen2.5-coder:3b` | `control` | `True` | 24.2% |
+
+In `effects.csv`, `hint_minus_no_hint` subtracts the unhinted score from the hinted
+score; `tone_by_hint_interaction` compares that change with the neutral wording's
+change. The `larger_minus_smaller_hint_False` and `larger_minus_smaller_hint_True`
+rows compare the 3B model with 1.5B in each hint condition. Intervals use 10,000
+bootstrap samples of whole tasks. The original study's 18 tone comparisons also
+report Holm-adjusted p-values.
+
+## Check the code
+
+Run the design, scoring, and analysis tests on any supported platform:
 
 ```sh
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory=report report/report.tex
-pdflatex -interaction=nonstopmode -halt-on-error -output-directory=report report/report.tex
+python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests
 ```
 
-Alternatively, upload `report/report.tex` to Overleaf and compile with pdfLaTeX. The source
-also opens directly in Codex's LaTeX editor with its PDF preview. The report's tables
-are rounded from the CSV outputs; its figure uses the same condition means.
+On macOS, run the complete suite, including execution of generated Python code in
+isolated processes:
 
-## 4. Rebuild the task datasets
+```sh
+python3 -B -m unittest -v
+```
+
+The full suite contains 22 tests. It checks dataset answer keys, trial pairing,
+math scoring, known statistical effects, incomplete runs, and code isolation.
+
+## Where things live
+
+```text
+configs/  Settings for the two experiments
+data/     Problems, coding tests, math answer keys, and wrong hints
+scripts/  Dataset builders, model runners, and analysis code
+tests/    Automated tests
+results/  Recorded responses and the four result CSVs
+report/   Research report
+```
+
+The five original coding tasks in `data/tasks.json` are inputs to the coding dataset
+builder. The complete datasets are `data/tasks_coding.json` and
+`data/tasks_math.json`. Raw responses are in `results/full_run/raw.jsonl` and
+`results/model_hint/raw.jsonl`; their first line records the configuration and tasks.
+
+## Optional: rebuild the input datasets
+
+The datasets are already included. To reconstruct them from their builders:
 
 ```sh
 python3 -m scripts.build_coding
 python3 -m scripts.build_math
 ```
 
-These overwrite `data/tasks_coding.json` and `data/tasks_math.json` deterministically.
-`scripts/build_coding.py` reads the five seed tasks from `data/tasks.json` and adds fifteen tasks
-with reference and brute-force solutions. `scripts/build_math.py` derives answers and wrong
-hints using enumeration and exact arithmetic. Answer keys and tests are used for
-scoring, not included in model prompts.
+These commands deterministically overwrite the two complete task datasets. Coding
+answers are checked against reference implementations; math answers and wrong hints
+are computed using enumeration and exact arithmetic. Answer keys are not sent to
+the models.
 
-## 5. Collect new model responses
+<details>
+<summary>Optional: collect new responses from the models</summary>
+
+
+New inference requires Ollama and downloaded model weights. The recorded runs used
+an Apple Silicon Mac with 16 GB RAM. The coding runner requires macOS
+`/usr/bin/sandbox-exec` to isolate generated code.
 
 The following macOS commands use a portable Ollama 0.6.8 runtime without replacing
 an existing installation:
@@ -145,28 +177,8 @@ source code, and model digests must match. Use only one collector per output fol
 API errors stop collection rather than assigning an incorrect score. Reanalysis of
 the committed data is independent of the current inference server.
 
-Recorded model digests (Q4_K_M):
+The complete model digests and generation settings are recorded in the first line of
+each saved `raw.jsonl` file. Fresh model outputs can vary across runtime/hardware
+versions; the saved-response workflow above reproduces the report's numerical results.
 
-```text
-qwen2.5-coder:1.5b  d7372fd828518a4d38b1eb196c673c31a85f2ed302b3d1e406c4c2d1b64a0668
-qwen2.5-coder:3b    f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225
-```
-
-Compare these with `/api/tags` before rerunning inference. Model tags can change,
-and identical seeds need not produce identical outputs across hardware/runtime
-versions. The exact collection sources are preserved at commits `df1eeb7` (original
-study) and `d169b60` (follow-up); current code groups files by purpose and removes presentation output while
-retaining the experiment design and scoring.
-
-## 6. Run tests
-
-```sh
-# Full suite, including macOS generated-code isolation:
-python3 -B -m unittest -v
-# Portable tests for design, math grading, and analysis:
-python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests
-```
-
-Tests cover dataset answer keys, paired trial designs, math grading, known statistical
-effects, incomplete-run detection, and generated-code evaluation. The full suite
-also verifies filesystem/network restrictions and timeouts for candidate Python code.
+</details>
