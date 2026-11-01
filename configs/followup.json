@@ -25,5 +25,5 @@
     "qwen2.5-coder:1.5b",
     "qwen2.5-coder:3b"
   ],
-  "dataset": "tasks_math.json"
+  "dataset": "../data/tasks_math.json"
 }

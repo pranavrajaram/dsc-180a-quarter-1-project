@@ -122,7 +122,7 @@ def contrasts(rows, config, bootstrap):
 
 
 def main():
-    import experiment as ex
+    from scripts import experiment as ex
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', type=Path, default=ex.ROOT / 'results/full_run')
     parser.add_argument('--output', type=Path, default=ex.ROOT / 'results/full_run')

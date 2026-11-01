@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def digest(data):
@@ -47,7 +47,7 @@ def api(base, path, payload=None):
 
 # ---------------------------------------------------------------- datasets / design
 
-def load_tasks(config, root=ROOT):
+def load_tasks(config, root=ROOT / "configs"):
     tasks = []
     for name in config["datasets"]:
         tasks += read_json(Path(root) / name)
@@ -499,7 +499,7 @@ def summarize(rows, config, tones, baseline):
 
 def analyze(directory):
     directory = Path(directory)
-    from study_analysis import load_run
+    from scripts.study_analysis import load_run
     metadata, rows = load_run(directory)
     config = metadata["config"]
     tones = list(config["tones"])
@@ -524,7 +524,7 @@ def analyze(directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["run", "analyze"])
-    parser.add_argument("--config", type=Path, default=ROOT / "config.json")
+    parser.add_argument("--config", type=Path, default=ROOT / "configs/config.json")
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--tasks-per-domain", type=int, default=None,
                         help="Use only the first N tasks of each domain.")

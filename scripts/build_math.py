@@ -4,7 +4,7 @@ Every answer is computed here by brute-force enumeration or exact Fraction arith
 never typed by hand. Each problem also has a wrong hint for part (a): a specific,
 plausible mistake (also computed in code) that is guaranteed to differ from the answer.
 
-Run: python3 build_math.py"""
+Run: python3 -m scripts.build_math"""
 import itertools
 import json
 import math
@@ -12,7 +12,7 @@ from collections import Counter
 from fractions import Fraction as F
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1] / "data"
 C = math.comb
 
 

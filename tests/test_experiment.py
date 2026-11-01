@@ -9,9 +9,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-import build_coding
-import build_math
-import experiment as ex
+from scripts import build_coding
+from scripts import build_math
+from scripts import experiment as ex
 
 
 # Independent reference implementations for the five pilot tasks.
@@ -89,7 +89,7 @@ def reference_source(task):
 
 class DesignTests(unittest.TestCase):
     def setUp(self):
-        self.config = ex.read_json(ex.ROOT / 'config.json')
+        self.config = ex.read_json(ex.ROOT / 'configs/config.json')
         self.tasks = ex.load_tasks(self.config)
 
     def test_datasets_match_independent_oracles(self):
@@ -202,7 +202,7 @@ class DesignTests(unittest.TestCase):
 
 class MathGradingTests(unittest.TestCase):
     def setUp(self):
-        tasks = ex.read_json(ex.ROOT / 'tasks_math.json')
+        tasks = ex.read_json(ex.ROOT / 'data/tasks_math.json')
         self.task = next(t for t in tasks if t['task_id'] == 'matching_socks')  # 190, 10, 1/19, 3/19; hint (a) 380
 
     def score(self, response, hint=True):
@@ -238,7 +238,7 @@ class MathGradingTests(unittest.TestCase):
         self.assertEqual(self.score('I cannot solve this.'), (0, False))
 
     def test_hint_adoption_and_part_a_accuracy(self):
-        poker = next(t for t in ex.read_json(ex.ROOT / 'tasks_math.json') if t['task_id'] == 'four_of_a_kind')
+        poker = next(t for t in ex.read_json(ex.ROOT / 'data/tasks_math.json') if t['task_id'] == 'four_of_a_kind')
         self.assertEqual(poker['hint'], '311875200')
         # Copied the hint with a dropped digit, as the model did in the dry run: still adoption.
         slip = ex.evaluate_math('Answer (a): 31,187,520\nAnswer (b): 192\nAnswer (c): 162000', poker, True)
@@ -284,13 +284,13 @@ class EvaluatorTests(unittest.TestCase):
         self.assertEqual(ex.evaluate('def solve(x):\n x.clear()\n return 3', task, 3)['pass_rate'], 0)
 
     def test_reference_solutions_pass_all_hidden_tests(self):
-        for task in ex.read_json(ex.ROOT / 'tasks_coding.json'):
+        for task in ex.read_json(ex.ROOT / 'data/tasks_coding.json'):
             with self.subTest(task=task['task_id']):
                 self.assertTrue(ex.evaluate(reference_source(task), task, 3)['fully_correct'])
 
     def test_os_isolation(self):
         # Success means the forbidden action raised PermissionError.
-        actions = [f'open({str(ex.ROOT / "config.json")!r})',
+        actions = [f'open({str(ex.ROOT / "configs/config.json")!r})',
                    'open("/etc/passwd")', 'open("/tmp/tone-escape-probe", "w")',
                    '__import__("socket").create_connection(("127.0.0.1", 11434), timeout=1)',
                    '__import__("subprocess").run(["/bin/echo", "child"])']
@@ -302,7 +302,7 @@ class EvaluatorTests(unittest.TestCase):
 
 class ReanalysisTests(unittest.TestCase):
     def test_exact_sign_flip_matches_exhaustive_enumeration(self):
-        from study_analysis import sign_flip_pvalue
+        from scripts.study_analysis import sign_flip_pvalue
         for values in ([0, 0], [1, 1, 1, 1], [1, -1, 0], [Fraction(1, 3), Fraction(-1, 4), Fraction(1, 2)]):
             observed = abs(sum(values))
             sums = [abs(sum(x * sign for x, sign in zip(values, signs)))
@@ -312,12 +312,12 @@ class ReanalysisTests(unittest.TestCase):
             sign_flip_pvalue([])
 
     def test_holm_known_values_and_original_order(self):
-        from study_analysis import holm_adjust
+        from scripts.study_analysis import holm_adjust
         self.assertEqual(holm_adjust([0.03, 0.001, 0.02]), [0.04, 0.003, 0.04])
         self.assertEqual(holm_adjust([1, 1]), [1, 1])
 
     def test_saved_run_scores_and_corruption_rejection(self):
-        from study_analysis import load_run
+        from scripts.study_analysis import load_run
         original = [json.loads(line) for line in (ex.ROOT / 'results/full_run/raw.jsonl').read_text().splitlines()]
         metadata, rows = load_run(ex.ROOT / 'results/full_run')
         tasks = {t['task_id']: t for t in metadata['tasks']}
@@ -351,9 +351,9 @@ class ReanalysisTests(unittest.TestCase):
 
 class FollowupTests(unittest.TestCase):
     def test_fully_crossed_seed_pairing(self):
-        import followup
-        config = ex.read_json(ex.ROOT / 'followup.json')
-        tasks = ex.read_json(ex.ROOT / config['dataset'])
+        from scripts import followup
+        config = ex.read_json(ex.ROOT / 'configs/followup.json')
+        tasks = ex.read_json(ex.ROOT / 'configs' / config['dataset'])
         plan = followup.design(config, tasks)
         self.assertEqual(len(plan), 480)
         self.assertEqual(plan, followup.design(config, tasks))
@@ -364,7 +364,7 @@ class FollowupTests(unittest.TestCase):
             self.assertEqual(len({(r['model'], r['tone'], r['hint']) for r in block}), 12)
 
     def test_exact_hint_match_and_downstream_score(self):
-        import followup
+        from scripts import followup
         task = {'hint_part': 'a', 'hint': '123456', 'parts': [
             {'label': 'a', 'answer': '7'}, {'label': 'b', 'answer': '2'}, {'label': 'c', 'answer': '3'}]}
         for answer, exact in [('123456', True), ('123455', False), ('-123456', False)]:
@@ -373,8 +373,8 @@ class FollowupTests(unittest.TestCase):
             self.assertEqual(result['downstream_accuracy'], .5)
 
     def test_paired_analysis_on_known_effect(self):
-        import followup
-        config = ex.read_json(ex.ROOT / 'followup.json')
+        from scripts import followup
+        config = ex.read_json(ex.ROOT / 'configs/followup.json')
         config['bootstrap_samples'] = 100
         tasks = [{'task_id': str(i), 'hint_part': 'a', 'hint': '9',
                   'parts': [{'label': 'a', 'answer': '1'}, {'label': 'b', 'answer': '2'}]} for i in range(2)]

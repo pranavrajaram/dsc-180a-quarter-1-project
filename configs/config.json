@@ -10,8 +10,8 @@
   "timeout_seconds": 3,
   "bootstrap_samples": 10000,
   "datasets": [
-    "tasks_coding.json",
-    "tasks_math.json"
+    "../data/tasks_coding.json",
+    "../data/tasks_math.json"
   ],
   "baseline_tone": "control",
   "hint_repetition": 1,

@@ -1,14 +1,14 @@
 """Builds tasks_coding.json: the 5 pilot tasks plus 15 new ones.
 Each new task has a reference solution and an independent brute-force check.
 Expected outputs are computed by the reference, then confirmed by the brute force,
-so no expected value is typed by hand. Run: python3 build_coding.py"""
+so no expected value is typed by hand. Run: python3 -m scripts.build_coding"""
 import copy
 import heapq
 import itertools
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1] / "data"
 
 
 # ---------- 1. expression evaluation ----------

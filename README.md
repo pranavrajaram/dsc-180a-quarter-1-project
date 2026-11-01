@@ -5,23 +5,34 @@ It includes a 560-response experiment with Qwen2.5-Coder 1.5B and a 480-response
 mathematics experiment comparing the 1.5B and 3B checkpoints under neutral, polite,
 and rude wording, with and without wrong hints.
 
-Read the updated [report.pdf](report.pdf), or edit its [LaTeX source](report.tex). The main finding is that the larger
+Read the updated [report.pdf](report/report.pdf), or edit its [LaTeX source](report/report.tex). The main finding is that the larger
 model performs better, but misleading hints still reduce accuracy substantially.
+
+## Repository layout
+
+```text
+configs/  Experiment settings
+data/     Task datasets and answer keys
+scripts/  Dataset builders, model runners, and analysis
+tests/    Automated tests
+results/  Saved responses and derived CSV tables
+report/   Research report PDF and LaTeX source
+```
 
 ## 1. Get the code and data
 
 ```sh
-git clone https://github.com/pranavrajaram/llm-tone-experiment.git
-cd llm-tone-experiment
+git clone https://github.com/pranavrajaram/dsc-180a-quarter-1-project.git
+cd dsc-180a-quarter-1-project
 ```
 
 All data needed to reproduce the reported results is included in the repository:
 
 | Path | Contents |
 |---|---|
-| `tasks.json` | Five original coding tasks used by the coding dataset builder |
-| `tasks_coding.json` | Twenty coding tasks and 162 hidden tests |
-| `tasks_math.json` | Twenty mathematics tasks, 63 answer-key parts, and wrong hints |
+| `data/tasks.json` | Five original coding tasks used by the coding dataset builder |
+| `data/tasks_coding.json` | Twenty coding tasks and 162 hidden tests |
+| `data/tasks_math.json` | Twenty mathematics tasks, 63 answer-key parts, and wrong hints |
 | `results/full_run/raw.jsonl` | The 560 original prompts, responses, and evaluations |
 | `results/model_hint/raw.jsonl` | The 480 model-comparison prompts and responses |
 
@@ -41,7 +52,7 @@ and trial order. Subsequent lines contain individual trial records.
   tests; a portable subset is listed below.
 - **Report PDF:** a LaTeX environment with `geometry`, `fontenc`, `mathptmx`, `amsmath`,
   `booktabs`, `tabularx`, `pgfplots`, and `hyperref`, or Overleaf. All report figures
-  and references are embedded in `report.tex`; there are no external figure files.
+  and references are embedded in `report/report.tex`; there are no external figure files.
 
 The analysis was tested with Python 3.14.5. The recorded inference runtime is Ollama
 0.6.8. No Python package requirements file is needed because the experiment and
@@ -52,9 +63,9 @@ analysis code have no third-party Python dependencies.
 Run these commands from the repository root:
 
 ```sh
-python3 experiment.py analyze --output results/full_run
-python3 study_analysis.py
-python3 followup.py analyze
+python3 -m scripts.experiment analyze --output results/full_run
+python3 -m scripts.study_analysis
+python3 -m scripts.followup analyze
 ```
 
 They overwrite only the derived CSV files:
@@ -76,24 +87,24 @@ adjustment; the follow-up reports pointwise bootstrap intervals.
 To build the report PDF locally:
 
 ```sh
-pdflatex -interaction=nonstopmode -halt-on-error report.tex
-pdflatex -interaction=nonstopmode -halt-on-error report.tex
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=report report/report.tex
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=report report/report.tex
 ```
 
-Alternatively, upload `report.tex` to Overleaf and compile with pdfLaTeX. The source
+Alternatively, upload `report/report.tex` to Overleaf and compile with pdfLaTeX. The source
 also opens directly in Codex's LaTeX editor with its PDF preview. The report's tables
 are rounded from the CSV outputs; its figure uses the same condition means.
 
 ## 4. Rebuild the task datasets
 
 ```sh
-python3 build_coding.py
-python3 build_math.py
+python3 -m scripts.build_coding
+python3 -m scripts.build_math
 ```
 
-These overwrite `tasks_coding.json` and `tasks_math.json` deterministically.
-`build_coding.py` reads the five seed tasks from `tasks.json` and adds fifteen tasks
-with reference and brute-force solutions. `build_math.py` derives answers and wrong
+These overwrite `data/tasks_coding.json` and `data/tasks_math.json` deterministically.
+`scripts/build_coding.py` reads the five seed tasks from `data/tasks.json` and adds fifteen tasks
+with reference and brute-force solutions. `scripts/build_math.py` derives answers and wrong
 hints using enumeration and exact arithmetic. Answer keys and tests are used for
 scoring, not included in model prompts.
 
@@ -114,15 +125,15 @@ Leave that server running. In a second terminal, from the repository root:
 ```sh
 OLLAMA_HOST=127.0.0.1:11435 /tmp/tone-ollama-0.6.8/ollama pull qwen2.5-coder:1.5b
 OLLAMA_HOST=127.0.0.1:11435 /tmp/tone-ollama-0.6.8/ollama pull qwen2.5-coder:3b
-python3 experiment.py run --output results/full_run_reproduction
-python3 followup.py run --output results/model_hint_reproduction
+python3 -m scripts.experiment run --output results/full_run_reproduction
+python3 -m scripts.followup run --output results/model_hint_reproduction
 ```
 
 Model downloads total about 3 GB. Allow additional memory and time for inference;
 the 480-response run takes roughly 1–2 hours on the recorded machine. Other platforms
 can run the mathematics follow-up with the corresponding Ollama 0.6.8 release.
 
-`config.json` specifies the original seven-tone study. `followup.json` specifies the
+`configs/config.json` specifies the original seven-tone study. `configs/followup.json` specifies the
 fully crossed 20 tasks × 2 models × 3 tones × 2 seeds × 2 hint conditions. Both use
 temperature 0.7, top-p 0.95, 4,096 context tokens, and at most 2,048 generated tokens.
 The follow-up uses the same seed for each task/repetition across models, tones, and
@@ -144,7 +155,7 @@ qwen2.5-coder:3b    f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e
 Compare these with `/api/tags` before rerunning inference. Model tags can change,
 and identical seeds need not produce identical outputs across hardware/runtime
 versions. The exact collection sources are preserved at commits `df1eeb7` (original
-study) and `d169b60` (follow-up); current code removes presentation output while
+study) and `d169b60` (follow-up); current code groups files by purpose and removes presentation output while
 retaining the experiment design and scoring.
 
 ## 6. Run tests
@@ -153,7 +164,7 @@ retaining the experiment design and scoring.
 # Full suite, including macOS generated-code isolation:
 python3 -B -m unittest -v
 # Portable tests for design, math grading, and analysis:
-python3 -B -m unittest -v test_experiment.DesignTests test_experiment.MathGradingTests test_experiment.ReanalysisTests test_experiment.FollowupTests
+python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests
 ```
 
 Tests cover dataset answer keys, paired trial designs, math grading, known statistical

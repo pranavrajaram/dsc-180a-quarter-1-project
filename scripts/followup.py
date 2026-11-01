@@ -11,7 +11,7 @@ import statistics as stats
 import sys
 import time
 
-from experiment import (ROOT, api, append_record, build_prompt, digest,
+from scripts.experiment import (ROOT, api, append_record, build_prompt, digest,
                         evaluate_math, read_json, system_prompt)
 
 
@@ -61,7 +61,7 @@ def run(args):
     args.output.mkdir(parents=True, exist_ok=True)
     path = args.output / 'raw.jsonl'
     sources = {name: digest((ROOT / name).read_bytes())
-               for name in ('followup.py', 'experiment.py')}
+               for name in ('scripts/followup.py', 'scripts/experiment.py')}
     tags = api(config['base_url'], '/api/tags')['models']
     models = {name: next(m for m in tags if m['name'] == name) for name in config['models']}
     if path.exists():
@@ -171,7 +171,7 @@ def analyze(directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['run', 'analyze'])
-    parser.add_argument('--config', type=Path, default=ROOT/'followup.json')
+    parser.add_argument('--config', type=Path, default=ROOT/'configs/followup.json')
     parser.add_argument('--output', type=Path, default=ROOT/'results/model_hint')
     args = parser.parse_args()
     run(args) if args.command == 'run' else analyze(args.output)
