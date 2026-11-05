@@ -120,6 +120,11 @@ builder. The complete datasets are `data/tasks_coding.json` and
 `data/tasks_math.json`. Raw responses are in `results/full_run/raw.jsonl` and
 `results/model_hint/raw.jsonl`; their first line records the configuration and tasks.
 
+## AI Use
+
+We used AI (specifically Codex and Claude) to assist with portions of our code implementation, including dataset construction, experiment automation, and repeated model runs. We carefully audited and tested AI generated code against our own reference calculations, unit tests, and
+reproduced saved results. [AI_USE.md](AI_USE.md) documents our prompts in more detail.
+
 ## Optional: rebuild the input datasets
 
 The datasets are already included. To reconstruct them from their builders:
@@ -182,3 +187,4 @@ each saved `raw.jsonl` file. Fresh model outputs can vary across runtime/hardwar
 versions; the saved-response workflow above reproduces the report's numerical results.
 
 </details>
+
