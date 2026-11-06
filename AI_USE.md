@@ -15,4 +15,10 @@ Here are the prompts we used to support our project
 - This was to clean up the repo for readability and align with submission requirements.
 
 > please convert this google doc to LaTeX.
+- Improving the quality of our writing in the written report
+
+> Here are bulletpoints and a title for several paragraphs of our written report. For each of these paragraphs, turn the bulletpoints and main ideas into a coherent paragraph that flows well from the one before it.
+- Getting our resulting data into tables in the report that are easy to read
+
+> Here is the data from our results about model performance across different tones and question types. The math questions had two repetitions, one with a false hint and one with no hint, and the coding questions had two repetitions that were the same. Format this data into a table that will be easy to read in pdf format in our report.
 - Converting our written report into LaTeX for submission.
