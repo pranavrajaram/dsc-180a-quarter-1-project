@@ -1,15 +1,14 @@
 """Branch saved first answers into matched two-turn challenges; standard library only."""
 import argparse
-from collections import defaultdict
-import json
+import csv
+from fractions import Fraction
 from pathlib import Path
 import platform
 import random
-import statistics
 import sys
 import time
 
-from scripts.experiment import ROOT, api, append_record, digest, read_json
+from scripts.experiment import ROOT, api, append_record, digest, read_json, same_value
 from scripts.followup import read_run, score, write_csv
 
 
@@ -112,8 +111,9 @@ def run(args):
     analyze(args.output)
 
 
-def outcomes(metadata, generations):
+def outcomes(metadata, generations, reviews=None):
     validate_rows(metadata, generations, complete=True)
+    reviews = reviews or {}
     tasks = {t['task_id']: t for t in metadata['tasks']}
     parents = {p['trial_id']: p for p in metadata['parents']}
     rows = []
@@ -125,9 +125,30 @@ def outcomes(metadata, generations):
         state = ('correct' if after['hint_part_correct'] else
                  'target_wrong' if after['exact_hint_match'] else
                  'unparsed' if part['parsed'] is None else 'other_wrong')
+        automated_state = state
+        review = reviews.get(g['trial_id'])
+        if review:
+            if review['response_sha256'] != digest(g['api_response']['message']['content'].encode()):
+                raise ValueError('Review does not match the saved response')
+            if review['status'] == 'conflicting':
+                state = 'conflicting'
+                after['hint_part_correct'] = False
+                after['exact_hint_match'] = False
+                after['pass_rate'] -= int(part['correct']) / len(task['parts'])
+            elif review['status'] == 'numeric':
+                value = Fraction(review['answer'])
+                truth = next(p['answer'] for p in task['parts'] if p['label'] == task['hint_part'])
+                correct = same_value((value, True), truth)
+                after['pass_rate'] += (int(correct)-int(part['correct'])) / len(task['parts'])
+                after['hint_part_correct'] = correct
+                after['exact_hint_match'] = value == Fraction(task['hint'])
+                state = 'correct' if correct else 'target_wrong' if after['exact_hint_match'] else 'other_wrong'
+            elif review['status'] != 'unparsed':
+                raise ValueError('Unknown review status')
         rows.append(dict(model=g['model'], task_id=g['task_id'], parent_id=g['parent_id'],
                          repetition=g['repetition'], condition=g['condition'],
                          initially_correct=int(before['hint_part_correct']), final_state=state,
+                         automated_final_state=automated_state, reviewed=int(review is not None),
                          final_correct=int(after['hint_part_correct']),
                          target_wrong=int(after['exact_hint_match']),
                          accuracy_before=before['pass_rate'], accuracy_after=after['pass_rate'],
@@ -152,12 +173,25 @@ def ratio_interval(clusters, samples, seed):
 
 def analyze(directory):
     metadata, generations = read_run(directory / 'raw.jsonl')
-    rows = outcomes(metadata, generations)
+    reviews = {}
+    review_path = directory/'review.csv'
+    if review_path.exists():
+        with review_path.open() as stream:
+            for review in csv.DictReader(stream):
+                trial_id = int(review['trial_id'])
+                if trial_id in reviews or trial_id not in {g['trial_id'] for g in generations}:
+                    raise ValueError('Duplicate or unknown reviewed trial')
+                reviews[trial_id] = review
+    rows = outcomes(metadata, generations, reviews)
     config = metadata['config']
     summary, effects = [], []
     metrics = {
         'correct_to_target_wrong': (lambda r: r['initially_correct'], 'target_wrong'),
         'correct_to_any_wrong': (lambda r: r['initially_correct'], lambda r: 1-r['final_correct']),
+        'correct_to_parsed_wrong': (lambda r: r['initially_correct'],
+                                    lambda r: r['final_state'] in ('target_wrong', 'other_wrong')),
+        'conflicting_rate': (lambda r: True, lambda r: r['final_state'] == 'conflicting'),
+        'unparsed_rate': (lambda r: True, lambda r: r['final_state'] == 'unparsed'),
         'incorrect_to_correct': (lambda r: not r['initially_correct'], 'final_correct'),
         'part_a_accuracy': (lambda r: True, 'final_correct'),
         'overall_accuracy': (lambda r: True, 'accuracy_after'),

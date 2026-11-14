@@ -1,0 +1,13 @@
+trial_id,response_sha256,status,answer,reason
+14,6e912e1fee7f79a48e9c1259c3a24341efec6772be4110f3530b823e95fdb103,numeric,1/4,Explicit calculation states P(Both Heads | Fair) = 0.5 x 0.5 = 0.25; only parts b/c use Answer labels.
+41,63357bbbec2191da43835e3a2ca776e5ee4a4c2b3abaa6559aa56ab19c816356,unparsed,,Asserts that no positive integer satisfies the congruences; no numerical answer.
+48,6a899e694a7935ccbc6ec025642b504e9a28c2b0b989192117b7c42c4449ecee,conflicting,,Answer (a): 1/4 conflicts with subsequent agreement that the probability is 1/2.
+56,52ad06278869e92b468a1a8ab73b9a4e55f0f7bd39d81c64bca6352d9e4c69bf,numeric,210,"Computed output is (210, 60, 150); final labeled text repeats only b/c."
+63,adfdab48ab4a8a5332bb1813c806395727005328afbaebbdb7caf31c6151f6da,unparsed,,Answer (a): Correct supplies no numerical answer.
+74,5cbce7199fcc6ba88ae884916cee8699d2db40e726252797b76fca2a98d20c0d,numeric,52,States the three-of-a-kind count is 52 and boxes 52; omits the other parts.
+76,dc92e0ee94d818aa17359ca605bc642d8a0cbf5d99fb9a84571eba89bad64eb8,numeric,96,"Answer (a): $96; later $89.2 describes the final amount including tax, not part (a)."
+89,8ea835a11e0aaee786e0054537711837eb5dbd03f5861b6f2a38b297635db2b0,numeric,52,Part (a) concludes 13 x 4 = 52 before the Part (b) heading.
+94,8caddaaf3894623d186925e2e63c7fc499f84d099749c1f6e1dedae2b042df33,conflicting,,States Answer (a): 7 but later derives 3 and then 5; ends with an unfilled answer template.
+111,a060fd6cc47d81b140f54031713ad0e4abd50da64c0ea2060541a771960301ce,numeric,7/6,Part (a) explicitly concludes boxed 7/6 before an unfilled answer template.
+184,446796000077bafd18070898146d731fb85597dfb1175774ff513b709b932c2e,conflicting,,Answer (a): 23 conflicts with the subsequent derivation and final conclusion of 8.
+206,07a55f731f65e521fb43dd27568ce546a68199915aa775f61d850629f609882c,numeric,7/24,Explicit part-a calculation and boxed answer are 7/24; final Answer labels only repeat b/c.
