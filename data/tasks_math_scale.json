@@ -1,0 +1,4522 @@
+[
+  {
+    "task_id": "four_of_a_kind_00",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 5 ranks, each with four distinct suits, for 20 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "15504"
+      },
+      {
+        "label": "b",
+        "answer": "80"
+      },
+      {
+        "label": "c",
+        "answer": "969/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1860480"
+  },
+  {
+    "task_id": "full_house_00",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 5 ranks, each with four distinct suits, for 20 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20"
+      },
+      {
+        "label": "b",
+        "answer": "480"
+      },
+      {
+        "label": "c",
+        "answer": "10/323"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "120"
+  },
+  {
+    "task_id": "matching_socks_00",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 4 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "28"
+      },
+      {
+        "label": "b",
+        "answer": "4"
+      },
+      {
+        "label": "c",
+        "answer": "1/7"
+      },
+      {
+        "label": "d",
+        "answer": "3/7"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "56"
+  },
+  {
+    "task_id": "digit_sum_00",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 3 decimal digits, allowing leading zeros.\n(a) How many have digit sum 1?\n(b) How many of those begin with zero?\n(c) How many 3-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "1"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "5"
+  },
+  {
+    "task_id": "lattice_paths_00",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (3,3) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (1,1)?\n(c) How many avoid (1,1)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20"
+      },
+      {
+        "label": "b",
+        "answer": "12"
+      },
+      {
+        "label": "c",
+        "answer": "8"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "64"
+  },
+  {
+    "task_id": "no_consecutive_heads_00",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 4 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16"
+      },
+      {
+        "label": "b",
+        "answer": "8"
+      },
+      {
+        "label": "c",
+        "answer": "1/2"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "8"
+  },
+  {
+    "task_id": "chinese_remainder_00",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 2 modulo 3 and 3 modulo 5?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "8"
+      },
+      {
+        "label": "b",
+        "answer": "38"
+      },
+      {
+        "label": "c",
+        "answer": "3863"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "23"
+  },
+  {
+    "task_id": "coupon_collector_00",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 4-sided die is rolled repeatedly until every face appears.\n(a) If 3 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 2 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "25/3"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/4"
+  },
+  {
+    "task_id": "bounded_solutions_00",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=8.\n(a) How many triples are there?\n(b) How many have x>4?\n(c) How many have all coordinates at most 4?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "21"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "12"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "45"
+  },
+  {
+    "task_id": "derangements_00",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "4 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "24"
+      },
+      {
+        "label": "b",
+        "answer": "9"
+      },
+      {
+        "label": "c",
+        "answer": "3/8"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6"
+  },
+  {
+    "task_id": "conditional_draw_00",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 12 distinct balls, of which 2 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "66"
+      },
+      {
+        "label": "b",
+        "answer": "21"
+      },
+      {
+        "label": "c",
+        "answer": "1"
+      },
+      {
+        "label": "d",
+        "answer": "1/21"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "132"
+  },
+  {
+    "task_id": "lcm_pairs_00",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=2?\n(b) How many pairs have lcm(a,b)=3?\n(c) How many pairs have lcm(a,b)=6?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "9"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4"
+  },
+  {
+    "task_id": "expected_heads_00",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 1/3 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/9"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "12"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/3"
+  },
+  {
+    "task_id": "grid_triangles_00",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 9 grid points with integer coordinates 0<=x<3 and 0<=y<3.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "84"
+      },
+      {
+        "label": "b",
+        "answer": "8"
+      },
+      {
+        "label": "c",
+        "answer": "76"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "504"
+  },
+  {
+    "task_id": "committee_00",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 3 people is chosen from 5 men and 4 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "84"
+      },
+      {
+        "label": "b",
+        "answer": "10"
+      },
+      {
+        "label": "c",
+        "answer": "40"
+      },
+      {
+        "label": "d",
+        "answer": "34"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "504"
+  },
+  {
+    "task_id": "double_headed_coin_00",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 2 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 2 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/4"
+      },
+      {
+        "label": "b",
+        "answer": "1/2"
+      },
+      {
+        "label": "c",
+        "answer": "2/3"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/2"
+  },
+  {
+    "task_id": "maximum_dice_00",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 6-sided dice numbered 1 through 6 are rolled. M is the larger result.\n(a) How many of the 36 ordered outcomes have M at most 2?\n(b) How many have M exactly 2?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "161/36"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3"
+  },
+  {
+    "task_id": "pipes_00",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 4 hours, pipe B in 6 hours, and a drain empties it in 12 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5/12"
+      },
+      {
+        "label": "b",
+        "answer": "1/3"
+      },
+      {
+        "label": "c",
+        "answer": "3"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/10"
+  },
+  {
+    "task_id": "elevator_00",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "3 people independently choose uniformly among 5 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "125"
+      },
+      {
+        "label": "b",
+        "answer": "60"
+      },
+      {
+        "label": "c",
+        "answer": "12/25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "243"
+  },
+  {
+    "task_id": "price_00",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $85. Its price rises 10%, then falls 5%, then 5% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "187/2"
+      },
+      {
+        "label": "b",
+        "answer": "3553/40"
+      },
+      {
+        "label": "c",
+        "answer": "74613/800"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "95"
+  },
+  {
+    "task_id": "four_of_a_kind_01",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 6 ranks, each with four distinct suits, for 24 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "42504"
+      },
+      {
+        "label": "b",
+        "answer": "120"
+      },
+      {
+        "label": "c",
+        "answer": "1771/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "5100480"
+  },
+  {
+    "task_id": "full_house_01",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 6 ranks, each with four distinct suits, for 24 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "24"
+      },
+      {
+        "label": "b",
+        "answer": "720"
+      },
+      {
+        "label": "c",
+        "answer": "30/1771"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "144"
+  },
+  {
+    "task_id": "matching_socks_01",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 5 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "45"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "1/9"
+      },
+      {
+        "label": "d",
+        "answer": "1/3"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "90"
+  },
+  {
+    "task_id": "digit_sum_01",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 4 decimal digits, allowing leading zeros.\n(a) How many have digit sum 2?\n(b) How many of those begin with zero?\n(c) How many 4-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "10"
+      },
+      {
+        "label": "b",
+        "answer": "6"
+      },
+      {
+        "label": "c",
+        "answer": "4"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "16"
+  },
+  {
+    "task_id": "lattice_paths_01",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (4,3) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (2,1)?\n(c) How many avoid (2,1)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "35"
+      },
+      {
+        "label": "b",
+        "answer": "18"
+      },
+      {
+        "label": "c",
+        "answer": "17"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "128"
+  },
+  {
+    "task_id": "no_consecutive_heads_01",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 5 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "32"
+      },
+      {
+        "label": "b",
+        "answer": "13"
+      },
+      {
+        "label": "c",
+        "answer": "13/32"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "16"
+  },
+  {
+    "task_id": "chinese_remainder_01",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 2 modulo 3 and 5 modulo 7?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5"
+      },
+      {
+        "label": "b",
+        "answer": "89"
+      },
+      {
+        "label": "c",
+        "answer": "5801"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "26"
+  },
+  {
+    "task_id": "coupon_collector_01",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 5-sided die is rolled repeatedly until every face appears.\n(a) If 4 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 2 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5"
+      },
+      {
+        "label": "b",
+        "answer": "5/3"
+      },
+      {
+        "label": "c",
+        "answer": "137/12"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/5"
+  },
+  {
+    "task_id": "bounded_solutions_01",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=10.\n(a) How many triples are there?\n(b) How many have x>5?\n(c) How many have all coordinates at most 5?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "36"
+      },
+      {
+        "label": "b",
+        "answer": "6"
+      },
+      {
+        "label": "c",
+        "answer": "18"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "66"
+  },
+  {
+    "task_id": "derangements_01",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "5 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "120"
+      },
+      {
+        "label": "b",
+        "answer": "44"
+      },
+      {
+        "label": "c",
+        "answer": "11/30"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "24"
+  },
+  {
+    "task_id": "conditional_draw_01",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 13 distinct balls, of which 3 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "78"
+      },
+      {
+        "label": "b",
+        "answer": "33"
+      },
+      {
+        "label": "c",
+        "answer": "3"
+      },
+      {
+        "label": "d",
+        "answer": "1/11"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "156"
+  },
+  {
+    "task_id": "lcm_pairs_01",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=4?\n(b) How many pairs have lcm(a,b)=3?\n(c) How many pairs have lcm(a,b)=12?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "15"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6"
+  },
+  {
+    "task_id": "expected_heads_01",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 1/2 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/4"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "6"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/2"
+  },
+  {
+    "task_id": "grid_triangles_01",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 12 grid points with integer coordinates 0<=x<4 and 0<=y<3.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "220"
+      },
+      {
+        "label": "b",
+        "answer": "20"
+      },
+      {
+        "label": "c",
+        "answer": "200"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1320"
+  },
+  {
+    "task_id": "committee_01",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 4 people is chosen from 6 men and 5 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "330"
+      },
+      {
+        "label": "b",
+        "answer": "15"
+      },
+      {
+        "label": "c",
+        "answer": "100"
+      },
+      {
+        "label": "d",
+        "answer": "215"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "7920"
+  },
+  {
+    "task_id": "double_headed_coin_01",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 2 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 3 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/8"
+      },
+      {
+        "label": "b",
+        "answer": "5/12"
+      },
+      {
+        "label": "c",
+        "answer": "4/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/4"
+  },
+  {
+    "task_id": "maximum_dice_01",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 7-sided dice numbered 1 through 7 are rolled. M is the larger result.\n(a) How many of the 49 ordered outcomes have M at most 3?\n(b) How many have M exactly 3?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "36/7"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6"
+  },
+  {
+    "task_id": "pipes_01",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 5 hours, pipe B in 7 hours, and a drain empties it in 13 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "12/35"
+      },
+      {
+        "label": "b",
+        "answer": "121/455"
+      },
+      {
+        "label": "c",
+        "answer": "455/121"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/12"
+  },
+  {
+    "task_id": "elevator_01",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "4 people independently choose uniformly among 6 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1296"
+      },
+      {
+        "label": "b",
+        "answer": "360"
+      },
+      {
+        "label": "c",
+        "answer": "5/18"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4096"
+  },
+  {
+    "task_id": "price_01",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $105. Its price rises 11%, then falls 6%, then 6% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2331/20"
+      },
+      {
+        "label": "b",
+        "answer": "109557/1000"
+      },
+      {
+        "label": "c",
+        "answer": "5806521/50000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "116"
+  },
+  {
+    "task_id": "four_of_a_kind_02",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 7 ranks, each with four distinct suits, for 28 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "98280"
+      },
+      {
+        "label": "b",
+        "answer": "168"
+      },
+      {
+        "label": "c",
+        "answer": "585"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "11793600"
+  },
+  {
+    "task_id": "full_house_02",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 7 ranks, each with four distinct suits, for 28 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "28"
+      },
+      {
+        "label": "b",
+        "answer": "1008"
+      },
+      {
+        "label": "c",
+        "answer": "2/195"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "168"
+  },
+  {
+    "task_id": "matching_socks_02",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 6 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "66"
+      },
+      {
+        "label": "b",
+        "answer": "6"
+      },
+      {
+        "label": "c",
+        "answer": "1/11"
+      },
+      {
+        "label": "d",
+        "answer": "3/11"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "132"
+  },
+  {
+    "task_id": "digit_sum_02",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 5 decimal digits, allowing leading zeros.\n(a) How many have digit sum 3?\n(b) How many of those begin with zero?\n(c) How many 5-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "35"
+      },
+      {
+        "label": "b",
+        "answer": "20"
+      },
+      {
+        "label": "c",
+        "answer": "15"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "55"
+  },
+  {
+    "task_id": "lattice_paths_02",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (5,3) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (2,1)?\n(c) How many avoid (2,1)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "56"
+      },
+      {
+        "label": "b",
+        "answer": "30"
+      },
+      {
+        "label": "c",
+        "answer": "26"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "256"
+  },
+  {
+    "task_id": "no_consecutive_heads_02",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 6 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "64"
+      },
+      {
+        "label": "b",
+        "answer": "21"
+      },
+      {
+        "label": "c",
+        "answer": "21/64"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "32"
+  },
+  {
+    "task_id": "chinese_remainder_02",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 2 modulo 3 and 9 modulo 11?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20"
+      },
+      {
+        "label": "b",
+        "answer": "548"
+      },
+      {
+        "label": "c",
+        "answer": "10646"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "53"
+  },
+  {
+    "task_id": "coupon_collector_02",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 6-sided die is rolled repeatedly until every face appears.\n(a) If 5 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 3 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "6"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "147/10"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/6"
+  },
+  {
+    "task_id": "bounded_solutions_02",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=12.\n(a) How many triples are there?\n(b) How many have x>6?\n(c) How many have all coordinates at most 6?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "55"
+      },
+      {
+        "label": "b",
+        "answer": "10"
+      },
+      {
+        "label": "c",
+        "answer": "25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "91"
+  },
+  {
+    "task_id": "derangements_02",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "6 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "720"
+      },
+      {
+        "label": "b",
+        "answer": "265"
+      },
+      {
+        "label": "c",
+        "answer": "53/144"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "120"
+  },
+  {
+    "task_id": "conditional_draw_02",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 14 distinct balls, of which 4 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "91"
+      },
+      {
+        "label": "b",
+        "answer": "46"
+      },
+      {
+        "label": "c",
+        "answer": "6"
+      },
+      {
+        "label": "d",
+        "answer": "3/23"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "182"
+  },
+  {
+    "task_id": "lcm_pairs_02",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=8?\n(b) How many pairs have lcm(a,b)=3?\n(c) How many pairs have lcm(a,b)=24?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "7"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "21"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "8"
+  },
+  {
+    "task_id": "expected_heads_02",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 3/5 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9/25"
+      },
+      {
+        "label": "b",
+        "answer": "5/3"
+      },
+      {
+        "label": "c",
+        "answer": "40/9"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3/5"
+  },
+  {
+    "task_id": "grid_triangles_02",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 15 grid points with integer coordinates 0<=x<5 and 0<=y<3.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "455"
+      },
+      {
+        "label": "b",
+        "answer": "43"
+      },
+      {
+        "label": "c",
+        "answer": "412"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "2730"
+  },
+  {
+    "task_id": "committee_02",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 5 people is chosen from 7 men and 6 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1287"
+      },
+      {
+        "label": "b",
+        "answer": "21"
+      },
+      {
+        "label": "c",
+        "answer": "210"
+      },
+      {
+        "label": "d",
+        "answer": "1056"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "154440"
+  },
+  {
+    "task_id": "double_headed_coin_02",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 2 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 4 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/16"
+      },
+      {
+        "label": "b",
+        "answer": "3/8"
+      },
+      {
+        "label": "c",
+        "answer": "8/9"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/8"
+  },
+  {
+    "task_id": "maximum_dice_02",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 8-sided dice numbered 1 through 8 are rolled. M is the larger result.\n(a) How many of the 64 ordered outcomes have M at most 4?\n(b) How many have M exactly 4?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16"
+      },
+      {
+        "label": "b",
+        "answer": "7"
+      },
+      {
+        "label": "c",
+        "answer": "93/16"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "10"
+  },
+  {
+    "task_id": "pipes_02",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 6 hours, pipe B in 8 hours, and a drain empties it in 14 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "7/24"
+      },
+      {
+        "label": "b",
+        "answer": "37/168"
+      },
+      {
+        "label": "c",
+        "answer": "168/37"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/14"
+  },
+  {
+    "task_id": "elevator_02",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "5 people independently choose uniformly among 7 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16807"
+      },
+      {
+        "label": "b",
+        "answer": "2520"
+      },
+      {
+        "label": "c",
+        "answer": "360/2401"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "78125"
+  },
+  {
+    "task_id": "price_02",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $125. Its price rises 12%, then falls 7%, then 7% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "140"
+      },
+      {
+        "label": "b",
+        "answer": "651/5"
+      },
+      {
+        "label": "c",
+        "answer": "69657/500"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "137"
+  },
+  {
+    "task_id": "four_of_a_kind_03",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 8 ranks, each with four distinct suits, for 32 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "201376"
+      },
+      {
+        "label": "b",
+        "answer": "224"
+      },
+      {
+        "label": "c",
+        "answer": "899"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "24165120"
+  },
+  {
+    "task_id": "full_house_03",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 8 ranks, each with four distinct suits, for 32 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "32"
+      },
+      {
+        "label": "b",
+        "answer": "1344"
+      },
+      {
+        "label": "c",
+        "answer": "6/899"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "192"
+  },
+  {
+    "task_id": "matching_socks_03",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 7 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "91"
+      },
+      {
+        "label": "b",
+        "answer": "7"
+      },
+      {
+        "label": "c",
+        "answer": "1/13"
+      },
+      {
+        "label": "d",
+        "answer": "3/13"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "182"
+  },
+  {
+    "task_id": "digit_sum_03",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 3 decimal digits, allowing leading zeros.\n(a) How many have digit sum 4?\n(b) How many of those begin with zero?\n(c) How many 3-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "15"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "10"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "20"
+  },
+  {
+    "task_id": "lattice_paths_03",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (6,3) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (3,1)?\n(c) How many avoid (3,1)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "84"
+      },
+      {
+        "label": "b",
+        "answer": "40"
+      },
+      {
+        "label": "c",
+        "answer": "44"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "512"
+  },
+  {
+    "task_id": "no_consecutive_heads_03",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 7 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "128"
+      },
+      {
+        "label": "b",
+        "answer": "34"
+      },
+      {
+        "label": "c",
+        "answer": "17/64"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "64"
+  },
+  {
+    "task_id": "chinese_remainder_03",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 4 modulo 5 and 5 modulo 7?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "19"
+      },
+      {
+        "label": "b",
+        "answer": "89"
+      },
+      {
+        "label": "c",
+        "answer": "1279"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "54"
+  },
+  {
+    "task_id": "coupon_collector_03",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 7-sided die is rolled repeatedly until every face appears.\n(a) If 6 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 3 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "7"
+      },
+      {
+        "label": "b",
+        "answer": "7/4"
+      },
+      {
+        "label": "c",
+        "answer": "363/20"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/7"
+  },
+  {
+    "task_id": "bounded_solutions_03",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=14.\n(a) How many triples are there?\n(b) How many have x>7?\n(c) How many have all coordinates at most 7?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "78"
+      },
+      {
+        "label": "b",
+        "answer": "15"
+      },
+      {
+        "label": "c",
+        "answer": "33"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "120"
+  },
+  {
+    "task_id": "derangements_03",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "7 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5040"
+      },
+      {
+        "label": "b",
+        "answer": "1854"
+      },
+      {
+        "label": "c",
+        "answer": "103/280"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "720"
+  },
+  {
+    "task_id": "conditional_draw_03",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 15 distinct balls, of which 5 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "105"
+      },
+      {
+        "label": "b",
+        "answer": "60"
+      },
+      {
+        "label": "c",
+        "answer": "10"
+      },
+      {
+        "label": "d",
+        "answer": "1/6"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "210"
+  },
+  {
+    "task_id": "lcm_pairs_03",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=16?\n(b) How many pairs have lcm(a,b)=3?\n(c) How many pairs have lcm(a,b)=48?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "27"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "10"
+  },
+  {
+    "task_id": "expected_heads_03",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 2/3 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4/9"
+      },
+      {
+        "label": "b",
+        "answer": "3/2"
+      },
+      {
+        "label": "c",
+        "answer": "15/4"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "2/3"
+  },
+  {
+    "task_id": "grid_triangles_03",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 18 grid points with integer coordinates 0<=x<6 and 0<=y<3.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "816"
+      },
+      {
+        "label": "b",
+        "answer": "78"
+      },
+      {
+        "label": "c",
+        "answer": "738"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4896"
+  },
+  {
+    "task_id": "committee_03",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 3 people is chosen from 8 men and 4 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "220"
+      },
+      {
+        "label": "b",
+        "answer": "56"
+      },
+      {
+        "label": "c",
+        "answer": "112"
+      },
+      {
+        "label": "d",
+        "answer": "52"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1320"
+  },
+  {
+    "task_id": "double_headed_coin_03",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 2 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 5 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/32"
+      },
+      {
+        "label": "b",
+        "answer": "17/48"
+      },
+      {
+        "label": "c",
+        "answer": "16/17"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/16"
+  },
+  {
+    "task_id": "maximum_dice_03",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 9-sided dice numbered 1 through 9 are rolled. M is the larger result.\n(a) How many of the 81 ordered outcomes have M at most 5?\n(b) How many have M exactly 5?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "25"
+      },
+      {
+        "label": "b",
+        "answer": "9"
+      },
+      {
+        "label": "c",
+        "answer": "175/27"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "15"
+  },
+  {
+    "task_id": "pipes_03",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 7 hours, pipe B in 9 hours, and a drain empties it in 15 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16/63"
+      },
+      {
+        "label": "b",
+        "answer": "59/315"
+      },
+      {
+        "label": "c",
+        "answer": "315/59"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/16"
+  },
+  {
+    "task_id": "elevator_03",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "3 people independently choose uniformly among 8 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "512"
+      },
+      {
+        "label": "b",
+        "answer": "336"
+      },
+      {
+        "label": "c",
+        "answer": "21/32"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6561"
+  },
+  {
+    "task_id": "price_03",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $145. Its price rises 13%, then falls 8%, then 8% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3277/20"
+      },
+      {
+        "label": "b",
+        "answer": "75371/500"
+      },
+      {
+        "label": "c",
+        "answer": "2035017/12500"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "158"
+  },
+  {
+    "task_id": "four_of_a_kind_04",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 9 ranks, each with four distinct suits, for 36 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "376992"
+      },
+      {
+        "label": "b",
+        "answer": "288"
+      },
+      {
+        "label": "c",
+        "answer": "1309"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "45239040"
+  },
+  {
+    "task_id": "full_house_04",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 9 ranks, each with four distinct suits, for 36 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "36"
+      },
+      {
+        "label": "b",
+        "answer": "1728"
+      },
+      {
+        "label": "c",
+        "answer": "6/1309"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "216"
+  },
+  {
+    "task_id": "matching_socks_04",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 8 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "120"
+      },
+      {
+        "label": "b",
+        "answer": "8"
+      },
+      {
+        "label": "c",
+        "answer": "1/15"
+      },
+      {
+        "label": "d",
+        "answer": "1/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "240"
+  },
+  {
+    "task_id": "digit_sum_04",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 4 decimal digits, allowing leading zeros.\n(a) How many have digit sum 5?\n(b) How many of those begin with zero?\n(c) How many 4-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "56"
+      },
+      {
+        "label": "b",
+        "answer": "21"
+      },
+      {
+        "label": "c",
+        "answer": "35"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "77"
+  },
+  {
+    "task_id": "lattice_paths_04",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (7,3) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (3,1)?\n(c) How many avoid (3,1)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "120"
+      },
+      {
+        "label": "b",
+        "answer": "60"
+      },
+      {
+        "label": "c",
+        "answer": "60"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1024"
+  },
+  {
+    "task_id": "no_consecutive_heads_04",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 8 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "256"
+      },
+      {
+        "label": "b",
+        "answer": "55"
+      },
+      {
+        "label": "c",
+        "answer": "55/256"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "128"
+  },
+  {
+    "task_id": "chinese_remainder_04",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 4 modulo 5 and 9 modulo 11?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "174"
+      },
+      {
+        "label": "c",
+        "answer": "14199"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "64"
+  },
+  {
+    "task_id": "coupon_collector_04",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 8-sided die is rolled repeatedly until every face appears.\n(a) If 7 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 4 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "8"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "761/35"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/8"
+  },
+  {
+    "task_id": "bounded_solutions_04",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=16.\n(a) How many triples are there?\n(b) How many have x>8?\n(c) How many have all coordinates at most 8?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "105"
+      },
+      {
+        "label": "b",
+        "answer": "21"
+      },
+      {
+        "label": "c",
+        "answer": "42"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "153"
+  },
+  {
+    "task_id": "derangements_04",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "8 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "40320"
+      },
+      {
+        "label": "b",
+        "answer": "14833"
+      },
+      {
+        "label": "c",
+        "answer": "2119/5760"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "5040"
+  },
+  {
+    "task_id": "conditional_draw_04",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 16 distinct balls, of which 2 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "120"
+      },
+      {
+        "label": "b",
+        "answer": "29"
+      },
+      {
+        "label": "c",
+        "answer": "1"
+      },
+      {
+        "label": "d",
+        "answer": "1/29"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "240"
+  },
+  {
+    "task_id": "lcm_pairs_04",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=32?\n(b) How many pairs have lcm(a,b)=3?\n(c) How many pairs have lcm(a,b)=96?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "33"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "12"
+  },
+  {
+    "task_id": "expected_heads_04",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 5/7 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "25/49"
+      },
+      {
+        "label": "b",
+        "answer": "7/5"
+      },
+      {
+        "label": "c",
+        "answer": "84/25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "5/7"
+  },
+  {
+    "task_id": "grid_triangles_04",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 21 grid points with integer coordinates 0<=x<7 and 0<=y<3.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1330"
+      },
+      {
+        "label": "b",
+        "answer": "130"
+      },
+      {
+        "label": "c",
+        "answer": "1200"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "7980"
+  },
+  {
+    "task_id": "committee_04",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 4 people is chosen from 9 men and 5 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1001"
+      },
+      {
+        "label": "b",
+        "answer": "126"
+      },
+      {
+        "label": "c",
+        "answer": "420"
+      },
+      {
+        "label": "d",
+        "answer": "455"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "24024"
+  },
+  {
+    "task_id": "double_headed_coin_04",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 3 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 2 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/4"
+      },
+      {
+        "label": "b",
+        "answer": "7/16"
+      },
+      {
+        "label": "c",
+        "answer": "4/7"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/2"
+  },
+  {
+    "task_id": "maximum_dice_04",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 10-sided dice numbered 1 through 10 are rolled. M is the larger result.\n(a) How many of the 100 ordered outcomes have M at most 6?\n(b) How many have M exactly 6?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "36"
+      },
+      {
+        "label": "b",
+        "answer": "11"
+      },
+      {
+        "label": "c",
+        "answer": "143/20"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "21"
+  },
+  {
+    "task_id": "pipes_04",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 8 hours, pipe B in 10 hours, and a drain empties it in 16 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9/40"
+      },
+      {
+        "label": "b",
+        "answer": "13/80"
+      },
+      {
+        "label": "c",
+        "answer": "80/13"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/18"
+  },
+  {
+    "task_id": "elevator_04",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "4 people independently choose uniformly among 9 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "6561"
+      },
+      {
+        "label": "b",
+        "answer": "3024"
+      },
+      {
+        "label": "c",
+        "answer": "112/243"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "262144"
+  },
+  {
+    "task_id": "price_04",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $165. Its price rises 14%, then falls 9%, then 9% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1881/10"
+      },
+      {
+        "label": "b",
+        "answer": "171171/1000"
+      },
+      {
+        "label": "c",
+        "answer": "18657639/100000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "179"
+  },
+  {
+    "task_id": "four_of_a_kind_05",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 10 ranks, each with four distinct suits, for 40 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "658008"
+      },
+      {
+        "label": "b",
+        "answer": "360"
+      },
+      {
+        "label": "c",
+        "answer": "9139/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "78960960"
+  },
+  {
+    "task_id": "full_house_05",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 10 ranks, each with four distinct suits, for 40 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "40"
+      },
+      {
+        "label": "b",
+        "answer": "2160"
+      },
+      {
+        "label": "c",
+        "answer": "30/9139"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "240"
+  },
+  {
+    "task_id": "matching_socks_05",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 9 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "153"
+      },
+      {
+        "label": "b",
+        "answer": "9"
+      },
+      {
+        "label": "c",
+        "answer": "1/17"
+      },
+      {
+        "label": "d",
+        "answer": "3/17"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "306"
+  },
+  {
+    "task_id": "digit_sum_05",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 5 decimal digits, allowing leading zeros.\n(a) How many have digit sum 6?\n(b) How many of those begin with zero?\n(c) How many 5-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "210"
+      },
+      {
+        "label": "b",
+        "answer": "84"
+      },
+      {
+        "label": "c",
+        "answer": "126"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "294"
+  },
+  {
+    "task_id": "lattice_paths_05",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (3,4) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (1,2)?\n(c) How many avoid (1,2)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "35"
+      },
+      {
+        "label": "b",
+        "answer": "18"
+      },
+      {
+        "label": "c",
+        "answer": "17"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "128"
+  },
+  {
+    "task_id": "no_consecutive_heads_05",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 9 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "512"
+      },
+      {
+        "label": "b",
+        "answer": "89"
+      },
+      {
+        "label": "c",
+        "answer": "89/512"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "256"
+  },
+  {
+    "task_id": "chinese_remainder_05",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 6 modulo 7 and 9 modulo 11?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20"
+      },
+      {
+        "label": "b",
+        "answer": "174"
+      },
+      {
+        "label": "c",
+        "answer": "10646"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "97"
+  },
+  {
+    "task_id": "coupon_collector_05",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 9-sided die is rolled repeatedly until every face appears.\n(a) If 8 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 4 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "9/5"
+      },
+      {
+        "label": "c",
+        "answer": "7129/280"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/9"
+  },
+  {
+    "task_id": "bounded_solutions_05",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=18.\n(a) How many triples are there?\n(b) How many have x>9?\n(c) How many have all coordinates at most 9?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "136"
+      },
+      {
+        "label": "b",
+        "answer": "28"
+      },
+      {
+        "label": "c",
+        "answer": "52"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "190"
+  },
+  {
+    "task_id": "derangements_05",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "9 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "362880"
+      },
+      {
+        "label": "b",
+        "answer": "133496"
+      },
+      {
+        "label": "c",
+        "answer": "16687/45360"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "40320"
+  },
+  {
+    "task_id": "conditional_draw_05",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 17 distinct balls, of which 3 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "136"
+      },
+      {
+        "label": "b",
+        "answer": "45"
+      },
+      {
+        "label": "c",
+        "answer": "3"
+      },
+      {
+        "label": "d",
+        "answer": "1/15"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "272"
+  },
+  {
+    "task_id": "lcm_pairs_05",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=2?\n(b) How many pairs have lcm(a,b)=9?\n(c) How many pairs have lcm(a,b)=18?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "15"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4"
+  },
+  {
+    "task_id": "expected_heads_05",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 3/4 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9/16"
+      },
+      {
+        "label": "b",
+        "answer": "4/3"
+      },
+      {
+        "label": "c",
+        "answer": "28/9"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3/4"
+  },
+  {
+    "task_id": "grid_triangles_05",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 12 grid points with integer coordinates 0<=x<3 and 0<=y<4.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "220"
+      },
+      {
+        "label": "b",
+        "answer": "20"
+      },
+      {
+        "label": "c",
+        "answer": "200"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1320"
+  },
+  {
+    "task_id": "committee_05",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 5 people is chosen from 10 men and 6 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4368"
+      },
+      {
+        "label": "b",
+        "answer": "252"
+      },
+      {
+        "label": "c",
+        "answer": "1260"
+      },
+      {
+        "label": "d",
+        "answer": "2856"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "524160"
+  },
+  {
+    "task_id": "double_headed_coin_05",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 3 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 3 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/8"
+      },
+      {
+        "label": "b",
+        "answer": "11/32"
+      },
+      {
+        "label": "c",
+        "answer": "8/11"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/4"
+  },
+  {
+    "task_id": "maximum_dice_05",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 11-sided dice numbered 1 through 11 are rolled. M is the larger result.\n(a) How many of the 121 ordered outcomes have M at most 2?\n(b) How many have M exactly 2?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4"
+      },
+      {
+        "label": "b",
+        "answer": "3"
+      },
+      {
+        "label": "c",
+        "answer": "86/11"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3"
+  },
+  {
+    "task_id": "pipes_05",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 9 hours, pipe B in 11 hours, and a drain empties it in 17 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20/99"
+      },
+      {
+        "label": "b",
+        "answer": "241/1683"
+      },
+      {
+        "label": "c",
+        "answer": "1683/241"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/20"
+  },
+  {
+    "task_id": "elevator_05",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "5 people independently choose uniformly among 10 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "100000"
+      },
+      {
+        "label": "b",
+        "answer": "30240"
+      },
+      {
+        "label": "c",
+        "answer": "189/625"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "9765625"
+  },
+  {
+    "task_id": "price_05",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $185. Its price rises 15%, then falls 10%, then 5% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "851/4"
+      },
+      {
+        "label": "b",
+        "answer": "7659/40"
+      },
+      {
+        "label": "c",
+        "answer": "160839/800"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "200"
+  },
+  {
+    "task_id": "four_of_a_kind_06",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 11 ranks, each with four distinct suits, for 44 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1086008"
+      },
+      {
+        "label": "b",
+        "answer": "440"
+      },
+      {
+        "label": "c",
+        "answer": "12341/5"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "130320960"
+  },
+  {
+    "task_id": "full_house_06",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 11 ranks, each with four distinct suits, for 44 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "44"
+      },
+      {
+        "label": "b",
+        "answer": "2640"
+      },
+      {
+        "label": "c",
+        "answer": "30/12341"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "264"
+  },
+  {
+    "task_id": "matching_socks_06",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 10 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "190"
+      },
+      {
+        "label": "b",
+        "answer": "10"
+      },
+      {
+        "label": "c",
+        "answer": "1/19"
+      },
+      {
+        "label": "d",
+        "answer": "3/19"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "380"
+  },
+  {
+    "task_id": "digit_sum_06",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 3 decimal digits, allowing leading zeros.\n(a) How many have digit sum 7?\n(b) How many of those begin with zero?\n(c) How many 3-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "36"
+      },
+      {
+        "label": "b",
+        "answer": "8"
+      },
+      {
+        "label": "c",
+        "answer": "28"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "44"
+  },
+  {
+    "task_id": "lattice_paths_06",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (4,4) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (2,2)?\n(c) How many avoid (2,2)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "70"
+      },
+      {
+        "label": "b",
+        "answer": "36"
+      },
+      {
+        "label": "c",
+        "answer": "34"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "256"
+  },
+  {
+    "task_id": "no_consecutive_heads_06",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 10 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1024"
+      },
+      {
+        "label": "b",
+        "answer": "144"
+      },
+      {
+        "label": "c",
+        "answer": "9/64"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "512"
+  },
+  {
+    "task_id": "chinese_remainder_06",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 2 modulo 3 and 11 modulo 13?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11"
+      },
+      {
+        "label": "b",
+        "answer": "89"
+      },
+      {
+        "label": "c",
+        "answer": "8708"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "50"
+  },
+  {
+    "task_id": "coupon_collector_06",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 10-sided die is rolled repeatedly until every face appears.\n(a) If 9 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 5 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "10"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "7381/252"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/10"
+  },
+  {
+    "task_id": "bounded_solutions_06",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=20.\n(a) How many triples are there?\n(b) How many have x>10?\n(c) How many have all coordinates at most 10?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "171"
+      },
+      {
+        "label": "b",
+        "answer": "36"
+      },
+      {
+        "label": "c",
+        "answer": "63"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "231"
+  },
+  {
+    "task_id": "derangements_06",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "10 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3628800"
+      },
+      {
+        "label": "b",
+        "answer": "1334961"
+      },
+      {
+        "label": "c",
+        "answer": "16481/44800"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "362880"
+  },
+  {
+    "task_id": "conditional_draw_06",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 18 distinct balls, of which 4 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "153"
+      },
+      {
+        "label": "b",
+        "answer": "62"
+      },
+      {
+        "label": "c",
+        "answer": "6"
+      },
+      {
+        "label": "d",
+        "answer": "3/31"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "306"
+  },
+  {
+    "task_id": "lcm_pairs_06",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=4?\n(b) How many pairs have lcm(a,b)=9?\n(c) How many pairs have lcm(a,b)=36?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "5"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6"
+  },
+  {
+    "task_id": "expected_heads_06",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 7/9 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "49/81"
+      },
+      {
+        "label": "b",
+        "answer": "9/7"
+      },
+      {
+        "label": "c",
+        "answer": "144/49"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "7/9"
+  },
+  {
+    "task_id": "grid_triangles_06",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 16 grid points with integer coordinates 0<=x<4 and 0<=y<4.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "560"
+      },
+      {
+        "label": "b",
+        "answer": "44"
+      },
+      {
+        "label": "c",
+        "answer": "516"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3360"
+  },
+  {
+    "task_id": "committee_06",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 3 people is chosen from 11 men and 4 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "455"
+      },
+      {
+        "label": "b",
+        "answer": "165"
+      },
+      {
+        "label": "c",
+        "answer": "220"
+      },
+      {
+        "label": "d",
+        "answer": "70"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "2730"
+  },
+  {
+    "task_id": "double_headed_coin_06",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 3 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 4 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/16"
+      },
+      {
+        "label": "b",
+        "answer": "19/64"
+      },
+      {
+        "label": "c",
+        "answer": "16/19"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/8"
+  },
+  {
+    "task_id": "maximum_dice_06",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 12-sided dice numbered 1 through 12 are rolled. M is the larger result.\n(a) How many of the 144 ordered outcomes have M at most 3?\n(b) How many have M exactly 3?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "611/72"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6"
+  },
+  {
+    "task_id": "pipes_06",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 10 hours, pipe B in 12 hours, and a drain empties it in 18 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11/60"
+      },
+      {
+        "label": "b",
+        "answer": "23/180"
+      },
+      {
+        "label": "c",
+        "answer": "180/23"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/22"
+  },
+  {
+    "task_id": "elevator_06",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "3 people independently choose uniformly among 11 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1331"
+      },
+      {
+        "label": "b",
+        "answer": "990"
+      },
+      {
+        "label": "c",
+        "answer": "90/121"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "177147"
+  },
+  {
+    "task_id": "price_06",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $205. Its price rises 16%, then falls 11%, then 6% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1189/5"
+      },
+      {
+        "label": "b",
+        "answer": "105821/500"
+      },
+      {
+        "label": "c",
+        "answer": "5608513/25000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "221"
+  },
+  {
+    "task_id": "four_of_a_kind_07",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 12 ranks, each with four distinct suits, for 48 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1712304"
+      },
+      {
+        "label": "b",
+        "answer": "528"
+      },
+      {
+        "label": "c",
+        "answer": "3243"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "205476480"
+  },
+  {
+    "task_id": "full_house_07",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 12 ranks, each with four distinct suits, for 48 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "48"
+      },
+      {
+        "label": "b",
+        "answer": "3168"
+      },
+      {
+        "label": "c",
+        "answer": "2/1081"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "288"
+  },
+  {
+    "task_id": "matching_socks_07",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 11 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "231"
+      },
+      {
+        "label": "b",
+        "answer": "11"
+      },
+      {
+        "label": "c",
+        "answer": "1/21"
+      },
+      {
+        "label": "d",
+        "answer": "1/7"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "462"
+  },
+  {
+    "task_id": "digit_sum_07",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 4 decimal digits, allowing leading zeros.\n(a) How many have digit sum 8?\n(b) How many of those begin with zero?\n(c) How many 4-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "165"
+      },
+      {
+        "label": "b",
+        "answer": "45"
+      },
+      {
+        "label": "c",
+        "answer": "120"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "210"
+  },
+  {
+    "task_id": "lattice_paths_07",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (5,4) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (2,2)?\n(c) How many avoid (2,2)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "126"
+      },
+      {
+        "label": "b",
+        "answer": "60"
+      },
+      {
+        "label": "c",
+        "answer": "66"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "512"
+  },
+  {
+    "task_id": "no_consecutive_heads_07",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 11 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2048"
+      },
+      {
+        "label": "b",
+        "answer": "233"
+      },
+      {
+        "label": "c",
+        "answer": "233/2048"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1024"
+  },
+  {
+    "task_id": "chinese_remainder_07",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 4 modulo 5 and 11 modulo 13?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "24"
+      },
+      {
+        "label": "b",
+        "answer": "89"
+      },
+      {
+        "label": "c",
+        "answer": "4509"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "89"
+  },
+  {
+    "task_id": "coupon_collector_07",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 11-sided die is rolled repeatedly until every face appears.\n(a) If 10 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 5 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11"
+      },
+      {
+        "label": "b",
+        "answer": "11/6"
+      },
+      {
+        "label": "c",
+        "answer": "83711/2520"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/11"
+  },
+  {
+    "task_id": "bounded_solutions_07",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=22.\n(a) How many triples are there?\n(b) How many have x>11?\n(c) How many have all coordinates at most 11?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "210"
+      },
+      {
+        "label": "b",
+        "answer": "45"
+      },
+      {
+        "label": "c",
+        "answer": "75"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "276"
+  },
+  {
+    "task_id": "derangements_07",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "11 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "39916800"
+      },
+      {
+        "label": "b",
+        "answer": "14684570"
+      },
+      {
+        "label": "c",
+        "answer": "1468457/3991680"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "3628800"
+  },
+  {
+    "task_id": "conditional_draw_07",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 19 distinct balls, of which 5 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "171"
+      },
+      {
+        "label": "b",
+        "answer": "80"
+      },
+      {
+        "label": "c",
+        "answer": "10"
+      },
+      {
+        "label": "d",
+        "answer": "1/8"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "342"
+  },
+  {
+    "task_id": "lcm_pairs_07",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=8?\n(b) How many pairs have lcm(a,b)=9?\n(c) How many pairs have lcm(a,b)=72?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "7"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "35"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "8"
+  },
+  {
+    "task_id": "expected_heads_07",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 4/5 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16/25"
+      },
+      {
+        "label": "b",
+        "answer": "5/4"
+      },
+      {
+        "label": "c",
+        "answer": "45/16"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4/5"
+  },
+  {
+    "task_id": "grid_triangles_07",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 20 grid points with integer coordinates 0<=x<5 and 0<=y<4.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1140"
+      },
+      {
+        "label": "b",
+        "answer": "84"
+      },
+      {
+        "label": "c",
+        "answer": "1056"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "6840"
+  },
+  {
+    "task_id": "committee_07",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 4 people is chosen from 12 men and 5 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2380"
+      },
+      {
+        "label": "b",
+        "answer": "495"
+      },
+      {
+        "label": "c",
+        "answer": "1100"
+      },
+      {
+        "label": "d",
+        "answer": "785"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "57120"
+  },
+  {
+    "task_id": "double_headed_coin_07",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 3 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 5 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/32"
+      },
+      {
+        "label": "b",
+        "answer": "35/128"
+      },
+      {
+        "label": "c",
+        "answer": "32/35"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/16"
+  },
+  {
+    "task_id": "maximum_dice_07",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 13-sided dice numbered 1 through 13 are rolled. M is the larger result.\n(a) How many of the 169 ordered outcomes have M at most 4?\n(b) How many have M exactly 4?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "16"
+      },
+      {
+        "label": "b",
+        "answer": "7"
+      },
+      {
+        "label": "c",
+        "answer": "119/13"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "10"
+  },
+  {
+    "task_id": "pipes_07",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 11 hours, pipe B in 13 hours, and a drain empties it in 19 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "24/143"
+      },
+      {
+        "label": "b",
+        "answer": "313/2717"
+      },
+      {
+        "label": "c",
+        "answer": "2717/313"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/24"
+  },
+  {
+    "task_id": "elevator_07",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "4 people independently choose uniformly among 12 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "20736"
+      },
+      {
+        "label": "b",
+        "answer": "11880"
+      },
+      {
+        "label": "c",
+        "answer": "55/96"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "16777216"
+  },
+  {
+    "task_id": "price_07",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $225. Its price rises 17%, then falls 12%, then 7% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1053/4"
+      },
+      {
+        "label": "b",
+        "answer": "11583/50"
+      },
+      {
+        "label": "c",
+        "answer": "1239381/5000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "242"
+  },
+  {
+    "task_id": "four_of_a_kind_08",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 13 ranks, each with four distinct suits, for 52 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2598960"
+      },
+      {
+        "label": "b",
+        "answer": "624"
+      },
+      {
+        "label": "c",
+        "answer": "4165"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "311875200"
+  },
+  {
+    "task_id": "full_house_08",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 13 ranks, each with four distinct suits, for 52 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "52"
+      },
+      {
+        "label": "b",
+        "answer": "3744"
+      },
+      {
+        "label": "c",
+        "answer": "6/4165"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "312"
+  },
+  {
+    "task_id": "matching_socks_08",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 12 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "276"
+      },
+      {
+        "label": "b",
+        "answer": "12"
+      },
+      {
+        "label": "c",
+        "answer": "1/23"
+      },
+      {
+        "label": "d",
+        "answer": "3/23"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "552"
+  },
+  {
+    "task_id": "digit_sum_08",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 5 decimal digits, allowing leading zeros.\n(a) How many have digit sum 9?\n(b) How many of those begin with zero?\n(c) How many 5-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "715"
+      },
+      {
+        "label": "b",
+        "answer": "220"
+      },
+      {
+        "label": "c",
+        "answer": "495"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "935"
+  },
+  {
+    "task_id": "lattice_paths_08",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (6,4) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (3,2)?\n(c) How many avoid (3,2)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "210"
+      },
+      {
+        "label": "b",
+        "answer": "100"
+      },
+      {
+        "label": "c",
+        "answer": "110"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1024"
+  },
+  {
+    "task_id": "no_consecutive_heads_08",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 12 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "4096"
+      },
+      {
+        "label": "b",
+        "answer": "377"
+      },
+      {
+        "label": "c",
+        "answer": "377/4096"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "2048"
+  },
+  {
+    "task_id": "chinese_remainder_08",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 6 modulo 7 and 11 modulo 13?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "76"
+      },
+      {
+        "label": "b",
+        "answer": "531"
+      },
+      {
+        "label": "c",
+        "answer": "12907"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "167"
+  },
+  {
+    "task_id": "coupon_collector_08",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 12-sided die is rolled repeatedly until every face appears.\n(a) If 11 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 6 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "12"
+      },
+      {
+        "label": "b",
+        "answer": "2"
+      },
+      {
+        "label": "c",
+        "answer": "86021/2310"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/12"
+  },
+  {
+    "task_id": "bounded_solutions_08",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=24.\n(a) How many triples are there?\n(b) How many have x>12?\n(c) How many have all coordinates at most 12?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "253"
+      },
+      {
+        "label": "b",
+        "answer": "55"
+      },
+      {
+        "label": "c",
+        "answer": "88"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "325"
+  },
+  {
+    "task_id": "derangements_08",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "12 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "479001600"
+      },
+      {
+        "label": "b",
+        "answer": "176214841"
+      },
+      {
+        "label": "c",
+        "answer": "16019531/43545600"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "39916800"
+  },
+  {
+    "task_id": "conditional_draw_08",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 20 distinct balls, of which 2 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "190"
+      },
+      {
+        "label": "b",
+        "answer": "37"
+      },
+      {
+        "label": "c",
+        "answer": "1"
+      },
+      {
+        "label": "d",
+        "answer": "1/37"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "380"
+  },
+  {
+    "task_id": "lcm_pairs_08",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=16?\n(b) How many pairs have lcm(a,b)=9?\n(c) How many pairs have lcm(a,b)=144?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "9"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "45"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "10"
+  },
+  {
+    "task_id": "expected_heads_08",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 9/11 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "81/121"
+      },
+      {
+        "label": "b",
+        "answer": "11/9"
+      },
+      {
+        "label": "c",
+        "answer": "220/81"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "9/11"
+  },
+  {
+    "task_id": "grid_triangles_08",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 24 grid points with integer coordinates 0<=x<6 and 0<=y<4.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2024"
+      },
+      {
+        "label": "b",
+        "answer": "140"
+      },
+      {
+        "label": "c",
+        "answer": "1884"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "12144"
+  },
+  {
+    "task_id": "committee_08",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 5 people is chosen from 13 men and 6 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11628"
+      },
+      {
+        "label": "b",
+        "answer": "1287"
+      },
+      {
+        "label": "c",
+        "answer": "4290"
+      },
+      {
+        "label": "d",
+        "answer": "6051"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1395360"
+  },
+  {
+    "task_id": "double_headed_coin_08",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 4 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 2 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/4"
+      },
+      {
+        "label": "b",
+        "answer": "2/5"
+      },
+      {
+        "label": "c",
+        "answer": "1/2"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/2"
+  },
+  {
+    "task_id": "maximum_dice_08",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 14-sided dice numbered 1 through 14 are rolled. M is the larger result.\n(a) How many of the 196 ordered outcomes have M at most 5?\n(b) How many have M exactly 5?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "25"
+      },
+      {
+        "label": "b",
+        "answer": "9"
+      },
+      {
+        "label": "c",
+        "answer": "275/28"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "15"
+  },
+  {
+    "task_id": "pipes_08",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 12 hours, pipe B in 14 hours, and a drain empties it in 20 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "13/84"
+      },
+      {
+        "label": "b",
+        "answer": "11/105"
+      },
+      {
+        "label": "c",
+        "answer": "105/11"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/26"
+  },
+  {
+    "task_id": "elevator_08",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "5 people independently choose uniformly among 13 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "371293"
+      },
+      {
+        "label": "b",
+        "answer": "154440"
+      },
+      {
+        "label": "c",
+        "answer": "11880/28561"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1220703125"
+  },
+  {
+    "task_id": "price_08",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $245. Its price rises 18%, then falls 13%, then 8% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2891/10"
+      },
+      {
+        "label": "b",
+        "answer": "251517/1000"
+      },
+      {
+        "label": "c",
+        "answer": "6790959/25000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "263"
+  },
+  {
+    "task_id": "four_of_a_kind_09",
+    "family": "four_of_a_kind",
+    "domain": "math",
+    "prompt": "A deck has 14 ranks, each with four distinct suits, for 56 distinct cards. A hand contains five cards, with order ignored.\n(a) How many five-card hands are possible?\n(b) How many hands contain four cards of the same rank?\n(c) What is the reciprocal of the probability of four of a kind?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3819816"
+      },
+      {
+        "label": "b",
+        "answer": "728"
+      },
+      {
+        "label": "c",
+        "answer": "5247"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "458377920"
+  },
+  {
+    "task_id": "full_house_09",
+    "family": "full_house",
+    "domain": "math",
+    "prompt": "A deck has 14 ranks, each with four distinct suits, for 56 distinct cards. A hand contains five cards, with order ignored. A full house contains three cards of one rank and two of another.\n(a) How many ways can you choose the three-of-a-kind part?\n(b) How many full houses are possible?\n(c) What is the probability of a full house?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "56"
+      },
+      {
+        "label": "b",
+        "answer": "4368"
+      },
+      {
+        "label": "c",
+        "answer": "2/1749"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "336"
+  },
+  {
+    "task_id": "matching_socks_09",
+    "family": "matching_socks",
+    "domain": "math",
+    "prompt": "A drawer contains 13 pairs of socks, each pair a different color. Individual socks are distinct.\n(a) How many unordered draws of two socks are possible?\n(b) How many give a matching pair?\n(c) What is the probability that two socks match?\n(d) If three socks are drawn, what is the probability that at least two match?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "325"
+      },
+      {
+        "label": "b",
+        "answer": "13"
+      },
+      {
+        "label": "c",
+        "answer": "1/25"
+      },
+      {
+        "label": "d",
+        "answer": "3/25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "650"
+  },
+  {
+    "task_id": "digit_sum_09",
+    "family": "digit_sum",
+    "domain": "math",
+    "prompt": "Consider strings of 3 decimal digits, allowing leading zeros.\n(a) How many have digit sum 10?\n(b) How many of those begin with zero?\n(c) How many 3-digit positive integers have that digit sum?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "63"
+      },
+      {
+        "label": "b",
+        "answer": "9"
+      },
+      {
+        "label": "c",
+        "answer": "54"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "74"
+  },
+  {
+    "task_id": "lattice_paths_09",
+    "family": "lattice_paths",
+    "domain": "math",
+    "prompt": "A path from (0,0) to (7,4) uses only unit steps right or up.\n(a) How many paths are possible?\n(b) How many pass through (3,2)?\n(c) How many avoid (3,2)?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "330"
+      },
+      {
+        "label": "b",
+        "answer": "150"
+      },
+      {
+        "label": "c",
+        "answer": "180"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "2048"
+  },
+  {
+    "task_id": "no_consecutive_heads_09",
+    "family": "no_consecutive_heads",
+    "domain": "math",
+    "prompt": "A fair coin is flipped 13 times.\n(a) How many ordered sequences are possible?\n(b) How many sequences contain no consecutive heads?\n(c) What is the probability of no consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "8192"
+      },
+      {
+        "label": "b",
+        "answer": "610"
+      },
+      {
+        "label": "c",
+        "answer": "305/4096"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4096"
+  },
+  {
+    "task_id": "chinese_remainder_09",
+    "family": "chinese_remainder",
+    "domain": "math",
+    "prompt": "Find positive integers satisfying these remainder conditions.\n(a) What is the smallest integer leaving remainder 10 modulo 11 and 11 modulo 13?\n(b) What is the smallest integer that also leaves remainder 4 modulo 17?\n(c) What is the smallest integer that additionally leaves remainder 6 modulo 19?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "76"
+      },
+      {
+        "label": "b",
+        "answer": "2078"
+      },
+      {
+        "label": "c",
+        "answer": "4509"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "219"
+  },
+  {
+    "task_id": "coupon_collector_09",
+    "family": "coupon_collector",
+    "domain": "math",
+    "prompt": "A fair 13-sided die is rolled repeatedly until every face appears.\n(a) If 12 different faces have appeared, what is the expected number of additional rolls until the last face appears?\n(b) If 6 different faces have appeared, what is the expected number of rolls until a new face appears?\n(c) What is the expected total number of rolls to see all faces?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "13"
+      },
+      {
+        "label": "b",
+        "answer": "13/7"
+      },
+      {
+        "label": "c",
+        "answer": "1145993/27720"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/13"
+  },
+  {
+    "task_id": "bounded_solutions_09",
+    "family": "bounded_solutions",
+    "domain": "math",
+    "prompt": "Consider ordered triples of positive integers with x+y+z=26.\n(a) How many triples are there?\n(b) How many have x>13?\n(c) How many have all coordinates at most 13?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "300"
+      },
+      {
+        "label": "b",
+        "answer": "66"
+      },
+      {
+        "label": "c",
+        "answer": "102"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "378"
+  },
+  {
+    "task_id": "derangements_09",
+    "family": "derangements",
+    "domain": "math",
+    "prompt": "13 people each put one hat in a pile, and the hats are returned in uniformly random order.\n(a) In how many orders can the hats be returned?\n(b) In how many orders does nobody receive their own hat?\n(c) What is the probability nobody receives their own hat?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "6227020800"
+      },
+      {
+        "label": "b",
+        "answer": "2290792932"
+      },
+      {
+        "label": "c",
+        "answer": "63633137/172972800"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "479001600"
+  },
+  {
+    "task_id": "conditional_draw_09",
+    "family": "conditional_draw",
+    "domain": "math",
+    "prompt": "A bag holds 21 distinct balls, of which 3 are red. Two balls are drawn without replacement.\n(a) How many unordered two-ball draws are possible?\n(b) How many contain at least one red ball?\n(c) How many contain two red balls?\n(d) Given that at least one is red, what is the probability both are red?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "210"
+      },
+      {
+        "label": "b",
+        "answer": "57"
+      },
+      {
+        "label": "c",
+        "answer": "3"
+      },
+      {
+        "label": "d",
+        "answer": "1/19"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "420"
+  },
+  {
+    "task_id": "lcm_pairs_09",
+    "family": "lcm_pairs",
+    "domain": "math",
+    "prompt": "Count ordered pairs (a,b) of positive integers with the specified least common multiple.\n(a) How many pairs have lcm(a,b)=32?\n(b) How many pairs have lcm(a,b)=9?\n(c) How many pairs have lcm(a,b)=288?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "11"
+      },
+      {
+        "label": "b",
+        "answer": "5"
+      },
+      {
+        "label": "c",
+        "answer": "55"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "12"
+  },
+  {
+    "task_id": "expected_heads_09",
+    "family": "expected_heads",
+    "domain": "math",
+    "prompt": "Independent flips of a biased coin have probability 5/6 of heads on each flip.\n(a) What is the probability the first two flips are both heads?\n(b) What is the expected number of flips until the first head?\n(c) What is the expected number of flips until two consecutive heads?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "25/36"
+      },
+      {
+        "label": "b",
+        "answer": "6/5"
+      },
+      {
+        "label": "c",
+        "answer": "66/25"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "5/6"
+  },
+  {
+    "task_id": "grid_triangles_09",
+    "family": "grid_triangles",
+    "domain": "math",
+    "prompt": "Consider all 28 grid points with integer coordinates 0<=x<7 and 0<=y<4.\n(a) How many unordered choices of three points are possible?\n(b) How many choices are collinear?\n(c) How many form triangles of positive area?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "3276"
+      },
+      {
+        "label": "b",
+        "answer": "224"
+      },
+      {
+        "label": "c",
+        "answer": "3052"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "19656"
+  },
+  {
+    "task_id": "committee_09",
+    "family": "committee",
+    "domain": "math",
+    "prompt": "A committee of 3 people is chosen from 14 men and 4 women.\n(a) How many committees are possible?\n(b) How many contain no women?\n(c) How many contain exactly one woman?\n(d) How many contain at least two women?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "816"
+      },
+      {
+        "label": "b",
+        "answer": "364"
+      },
+      {
+        "label": "c",
+        "answer": "364"
+      },
+      {
+        "label": "d",
+        "answer": "88"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4896"
+  },
+  {
+    "task_id": "double_headed_coin_09",
+    "family": "double_headed_coin",
+    "domain": "math",
+    "prompt": "A bag contains 4 fair coins and one double-headed coin. One coin is chosen uniformly and flipped 3 times.\n(a) If the coin is fair, what is the probability all flips are heads?\n(b) What is the overall probability all flips are heads?\n(c) Given all flips were heads, what is the probability the coin is double-headed?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "1/8"
+      },
+      {
+        "label": "b",
+        "answer": "3/10"
+      },
+      {
+        "label": "c",
+        "answer": "2/3"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/4"
+  },
+  {
+    "task_id": "maximum_dice_09",
+    "family": "maximum_dice",
+    "domain": "math",
+    "prompt": "Two fair 15-sided dice numbered 1 through 15 are rolled. M is the larger result.\n(a) How many of the 225 ordered outcomes have M at most 6?\n(b) How many have M exactly 6?\n(c) What is the expected value of M?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "36"
+      },
+      {
+        "label": "b",
+        "answer": "11"
+      },
+      {
+        "label": "c",
+        "answer": "472/45"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "21"
+  },
+  {
+    "task_id": "pipes_09",
+    "family": "pipes",
+    "domain": "math",
+    "prompt": "Pipe A fills a tank in 13 hours, pipe B in 15 hours, and a drain empties it in 21 hours.\n(a) With only A and B open, what fraction fills per hour?\n(b) With both pipes and the drain open, what fraction fills per hour?\n(c) With both pipes and drain open, how many hours fill an empty tank?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "28/195"
+      },
+      {
+        "label": "b",
+        "answer": "131/1365"
+      },
+      {
+        "label": "c",
+        "answer": "1365/131"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "1/28"
+  },
+  {
+    "task_id": "elevator_09",
+    "family": "elevator",
+    "domain": "math",
+    "prompt": "3 people independently choose uniformly among 14 floors to exit an elevator.\n(a) How many equally likely assignments of people to floors are possible?\n(b) How many assignments give everyone different floors?\n(c) What is the probability everyone exits on different floors?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "2744"
+      },
+      {
+        "label": "b",
+        "answer": "2184"
+      },
+      {
+        "label": "c",
+        "answer": "39/49"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "4782969"
+  },
+  {
+    "task_id": "price_09",
+    "family": "price",
+    "domain": "math",
+    "prompt": "An item costs $265. Its price rises 19%, then falls 14%, then 9% sales tax is applied.\n(a) What is the price after the increase, in dollars?\n(b) What is the price after the decrease, in dollars?\n(c) What is the final price including tax, in dollars?",
+    "parts": [
+      {
+        "label": "a",
+        "answer": "6307/20"
+      },
+      {
+        "label": "b",
+        "answer": "271201/1000"
+      },
+      {
+        "label": "c",
+        "answer": "29560909/100000"
+      }
+    ],
+    "hint_part": "a",
+    "hint": "284"
+  }
+]

@@ -43,3 +43,17 @@ These are AI-assisted review decisions, not independent human grading. Both
 automated and reviewed states remain available; the README explains the effect
 on the primary result. The author can inspect each annotation against the saved
 response.
+
+## Larger two-turn study (November 17, 2026)
+
+> can you also do another pass with a way higher sample size since tokens and cost arent a huge issue running a local model - 24 is basically nothing and hard to really draw interesting/useful conclusions from
+
+The author requested a substantially larger sample. The assistant implemented 200
+parameterized mathematics problems across 20 families, three repetitions per model,
+fresh first-turn collection, and matched follow-ups (4,800 planned generations).
+The assistant also implemented a fixed labeled-answer scoring protocol and
+family-cluster intervals. Tests check deterministic task reconstruction, exact keys,
+matched seeds, and handling of missing or conflicting answer lines. The complete
+29-test suite passed, and the smaller study's three result tables reproduced
+byte-for-byte after these changes. The larger collection was started locally;
+its results will be reported only once all planned responses have been saved.

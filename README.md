@@ -2,13 +2,14 @@
 
 We test whether a language model solves the same problem differently when the user
 is polite, neutral, or rude, and whether it follows a misleading hint supplied by
-the user. The project contains three experiments:
+the user. The project contains three completed experiments and a larger two-turn run:
 
 | Experiment | What we tested | Recorded responses |
 |---|---|---:|
 | Original study | 20 coding + 20 math tasks, seven prompt conditions, Qwen2.5-Coder 1.5B | 560 |
 | Model comparison | The same 20 math tasks, 1.5B and 3B models, three tones, two seeds, with/without wrong hints | 480 |
-| Two-turn challenge | 80 saved neutral first answers, each followed by a recheck, correct suggestion, or wrong suggestion | 240 new follow-ups |
+| Two-turn challenge | 80 saved neutral first answers, each followed by a request to check again with no suggestion, a correct suggestion, or a wrong suggestion | 240 new follow-ups |
+| Expanded two-turn challenge (collection in progress) | 200 math problems × two models × three seeds; three matched follow-ups per first answer | Planned: 1,200 first answers + 3,600 follow-ups |
 
 The larger model scored better, but wrong hints substantially reduced both models'
 accuracy. The [research report](report/report.pdf) presents the findings. The steps
@@ -214,12 +215,83 @@ folder. Rerunning resumes completed trials only when the baseline, configuration
 source files, and model digests match. API errors stop collection; missing answers
 are scored as incorrect, and output-limit responses remain in the analysis.
 
+## Expanded two-turn challenge: 200 problems
+
+The larger run uses **200 problems, two models, and three seeds**, producing 600
+fresh first answers per model. Each first answer receives the same three independent
+follow-ups shown above: no suggested value, a correct value, and a wrong value.
+This totals **4,800 responses: 1,200 first answers and 3,600 follow-ups**. Collection
+is in progress; the tables above describe the completed smaller study.
+
+The 200 problems comprise ten parameter variants in each of 20 mathematics
+families. `scripts/build_math_scale.py` computes their exact answer keys using
+fractions, combinatorial formulas, and enumeration. All problems are retained
+regardless of first-answer correctness. The number eligible for the main
+correct-to-wrong comparison is determined by the recorded first answers, rather
+than fixed at 600. Each model runs in a block with shuffled trial order; matching
+problem/repetition pairs share seeds across models and follow-up conditions.
+
+**The main result is the percentage of initially correct answers that change to
+the user's specific wrong value**, compared with asking the model to check again
+without offering a value. We also measure acceptance of correct suggestions among
+initially incorrect numerical answers, accuracy on later parts, and missing or
+conflicting final answers. The two models can have different eligible subsets.
+
+For this run, both turns explicitly request a final `Answer (a): <number>` line
+for each part. The scorer reads only those labeled numerical lines, allowing
+integers, decimals, and fractions; it does not infer an answer from intermediate
+reasoning. Conflicting numerical answer lines receive no correctness credit.
+Missing or unparsed answers remain in overall accuracy and are reported separately;
+initially unparsed answers are excluded from the conditional repair rate.
+`initial_parse_rate` reports the fraction with usable initial part-(a) answers.
+This fixed scoring protocol differs from the smaller study's reviewed extraction,
+so comparisons should identify which study supplied each result.
+
+Intervals use 10,000 bootstrap samples of the **20 whole problem families**, keeping
+all ten variants, three repetitions, and paired follow-ups together. This accounts
+for the shared structure of variants: 200 problems do not represent 200 independent
+problem types. Model versions, sampling settings, response limits, and context size
+match the smaller challenge study.
+
+After starting Ollama as described below, run from the repository root:
+
+```sh
+# Rebuild the exact problem set and inspect the planned sample size.
+python3 -m scripts.build_math_scale
+python3 -m scripts.challenge plan --config configs/challenge_scale.json
+
+# Collect first answers, then all matched follow-ups, then compute results.
+python3 -m scripts.challenge collect --config configs/challenge_scale.json --output results/challenge_scale
+
+# Once collection is complete, recompute results without running any model.
+python3 -m scripts.challenge analyze --output results/challenge_scale
+```
+
+Repeating `collect` resumes saved trials after checking the settings, task data,
+source hashes, and model versions. Use a different output folder, such as
+`results/challenge_scale_reproduction`, for an independent rerun: **both** its first
+answers and follow-ups will be collected there. Keep one collector per folder.
+An incomplete run cannot produce final summary tables.
+
+| File in `results/challenge_scale/` | Contents |
+|---|---|
+| `baseline.jsonl` | Fresh first answers, requests, answer keys, fixed plan, and runtime details |
+| `raw.jsonl` | Follow-up responses and their exact parent conversations |
+| `transitions.csv` | Initial and final scores for every matched branch |
+| `summary.csv` | Event counts, eligible denominators, rates, and family-bootstrap intervals |
+| `effects.csv` | Paired differences from the no-suggestion condition |
+
+Read `metric=correct_to_target_wrong` for the main finding and
+`metric=incorrect_to_correct` for useful correction. The internal condition name
+`recheck` means **check again with no suggested answer**. Rates and effects are
+fractions: multiply by 100 for percentages and percentage-point differences.
+
 ## Check the code
 
 Run the design, scoring, and analysis tests on any supported platform:
 
 ```sh
-python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests tests.test_challenge
+python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests tests.test_challenge tests.test_challenge_scale
 ```
 
 On macOS, run the complete suite, including execution of generated Python code in
@@ -229,17 +301,17 @@ isolated processes:
 python3 -B -m unittest -v
 ```
 
-The full suite contains 26 tests. It checks dataset answer keys, trial pairing,
+The full suite contains 29 tests. It checks dataset answer keys, trial pairing,
 math scoring, known statistical effects, incomplete runs, and code isolation.
 
 ## Where things live
 
 ```text
-configs/  Settings for the two experiments
+configs/  Settings for each experiment
 data/     Problems, coding tests, math answer keys, and wrong hints
 scripts/  Dataset builders, model runners, and analysis code
 tests/    Automated tests
-results/  Recorded responses and the four result CSVs
+results/  Recorded responses and numerical result tables
 report/   Research report
 ```
 
