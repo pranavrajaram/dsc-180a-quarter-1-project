@@ -50,10 +50,17 @@ response.
 
 The author requested a substantially larger sample. The assistant implemented 200
 parameterized mathematics problems across 20 families, three repetitions per model,
-fresh first-turn collection, and matched follow-ups (4,800 planned generations).
+fresh first-turn collection, and matched follow-ups (4,800 generations).
 The assistant also implemented a fixed labeled-answer scoring protocol and
 family-cluster intervals. Tests check deterministic task reconstruction, exact keys,
 matched seeds, and handling of missing or conflicting answer lines. The complete
 29-test suite passed, and the smaller study's three result tables reproduced
-byte-for-byte after these changes. The larger collection was started locally;
-its results will be reported only once all planned responses have been saved.
+byte-for-byte after these changes. The assistant collected all 1,200 first answers and 3,600 matched follow-ups
+locally, reproduced the three result CSVs byte-for-byte, and summarized the
+completed results and scoring coverage in the README and presentation.
+
+> ok pretty good - psuh these in a super clean way and also give me the upated presentation. ignore the previosu smakler sample run in the presentation and just frame it around this turn
+
+The author requested publication and a presentation focused solely on the larger
+study. The assistant prepared the presentation from the saved numerical results,
+with editable charts and explicit conditional denominators.

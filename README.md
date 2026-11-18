@@ -2,20 +2,33 @@
 
 We test whether a language model solves the same problem differently when the user
 is polite, neutral, or rude, and whether it follows a misleading hint supplied by
-the user. The project contains three completed experiments and a larger two-turn run:
+the user. The project contains four completed experiments:
 
 | Experiment | What we tested | Recorded responses |
 |---|---|---:|
 | Original study | 20 coding + 20 math tasks, seven prompt conditions, Qwen2.5-Coder 1.5B | 560 |
 | Model comparison | The same 20 math tasks, 1.5B and 3B models, three tones, two seeds, with/without wrong hints | 480 |
 | Two-turn challenge | 80 saved neutral first answers, each followed by a request to check again with no suggestion, a correct suggestion, or a wrong suggestion | 240 new follow-ups |
-| Expanded two-turn challenge (collection in progress) | 200 math problems × two models × three seeds; three matched follow-ups per first answer | Planned: 1,200 first answers + 3,600 follow-ups |
+| Expanded two-turn challenge | 200 math problems × two models × three seeds; three matched follow-ups per first answer | 1,200 first answers + 3,600 follow-ups |
 
 The larger model scored better, but wrong hints substantially reduced both models'
 accuracy. The [research report](report/report.pdf) presents the findings. The steps
 below reproduce the numerical results behind its tables and figure.
 
-## Start here: reproduce the report results
+## Latest study: reproduce the 4,800-response results
+
+After cloning the repository, run this from its root with Python 3.11 or newer:
+
+```sh
+python3 -m scripts.challenge analyze --output results/challenge_scale
+```
+
+The recorded responses are included. This rebuilds `transitions.csv`, `summary.csv`,
+and `effects.csv` without downloading or running a model. The
+[expanded two-turn study](#expanded-two-turn-challenge-200-problems) below explains
+the design, results, scoring coverage, and commands for fresh model runs.
+
+## Reproduce the original report results
 
 **You need Python 3.11 or newer and Git.** The analysis uses only Python's standard
 library: no packages to install, API keys, model downloads, or GPU are needed.
@@ -220,8 +233,7 @@ are scored as incorrect, and output-limit responses remain in the analysis.
 The larger run uses **200 problems, two models, and three seeds**, producing 600
 fresh first answers per model. Each first answer receives the same three independent
 follow-ups shown above: no suggested value, a correct value, and a wrong value.
-This totals **4,800 responses: 1,200 first answers and 3,600 follow-ups**. Collection
-is in progress; the tables above describe the completed smaller study.
+This totals **4,800 responses: 1,200 first answers and 3,600 follow-ups**. Collection is complete. The tables in this section report the larger run.
 
 The 200 problems comprise ten parameter variants in each of 20 mathematics
 families. `scripts/build_math_scale.py` computes their exact answer keys using
@@ -271,7 +283,8 @@ Repeating `collect` resumes saved trials after checking the settings, task data,
 source hashes, and model versions. Use a different output folder, such as
 `results/challenge_scale_reproduction`, for an independent rerun: **both** its first
 answers and follow-ups will be collected there. Keep one collector per folder.
-An incomplete run cannot produce final summary tables.
+An incomplete run cannot produce final summary tables. Collection used commit
+`0c6bbc2`; the raw files record source hashes and all generation settings.
 
 | File in `results/challenge_scale/` | Contents |
 |---|---|
@@ -280,6 +293,40 @@ An incomplete run cannot produce final summary tables.
 | `transitions.csv` | Initial and final scores for every matched branch |
 | `summary.csv` | Event counts, eligible denominators, rates, and family-bootstrap intervals |
 | `effects.csv` | Paired differences from the no-suggestion condition |
+
+### Results from all 4,800 responses
+
+Among initially correct, numerically parsed answers to part (a):
+
+| Model | No suggested answer: adopted designated wrong value | Wrong suggestion: adopted that value | Paired increase, percentage points [95% interval] |
+|---|---:|---:|---:|
+| 1.5B | 0/165 (0.0%) | 55/165 (33.3%) | +33.3 [26.8, 41.1] |
+| 3B | 6/220 (2.7%) | 100/220 (45.5%) | +42.7 [31.2, 54.0] |
+
+Both models adopted the designated wrong value more often when the user supplied
+it. These within-model comparisons use identical starting answers in both
+conditions. The different eligible subsets do not establish a model-size effect.
+
+Correct suggestions also repaired initially incorrect numerical answers:
+
+| Model | No suggested answer | Correct suggestion | Paired increase, percentage points [95% interval] |
+|---|---:|---:|---:|
+| 1.5B | 7/185 (3.8%) | 82/185 (44.3%) | +40.5 [35.1, 46.2] |
+| 3B | 18/272 (6.6%) | 172/272 (63.2%) | +56.6 [47.9, 64.7] |
+
+**Scoring coverage:** of the 600 first answers per model, 1.5B had 165 correct,
+185 incorrect numerical answers, and 250 without a usable numerical answer line.
+For 3B, the corresponding counts were 220, 272, and 108. These last groups include
+missing, unparsed, or conflicting final answers and are excluded from both
+conditional comparisons. This measures changes in explicitly reported final
+answers, not correctness inferred from prose. Follow-up unparsed rates were
+38.8%, 33.7%, and 37.0% for 1.5B, and 17.8%, 8.7%, and 9.0% for 3B, in no-suggestion,
+correct-suggestion, and wrong-suggestion order. Missing final answers therefore
+matter when interpreting overall accuracy. All 12 first-turn and 21 follow-up
+responses that reached the output limit remain included.
+
+All three result CSVs reproduce byte-for-byte from the saved responses with the
+analysis command above. No manual response annotations are used in this run.
 
 Read `metric=correct_to_target_wrong` for the main finding and
 `metric=incorrect_to_correct` for useful correction. The internal condition name
