@@ -370,8 +370,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['run', 'analyze', 'plan', 'collect'])
     parser.add_argument('--scoring', choices=['strict', 'robust'], help='Analysis only; default: robust for the expanded study')
-    parser.add_argument('--config', type=Path, default=ROOT/'configs/challenge.json')
-    parser.add_argument('--output', type=Path, default=ROOT/'results/challenge')
+    parser.add_argument('--config', type=Path, default=ROOT/'configs/challenge_scale.json')
+    parser.add_argument('--output', type=Path, default=ROOT/'results/challenge_scale')
     args = parser.parse_args()
     if args.command == 'collect':
         collect_baseline(args)

@@ -5,9 +5,15 @@ __pycache__/
 .env
 .env.*
 results/*_reproduction/
-report.aux
-report.log
-report.out
-report.fls
-report.fdb_latexmk
-report.synctex.gz
+
+# Local notebook caches and generated LaTeX files
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz

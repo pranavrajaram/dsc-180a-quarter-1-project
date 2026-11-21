@@ -38,7 +38,8 @@ and rejection of incomplete or altered records. Results are derived from saved
 responses and task-cluster bootstrap comparisons, with commands in the README.
 
 The assistant also inspected unparsed and conflicting part-(a) responses and
-recorded twelve response-specific annotations in `results/challenge/review.csv`.
+recorded twelve response-specific annotations in the historical pilot’s `results/challenge/review.csv`
+([preserved at commit da09089](https://github.com/pranavrajaram/dsc-180a-quarter-1-project/tree/da09089/results/challenge)).
 These are AI-assisted review decisions, not independent human grading. Both
 automated and reviewed states remain available; the README explains the effect
 on the primary result. The author can inspect each annotation against the saved
@@ -79,3 +80,13 @@ AI-assisted inspection, not an independent human grading study. The notebook
 compares the revised extraction with the original strict protocol and records
 remaining unresolved responses. Raw generations and collection metadata were
 unchanged. Shared analysis code produces the tables and charts.
+
+## Repository cleanup
+
+> deep clean github so only necessary files are included
+
+The assistant removed the superseded 240-response pilot from the current tree,
+retained its provenance in Git history, and removed the stale compiled checkpoint
+PDF. The earlier tone experiments remain as supporting research. The current
+notebook, source report, raw data, analysis outputs, configurations, and tests remain.
+The README now leads with the current study and executable notebook.

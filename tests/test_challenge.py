@@ -13,13 +13,13 @@ from scripts.experiment import ROOT, read_json, digest
 class ChallengeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.path = ROOT/'configs/challenge.json'
+        cls.path = ROOT/'configs/challenge_scale.json'
         cls.config = read_json(cls.path)
         cls.spec = prepare(cls.config, cls.path)
 
     def test_shared_first_response_and_seed(self):
-        self.assertEqual(len(self.spec['parents']), 80)
-        self.assertEqual(len(self.spec['plan']), 240)
+        self.assertEqual(len(self.spec['parents']), 1200)
+        self.assertEqual(len(self.spec['plan']), 3600)
         for parent in self.spec['parents']:
             trials = [t for t in self.spec['plan'] if t['parent_id'] == parent['trial_id']]
             self.assertEqual({t['condition'] for t in trials}, set(self.config['conditions']))
