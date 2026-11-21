@@ -64,3 +64,18 @@ completed results and scoring coverage in the README and presentation.
 The author requested publication and a presentation focused solely on the larger
 study. The assistant prepared the presentation from the saved numerical results,
 with editable charts and explicit conditional denominators.
+
+## Answer extraction and results notebook (November 21, 2026)
+
+> ok fix the scoring and cretae the notebook right now
+
+The assistant implemented answer-key-independent extraction of mathematical
+expressions and part-specific final conclusions, added regression tests and
+reproducible family sign-flip p-values, and created one executed results notebook.
+The author requested the correction after learning that formatting exclusions
+removed many nonempty responses. The assistant inspected a deterministic sample
+of 24 extraction changes against saved response text during development. This was
+AI-assisted inspection, not an independent human grading study. The notebook
+compares the revised extraction with the original strict protocol and records
+remaining unresolved responses. Raw generations and collection metadata were
+unchanged. Shared analysis code produces the tables and charts.

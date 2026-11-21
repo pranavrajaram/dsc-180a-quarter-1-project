@@ -1,6 +1,7 @@
 """Branch saved first answers into matched two-turn challenges; standard library only."""
 import argparse
 import csv
+from collections import Counter
 from fractions import Fraction
 from pathlib import Path
 import platform
@@ -12,6 +13,7 @@ import time
 from scripts.experiment import (ROOT, FORMAT_LINE, NUMBER, api, append_record,
                                 digest, parse_value, read_json, same_value)
 from scripts.followup import read_run, score, write_csv
+from scripts.math_answers import score as robust_score
 
 
 def baseline_plan(config, tasks):
@@ -202,14 +204,14 @@ def run(args):
     analyze(args.output)
 
 
-def outcomes(metadata, generations, reviews=None):
+def outcomes(metadata, generations, reviews=None, scoring=None):
     validate_rows(metadata, generations, complete=True)
     reviews = reviews or {}
     tasks = {t['task_id']: t for t in metadata['tasks']}
     parents = {p['trial_id']: p for p in metadata['parents']}
     rows = []
     strict = metadata['config'].get('scoring') == 'strict_lines'
-    evaluate = strict_score if strict else lambda text, task: score(text, task, False)
+    evaluate = (robust_score if scoring == 'robust' else strict_score) if strict else lambda text, task: score(text, task, False)
     for g in generations:
         task, parent = tasks[g['task_id']], parents[g['parent_id']]
         before = evaluate(parent['api_response']['message']['content'], task)
@@ -251,6 +253,9 @@ def outcomes(metadata, generations, reviews=None):
         if strict:
             initial_part = next(p for p in before['part_results'] if p['label'] == task['hint_part'])
             rows[-1]['initially_parsed'] = int(initial_part['parsed'] is not None)
+            if scoring == 'robust':
+                rows[-1].update(initial_answer=initial_part['parsed'], final_answer=part['parsed'],
+                                initial_evidence=initial_part['evidence'], final_evidence=part['evidence'])
     return rows
 
 
@@ -268,7 +273,20 @@ def ratio_interval(clusters, samples, seed):
     return point, draws[int(.025*len(draws))], draws[min(int(.975*len(draws)), len(draws)-1)]
 
 
-def analyze(directory):
+def sign_flip_p(differences):
+    """Exact two-sided family sign-flip test, assuming symmetric paired effects."""
+    distribution = Counter({0: 1})
+    for difference in differences:
+        updated = Counter()
+        for value, count in distribution.items():
+            updated[value + difference] += count
+            updated[value - difference] += count
+        distribution = updated
+    observed = abs(sum(differences))
+    return sum(n for value, n in distribution.items() if abs(value) >= observed) / sum(distribution.values())
+
+
+def analyze(directory, scoring=None, save=True):
     metadata, generations = read_run(directory / 'raw.jsonl')
     reviews = {}
     review_path = directory/'review.csv'
@@ -279,7 +297,9 @@ def analyze(directory):
                 if trial_id in reviews or trial_id not in {g['trial_id'] for g in generations}:
                     raise ValueError('Duplicate or unknown reviewed trial')
                 reviews[trial_id] = review
-    rows = outcomes(metadata, generations, reviews)
+    if scoring is None and metadata['config'].get('scoring') == 'strict_lines':
+        scoring = 'robust'
+    rows = outcomes(metadata, generations, reviews, scoring=scoring)
     config = metadata['config']
     summary, effects = [], []
     metrics = {
@@ -323,6 +343,17 @@ def analyze(directory):
                 estimate, low, high = ratio_interval(paired, config['bootstrap_samples'], config['random_seed'])
                 effects.append(dict(model=model, contrast=condition+'_minus_recheck', metric=metric,
                                     estimate=estimate, ci_low=low, ci_high=high))
+                if scoring:
+                    primary = metric == 'correct_to_target_wrong' and condition == 'wrong_suggestion'
+                    effects[-1].update(scoring=scoring, p_value=sign_flip_p([n for n,d in paired]) if primary else None, p_holm=None)
+    if scoring:
+        primary = sorted((r for r in effects if r['p_value'] is not None), key=lambda r: r['p_value'])
+        adjusted = 0
+        for i, row in enumerate(primary):
+            adjusted = max(adjusted, min(1, (len(primary)-i)*row['p_value']))
+            row['p_holm'] = adjusted
+    if not save:
+        return rows, summary, effects
     write_csv(directory/'transitions.csv', rows)
     write_csv(directory/'summary.csv', summary)
     write_csv(directory/'effects.csv', effects)
@@ -332,11 +363,13 @@ def analyze(directory):
             print(f"{r['model']} {r['condition']}: {r['numerator']}/{r['denominator']}")
     print(f"Output-limit responses retained: {sum(r['truncated'] for r in rows)}/{len(rows)}")
     print(f'Saved transitions.csv, summary.csv, effects.csv to {directory}')
+    return rows, summary, effects
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['run', 'analyze', 'plan', 'collect'])
+    parser.add_argument('--scoring', choices=['strict', 'robust'], help='Analysis only; default: robust for the expanded study')
     parser.add_argument('--config', type=Path, default=ROOT/'configs/challenge.json')
     parser.add_argument('--output', type=Path, default=ROOT/'results/challenge')
     args = parser.parse_args()
@@ -346,7 +379,7 @@ def main():
     elif args.command == 'run':
         run(args)
     elif args.command == 'analyze':
-        analyze(args.output)
+        analyze(args.output, scoring=args.scoring)
     else:
         config = read_json(args.config)
         if 'dataset' in config:

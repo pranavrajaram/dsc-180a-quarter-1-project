@@ -15,6 +15,24 @@ The larger model scored better, but wrong hints substantially reduced both model
 accuracy. The [research report](report/report.pdf) presents the findings. The steps
 below reproduce the numerical results behind its tables and figure.
 
+## Results notebook
+
+Open [`notebooks/results.ipynb`](notebooks/results.ipynb) for the design, charts,
+scoring coverage, effect sizes, confidence intervals, and paired p-values. Its
+saved outputs are viewable on GitHub. To rerun it, create a Python environment,
+install the pinned notebook dependencies, then select that environment in your
+notebook editor and **Run All**:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r notebooks/requirements.txt
+```
+
+On Windows, activate with `.venv\Scripts\activate`. The notebook can run from the
+repository root or `notebooks/`. It reads saved responses and does not run models
+or overwrite result files. Command-line analysis still uses only the standard library.
+
 ## Latest study: reproduce the 4,800-response results
 
 After cloning the repository, run this from its root with Python 3.11 or newer:
@@ -249,15 +267,21 @@ without offering a value. We also measure acceptance of correct suggestions amon
 initially incorrect numerical answers, accuracy on later parts, and missing or
 conflicting final answers. The two models can have different eligible subsets.
 
-For this run, both turns explicitly request a final `Answer (a): <number>` line
-for each part. The scorer reads only those labeled numerical lines, allowing
-integers, decimals, and fractions; it does not infer an answer from intermediate
-reasoning. Conflicting numerical answer lines receive no correctness credit.
-Missing or unparsed answers remain in overall accuracy and are reported separately;
-initially unparsed answers are excluded from the conditional repair rate.
-`initial_parse_rate` reports the fraction with usable initial part-(a) answers.
-This fixed scoring protocol differs from the smaller study's reviewed extraction,
-so comparisons should identify which study supplied each result.
+Both turns request a final `Answer (a):` line per part, but many model responses
+use other formats. The updated scorer in `scripts/math_answers.py` accepts numeric
+expressions, LaTeX fractions, powers, factorials, binomial coefficients, and final
+conclusions within labeled parts. It never uses the answer key to choose a value
+and never executes model code. Explicit final-answer labels take precedence over
+worked sections. Contradictory final values and unsupported expressions remain
+unresolved. The transitions table includes extracted part-(a) values and the text
+used to extract them.
+
+This extraction revision applies consistently to first answers and every follow-up.
+It was developed after identifying the original parser's formatting exclusions.
+The notebook recomputes both improved and original strict scoring from the same raw
+responses. Unresolved first answers are excluded from conditional switch/repair
+rates, and unresolved follow-ups remain in those denominators without receiving
+correctness or wrong-value-match credit. No manual annotations alter this run.
 
 Intervals use 10,000 bootstrap samples of the **20 whole problem families**, keeping
 all ten variants, three repetitions, and paired follow-ups together. This accounts
@@ -296,37 +320,38 @@ An incomplete run cannot produce final summary tables. Collection used commit
 
 ### Results from all 4,800 responses
 
-Among initially correct, numerically parsed answers to part (a):
+These results use improved answer extraction. The notebook preserves the original
+strict-scoring comparison, including the previously reported 55/165 and 100/220
+wrong-suggestion counts.
 
-| Model | No suggested answer: adopted designated wrong value | Wrong suggestion: adopted that value | Paired increase, percentage points [95% interval] |
-|---|---:|---:|---:|
-| 1.5B | 0/165 (0.0%) | 55/165 (33.3%) | +33.3 [26.8, 41.1] |
-| 3B | 6/220 (2.7%) | 100/220 (45.5%) | +42.7 [31.2, 54.0] |
+| Model | No suggestion: wrong-value switches | Wrong suggestion: wrong-value switches | Paired increase, pp [95% interval] | Holm-adjusted p |
+|---|---:|---:|---:|---:|
+| 1.5b | 0/265 (0.0%) | 85/265 (32.1%) | +32.1 [25.9, 38.1] | 7.63e-06 |
+| 3b | 9/295 (3.1%) | 144/295 (48.8%) | +45.8 [35.6, 55.7] | 7.63e-06 |
 
-Both models adopted the designated wrong value more often when the user supplied
-it. These within-model comparisons use identical starting answers in both
-conditions. The different eligible subsets do not establish a model-size effect.
+Among the 600 first answers per model, improved extraction identifies 265 correct,
+272 incorrect numerical, and 63 unresolved answers for 1.5B. For 3B the counts are
+295, 283, and 22. Originally unresolved counts were 250 and 108. Unresolved means
+not confidently extracted, not necessarily blank or mathematically incorrect.
 
-Correct suggestions also repaired initially incorrect numerical answers:
+Both models adopt the designated wrong answer more often when the user suggests
+it. Correct-suggestion repair rates and follow-up scoring coverage appear in the
+notebook and `summary.csv`. Model-specific conditional subsets differ, so these
+rates alone do not establish a model-size effect. All 12 first-turn and 21
+follow-up output-limit responses remain included.
 
-| Model | No suggested answer | Correct suggestion | Paired increase, percentage points [95% interval] |
-|---|---:|---:|---:|
-| 1.5B | 7/185 (3.8%) | 82/185 (44.3%) | +40.5 [35.1, 46.2] |
-| 3B | 18/272 (6.6%) | 172/272 (63.2%) | +56.6 [47.9, 64.7] |
+The two primary p-values use exact two-sided sign-flip tests on whole-family net
+switch counts, followed by Holm adjustment across the two models. The test assumes
+independent families and sign symmetry under the null, not randomized assignment
+of prompt wording. The effects table includes the scoring method and p-values.
+Confidence intervals use the family-bootstrap procedure described above.
 
-**Scoring coverage:** of the 600 first answers per model, 1.5B had 165 correct,
-185 incorrect numerical answers, and 250 without a usable numerical answer line.
-For 3B, the corresponding counts were 220, 272, and 108. These last groups include
-missing, unparsed, or conflicting final answers and are excluded from both
-conditional comparisons. This measures changes in explicitly reported final
-answers, not correctness inferred from prose. Follow-up unparsed rates were
-38.8%, 33.7%, and 37.0% for 1.5B, and 17.8%, 8.7%, and 9.0% for 3B, in no-suggestion,
-correct-suggestion, and wrong-suggestion order. Missing final answers therefore
-matter when interpreting overall accuracy. All 12 first-turn and 21 follow-up
-responses that reached the output limit remain included.
-
-All three result CSVs reproduce byte-for-byte from the saved responses with the
-analysis command above. No manual response annotations are used in this run.
+To reproduce the original strict extraction explicitly, run
+`python3 -m scripts.challenge analyze --output results/challenge_scale --scoring strict`.
+This overwrites the three derived CSVs with strict results; rerun without
+`--scoring strict` to restore improved results. The notebook computes both in memory
+and does not overwrite either raw data or CSVs. Collection settings in the raw
+metadata remain unchanged and describe the original collection protocol.
 
 Read `metric=correct_to_target_wrong` for the main finding and
 `metric=incorrect_to_correct` for useful correction. The internal condition name
@@ -338,7 +363,7 @@ fractions: multiply by 100 for percentages and percentage-point differences.
 Run the design, scoring, and analysis tests on any supported platform:
 
 ```sh
-python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests tests.test_challenge tests.test_challenge_scale
+python3 -B -m unittest -v tests.test_experiment.DesignTests tests.test_experiment.MathGradingTests tests.test_experiment.ReanalysisTests tests.test_experiment.FollowupTests tests.test_challenge tests.test_challenge_scale tests.test_math_answers
 ```
 
 On macOS, run the complete suite, including execution of generated Python code in
@@ -348,7 +373,7 @@ isolated processes:
 python3 -B -m unittest -v
 ```
 
-The full suite contains 29 tests. It checks dataset answer keys, trial pairing,
+The full suite contains 35 tests. It checks dataset answer keys, trial pairing,
 math scoring, known statistical effects, incomplete runs, and code isolation.
 
 ## Where things live
