@@ -90,3 +90,15 @@ retained its provenance in Git history, and removed the stale compiled checkpoin
 PDF. The earlier tone experiments remain as supporting research. The current
 notebook, source report, raw data, analysis outputs, configurations, and tests remain.
 The README now leads with the current study and executable notebook.
+
+## Full Q1 report (November 25, 2026)
+
+> can you latex the full q1 report
+
+The assistant drafted the complete LaTeX report from the checked-in analysis and
+verified literature sources, centered on the larger two-turn study with earlier
+tone experiments as context. This included prose, statistical explanations, tables,
+plots, references, experimental prompts, and an AI-use appendix. The report
+explicitly describes the post-collection extraction revision and the absence of
+independent human grading. The authors still need to review the report and confirm
+the required course-template formatting.
