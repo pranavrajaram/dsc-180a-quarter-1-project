@@ -110,12 +110,8 @@ These remain as supporting research for the paper:
 
 The superseded 240-follow-up pilot is available in
 [Git history](https://github.com/pranavrajaram/dsc-180a-quarter-1-project/tree/da09089/results/challenge).
-It is not needed to reproduce the current study. `report/report.tex` contains the full Q1 report, including the main two-turn study,
-the earlier experiments, extraction sensitivity, and AI-use disclosure. It is a
-self-contained LaTeX file with embedded tables and plots;
-[the compiled PDF](report/report.pdf) is included for review. The course template link
-was unavailable during preparation; its formatting still needs to be checked
-against the required Overleaf template.
+It is not needed to reproduce the current study. Reports are maintained separately
+and are not included in this repository.
 
 ## Collect fresh model responses
 
@@ -189,7 +185,6 @@ scripts/    Dataset builders, collection, scoring, and analysis
 tests/      Automated tests
 results/    Saved responses and reproducible result tables
 notebooks/  One executed results notebook and its dependencies
-report/     Full Q1 report in LaTeX
 ```
 
 The authors selected the project direction and requested the experimental extensions.

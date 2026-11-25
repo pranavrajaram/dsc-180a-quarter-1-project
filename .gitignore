@@ -17,3 +17,6 @@ results/*_reproduction/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+
+# Reports are local deliverables and must not be committed.
+/report/
